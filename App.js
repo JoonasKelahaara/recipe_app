@@ -1,14 +1,9 @@
-import { Text, TextInput, View, Button, Alert, ScrollView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Text, TextInput, View, Button, Alert, ScrollView, TouchableOpacity } from 'react-native';
 import {defaultStyle} from './styles/styles.js'
-import { AntDesign } from '@expo/vector-icons'
 import React, { useState, useEffect } from "react"
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Home from './components/Home'
-import Test from './components/Test'
-
+import Navigation from './components/Navigation'
 
 //database hommeja
 import { child, onValue, push, ref, remove, update } from "firebase/database"
@@ -90,26 +85,9 @@ export default function App() {
   let recipesKeys = Object.keys(recipes);
   //databs päättyy
 
-  //Navihommia
-  function HomeScreen() {
-    return(
-        <Home />
-    )
-}
-
-  function TestScreen() {
-      return(
-          <Test />
-      )
-  }
-
-  const Tab = createBottomTabNavigator();
-
-  //navihommat päättyy
-
-
   return (
     <View style={defaultStyle.container}>
+    <ScrollView>
       <Header />
 
       {/* väliaikasesti tässä tuo näkyvä osa databasesta. tuntuu toimivan reseptin lisäys ja kaikkien reseptien poisto. atm vain reseptin nimi on kirjattuna */}
@@ -121,36 +99,37 @@ export default function App() {
               placeholder="add new recipe"
               value={newRecipe}
               onChangeText={setNewRecipe}
+              style={defaultStyle.textInput}
             />
             <TextInput
               placeholder="add instructions"
               value={instructions}
               onChangeText={setInstructions}
+              style={defaultStyle.textInput}
             />
             <TextInput
               placeholder="add a category"
               value={categoryInput}
               onChangeText={setCategoryInput}
+              style={defaultStyle.textInput}
             />
-            <Button
-              title="Add new a new category"
-              onPress={addCategories}
-            />
+            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={addCategories}>
+              <Text style={defaultStyle.buttonText}>Add a new category</Text>
+            </TouchableOpacity>
             <TextInput
               placeholder="add new ingredient"
               value={ingredientInput}
               onChangeText={setIngredientInput}
+              style={defaultStyle.textInput}
             />
-            <Button
-              title="Add new a new ingredient"
-              onPress={addIngredients}
-            />
+            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={addIngredients}>
+              <Text style={defaultStyle.buttonText}>Add a new ingredient</Text>
+            </TouchableOpacity>
           </View>
           <View>
-            <Button
-              title="Add new recipe item"
-              onPress={() => addNewRecipe()}
-            />
+            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => addNewRecipe}>
+              <Text style={defaultStyle.buttonText}>Add a new recipe</Text>
+            </TouchableOpacity>
             <ScrollView>
               {recipesKeys.length > 0 ? (
                 recipesKeys.map(key => (
@@ -164,10 +143,9 @@ export default function App() {
                 <Text>There are no items</Text>
               )}
               <View>
-                <Button
-                title="Remove all recipes"
-                onPress={() => createTwoButtonAlert()}
-              />
+              <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => createTwoButtonAlert()}>
+              <Text style={defaultStyle.buttonText}>Remove all recipes</Text>
+            </TouchableOpacity>
               </View>
             </ScrollView>
           </View>
@@ -175,40 +153,11 @@ export default function App() {
       </React.Fragment>
       {/* reseptien lisäys, näkymä ja poisto */}
 
-      <Text>Tähän kaikki komponentit ja semmoset siistit jutut, Navi joko tän yläpuolelle tai sit alimmaksi</Text>
-      {/* Navi alkaa */}
-      <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={({route}) => ({
-            tabBarIcon: ({focused,color,size}) => {
-              let iconName;
-              let iconColor;
-              let iconSize = 20;
-
-              if (route.name === 'Home') {
-                iconName = focused ? 'home' : 'home',
-                iconColor = focused ? 'gray' : 'black'
-              } else if (route.name === "Test") {
-                iconName = focused ? 'checkcircle' : 'checkcircleo'
-                iconColor = focused ? 'gray' : 'black'
-              }
-
-              return <AntDesign name={iconName} size={iconSize} color={iconColor} />
-            },
-            tabBarActiveTintColor: 'green',
-            tabBarInactiveBackgroundColor: 'white',
-            tabBarShowLabel: false,
-            tabBarStyle: {
-              position: 'absolute'
-            }
-          })}
-        >
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Test" component={TestScreen}/>
-        </Tab.Navigator>
-      </NavigationContainer>
-      {/* Navi loppuu */}
       <Footer />
+    </ScrollView>
+      <View style={defaultStyle.navBar}>
+        <Navigation />
+      </View>
     </View>
   );
 }
