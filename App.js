@@ -1,8 +1,13 @@
 import { Text, TextInput, View, Button, Alert, ScrollView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {defaultStyle} from './styles/styles.js'
+import { AntDesign } from '@expo/vector-icons'
 import React, { useState, useEffect } from "react"
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Home from './components/Home'
+import Test from './components/Test'
 
 
 //database hommeja
@@ -85,6 +90,21 @@ export default function App() {
   let recipesKeys = Object.keys(recipes);
   //databs päättyy
 
+  //Navihommia
+  function HomeScreen() {
+    return(
+        <Home />
+    )
+}
+
+  function TestScreen() {
+      return(
+          <Test />
+      )
+  }
+
+  const Tab = createBottomTabNavigator();
+
 
   return (
     <View style={defaultStyle.container}>
@@ -154,6 +174,38 @@ export default function App() {
       {/* reseptien lisäys, näkymä ja poisto */}
 
       <Text>Tähän kaikki komponentit ja semmoset siistit jutut, Navi joko tän yläpuolelle tai sit alimmaksi</Text>
+      {/* Navi alkaa */}
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({route}) => ({
+            tabBarIcon: ({focused,color,size}) => {
+              let iconName;
+              let iconColor;
+              let iconSize = 20;
+
+              if (route.name === 'Home') {
+                iconName = focused ? 'home' : 'home',
+                iconColor = focused ? 'gray' : 'black'
+              } else if (route.name === "Test") {
+                iconName = focused ? 'checkcircle' : 'checkcircleo'
+                iconColor = focused ? 'gray' : 'black'
+              }
+
+              return <AntDesign name={iconName} size={iconSize} color={iconColor} />
+            },
+            tabBarActiveTintColor: 'green',
+            tabBarInactiveBackgroundColor: 'white',
+            tabBarShowLabel: false,
+            tabBarStyle: {
+              position: 'absolute'
+            }
+          })}
+        >
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Test" component={TestScreen}/>
+        </Tab.Navigator>
+      </NavigationContainer>
+      {/* Navi loppuu */}
       <Footer />
     </View>
   );
