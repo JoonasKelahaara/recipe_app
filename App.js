@@ -14,6 +14,11 @@ export default function App() {
 
   //databs
   const [newRecipe, setNewRecipe] = useState("");
+  const [categoryInput, setCategoryInput] = useState("");
+  const [allCategories, setAllCategories] = useState([]);
+  const [ingredientInput, setIngredientInput] = useState("");
+  const [allIngredients, setAllIngredients] = useState([]);
+  const [instructions, setInstructions] = useState("");
   const [recipes, setRecipes] = useState({});
 
   useEffect(() => {
@@ -28,14 +33,37 @@ export default function App() {
   const addNewRecipe = () => {
     if (newRecipe.trim() !== "") {
       const newRecipeItem = {
-        recipeItem: newRecipe
+        recipeItem: newRecipe,
+        instructions: instructions,
+        categories: allCategories,
+        ingredients: allIngredients
       };
       const newRecipeItemKey = push(child(ref(db), RECIPES_REF)).key;
       const updates = {};
       updates[RECIPES_REF + newRecipeItemKey] = newRecipeItem;
       setNewRecipe("");
+      setCategoryInput("")
+      setAllCategories([])
+      setIngredientInput("")
+      setInstructions("")
       return update(ref(db), updates);
     }
+  }
+
+  const addCategories = () => {
+    setAllCategories((prevCategories) => [
+      ...prevCategories,
+      categoryInput
+    ])
+    setCategoryInput("")
+  }
+
+  const addIngredients = () => {
+    setAllIngredients((prevIngredients) => [
+      ...prevIngredients,
+      ingredientInput
+    ])
+    setIngredientInput("")
   }
 
   const removeRecipes = () => {
@@ -45,7 +73,6 @@ export default function App() {
   const createTwoButtonAlert = () => Alert.alert(
     "todolist", "remove all items?", [{
       text: "Cancel",
-      onPress: () => console.log("Cancel Pressed"),
       style: "cancel"
     },
     {
@@ -72,6 +99,29 @@ export default function App() {
               placeholder="add new recipe"
               value={newRecipe}
               onChangeText={setNewRecipe}
+            />
+            <TextInput
+              placeholder="add instructions"
+              value={instructions}
+              onChangeText={setInstructions}
+            />
+            <TextInput
+              placeholder="add a category"
+              value={categoryInput}
+              onChangeText={setCategoryInput}
+            />
+            <Button
+              title="Add new a new category"
+              onPress={addCategories}
+            />
+            <TextInput
+              placeholder="add new ingredient"
+              value={ingredientInput}
+              onChangeText={setIngredientInput}
+            />
+            <Button
+              title="Add new a new ingredient"
+              onPress={addIngredients}
             />
           </View>
           <View>
