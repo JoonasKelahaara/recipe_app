@@ -105,6 +105,8 @@ export default function App() {
 
   const Tab = createBottomTabNavigator();
 
+  //navihommat päättyy
+
 
   return (
     <View style={defaultStyle.container}>
