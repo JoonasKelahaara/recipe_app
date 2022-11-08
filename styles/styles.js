@@ -5,6 +5,9 @@ export const defaultStyle = StyleSheet.create({
         flex: 1,
         marginTop: StatusBar.currentHeight || 0
       },
+      navMargin: {
+        marginBottom: 45
+      },
       header: {
         backgroundColor: 'lightblue',
         textAlign: 'center',
@@ -37,12 +40,25 @@ export const defaultStyle = StyleSheet.create({
         marginLeft: 7,
         marginRight: 7,
         padding: 4,
-        borderWidth: 1
+        borderWidth: 1,
+        borderRadius: 6
       },
       navBar: {
         position: 'absolute', 
         left: 0, 
         right: 0, 
         bottom: 0,
+      },
+      recipeItem: {
+        margin: 5,
+        borderWidth: 1,
+        borderRadius: 6,
+        padding: 5
+      },
+      recipeTitle: {
+        textAlign: 'center',
+        fontSize: 25,
+        fontWeight: 'bold',
+        borderBottomWidth: 1
       }
 })

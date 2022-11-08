@@ -3,6 +3,7 @@ import React from "react";
 import Entypo from "@expo/vector-icons/Entypo"
 import { View, Text, Pressable} from "react-native";
 import { db, RECIPES_REF } from "../firebase/Config";
+import {defaultStyle} from '../styles/styles.js'
 
 export const RecipeItem = ({recipeItem: {recipeItem: title, instructions: instructions, categories: allCategories, ingredients: allIngredients }, id}) => {
 
@@ -12,8 +13,8 @@ export const RecipeItem = ({recipeItem: {recipeItem: title, instructions: instru
     };
 
     return (
-        <View>
-            <Text>{title}</Text>
+        <View style={defaultStyle.recipeItem}>
+            <Text style={defaultStyle.recipeTitle} >{title}</Text>
             <Text>{instructions}</Text>
             <Text>{allCategories}</Text>
             <Text>{allIngredients}</Text>

@@ -41,7 +41,7 @@ export default function Navigation() {
             tabBarActiveTintColor: 'green',
             tabBarInactiveBackgroundColor: 'white',
             tabBarShowLabel: false,
-            tabBarStyle: {position: 'relative'}
+            tabBarStyle: {position: 'absolute'}
           })}
         >
           <Tab.Screen name="Home" component={HomeScreen} />

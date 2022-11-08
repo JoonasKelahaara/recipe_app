@@ -33,7 +33,7 @@ export default function App() {
 
   return (
     <View style={defaultStyle.container}>
-    <ScrollView>
+    <ScrollView style={defaultStyle.navMargin}>
       <Header />
       <AddRecipe />
 
