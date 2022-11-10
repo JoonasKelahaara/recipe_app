@@ -10,6 +10,9 @@ import { StyleSheet, StatusBar } from "react-native";
 //AKSENTIT:
 //      1. #808080
 
+//FONTIT:
+//      1. Quicksand väliostikot
+//      2. Roboto leipäteksti
 export const defaultStyle = StyleSheet.create({
     container: {
         flex: 1,
@@ -84,5 +87,9 @@ export const defaultStyle = StyleSheet.create({
       pageTitle: {
         fontSize: 16,
         fontWeight: 'bold'
+      },
+      logo: {
+        height: 85,
+        width: 85,
       }
 })
