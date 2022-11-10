@@ -5,7 +5,7 @@ import {defaultStyle} from '../styles/styles.js'
 export default function Header() {
     return (
     <View>
-        <Text style={defaultStyle.header}>Syökää ruokaa ja viinaa juokaa</Text>
+        <Text style={defaultStyle.header}>Puistokemistit</Text>
     </View>
     )
 }

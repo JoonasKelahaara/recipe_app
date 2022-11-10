@@ -4,8 +4,8 @@ import {defaultStyle} from '../styles/styles.js'
 
 export default function Footer() {
     return (
-    <View>
-        <Text style={defaultStyle.footer}>Ryhymä kolomosen tekijjät</Text>
+    <View style={defaultStyle.footer}>
+        <Text>Ryhymä kolomosen tekijjät</Text>
     </View>
     )
 }

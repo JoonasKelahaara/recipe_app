@@ -56,7 +56,7 @@ export function AddRecipe () {
 
   return (
     <View>
-    <Text>Recipes ({recipesKeys.length})</Text>
+    <Text style={defaultStyle.pageTitle}>Recipes ({recipesKeys.length})</Text>
         <TextInput
         placeholder='add new recipe'
         value={newRecipe}
