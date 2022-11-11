@@ -65,6 +65,7 @@ export function AddRecipe () {
         />
         <TextInput
         placeholder='add instructions'
+        multiline={true}
         value={instructions}
         onChangeText={setInstructions}
         style={defaultStyle.textInput}
