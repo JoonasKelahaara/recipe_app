@@ -1,11 +1,19 @@
-import { ref, remove, child, update } from "firebase/database";
-import React from "react";
+import { ref, remove, child, update, onValue } from "firebase/database";
+import React, { useState, useEffect } from "react"
 import Entypo from "@expo/vector-icons/Entypo"
-import { View, Text, Pressable} from "react-native";
+import { View, Text, Pressable, ScrollView} from "react-native";
 import { db, RECIPES_REF } from "../firebase/Config";
 import {defaultStyle} from '../styles/styles.js'
 
 export const RecipeItem = ({recipeItem: {recipeItem: title, instructions: instructions, categories: allCategories, ingredients: allIngredients }, id}) => {
+
+    const ingredientList = allIngredients.map((ingredient) =>
+        <Text>{ingredient}</Text>
+    )
+
+    const categoryList = allCategories.map((category) =>
+    <Text>{category}</Text>
+    )
 
     const onRemove = () => {
         return remove(child(
@@ -16,8 +24,9 @@ export const RecipeItem = ({recipeItem: {recipeItem: title, instructions: instru
         <View style={defaultStyle.recipeItem}>
             <Text style={defaultStyle.recipeTitle} >{title}</Text>
             <Text>{instructions}</Text>
-            <Text>{allCategories}</Text>
-            <Text>{allIngredients}</Text>
+            <ScrollView>{categoryList}</ScrollView>
+            <ScrollView>{ingredientList}</ScrollView>
+
 
             <Pressable>
                 <Entypo name={"trash"} size={32} onPress={(onRemove)} />

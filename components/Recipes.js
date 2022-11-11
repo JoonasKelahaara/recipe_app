@@ -1,7 +1,6 @@
 import { Text, ScrollView} from 'react-native';
 import {defaultStyle} from '../styles/styles.js'
 import React, { useState, useEffect } from "react"
-import Footer from './Footer'
 
 //database hommeja
 import { onValue, ref} from "firebase/database"
