@@ -6,6 +6,7 @@ import { StyleSheet, StatusBar } from "react-native";
 //      3. #559E54
 //      4. #305A30
 //      5. #0A3409
+//      GRAFIIKAT: #8EC641
 
 //AKSENTIT:
 //      1. #808080
@@ -17,7 +18,6 @@ export const defaultStyle = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: StatusBar.currentHeight || 0,
-        backgroundColor: '#E8F3E8'
       },
       navMargin: {
         marginBottom: 45,
@@ -27,8 +27,20 @@ export const defaultStyle = StyleSheet.create({
       },
       header: {
         backgroundColor: '#92C591',
-        textAlign: 'center',
-        fontSize: 25
+        width: '30%',
+        borderBottomRightRadius: 70,
+        borderTopRightRadius: 1,
+        
+      },
+      shadowIoS: {
+        shadowColor: 'black',
+        shadowOffset: {width: 1, height: 4},
+        shadowOpacity: 0.5,
+        shadowRadius: 3
+      },
+      shadowAndroid: {
+        elevation: 25,
+        shadowColor: '#000',
       },
       footer: {
         backgroundColor: '#92C591',
@@ -89,7 +101,18 @@ export const defaultStyle = StyleSheet.create({
         fontWeight: 'bold'
       },
       logo: {
+        flex: 1,
+        backgroundColor: 'white',
+      },
+      logoBorder: {
         height: 85,
         width: 85,
+        backgroundColor: 'white',
+        borderRadius: 90,
+        borderWidth: 12,
+        borderColor: '#8EC641',
+        margin: 5,
+        alignItems: 'center',
+        overflow: 'hidden',
       }
 })
