@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import {defaultStyle} from './styles/styles.js'
 import React, { useState, useEffect } from "react"
@@ -9,6 +9,9 @@ import Home from './components/Home'
 import Recipes from './components/Recipes'
 import Header from './components/Header'
 import Info from './components/Info'
+import Login from './components/Login'
+import Profile from './components/Profile'
+import Settings from './components/Settings';
 import Footer from './components/Footer'
 
 //database hommeja
@@ -39,6 +42,24 @@ export default function App() {
       )
   }
 
+  function LoginScreen() {
+    return(
+      <Login />
+    )
+  }
+
+  function ProfileScreen() {
+    return(
+      <Profile navigation="Settings"/>
+    )
+  }
+
+  function SettingsScreen() {
+    return(
+      <Settings name="Settings"/>
+    )
+  }
+
   const Tab = createBottomTabNavigator();
 
   return (
@@ -62,6 +83,15 @@ export default function App() {
               } else if (route.name === "Info") {
                 iconName = focused ? 'infocirlceo' : 'infocirlceo'
                 iconColor = focused ? '#808080' : 'white'
+              } else if (route.name === "Login") {
+                iconName = focused ? 'login' : 'login',
+                iconColor = focused ? '#808080' : 'white'
+              } else if (route.name === "Profile") {
+                iconName = focused ? 'user' : 'user',
+                iconColor = focused ? '#808080' : 'white'
+              } else if (route.name === "Settings") {
+                iconName = focused ? 'setting' : 'setting',
+                iconColor = focused ? '#808080' : 'white'
               }
 
               return <AntDesign name={iconName} size={iconSize} color={iconColor} />
@@ -74,9 +104,15 @@ export default function App() {
             headerShown: false,
           })}
         >
+          <Tab.Screen name="Login" component={LoginScreen} />
           <Tab.Screen name="Info" component={InfoScreen} />
           <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Recipes" component={RecipeScreen}/>
+          <Tab.Screen name="Recipes" component={RecipeScreen} />
+          <Tab.Screen name ="Profile" component={ProfileScreen} />
+          <Tab.Screen name="Settings" component={SettingsScreen} options={{
+            tabBarButton: () => null,
+            tabBarVisible: false
+          }}/>
         </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" backgroundColor="#92C591" />

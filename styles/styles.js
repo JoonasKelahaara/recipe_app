@@ -114,5 +114,8 @@ export const defaultStyle = StyleSheet.create({
         margin: 5,
         alignItems: 'center',
         overflow: 'hidden',
+      },
+      settingsButton: {
+        justifyContent: 'flex-end'
       }
 })
