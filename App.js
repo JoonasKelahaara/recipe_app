@@ -1,7 +1,7 @@
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import {defaultStyle} from './styles/styles.js'
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from '@expo/vector-icons'
@@ -14,13 +14,8 @@ import Profile from './components/Profile'
 import Settings from './components/Settings';
 import Footer from './components/Footer'
 
-//database hommeja
-import { onValue, ref} from "firebase/database"
-import { db, RECIPES_REF } from "./firebase/Config"
-//componentti reseptien näyttämiseen
-import { RecipeItem } from './components/RecipeItem';
-//componentti reseptien lisäämiseen
-import { AddRecipe } from "./components/AddRecipe"
+
+
 
 export default function App() {
 

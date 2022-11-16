@@ -1,141 +1,144 @@
-import { ref, remove, child, update, onValue, set, push } from "firebase/database";
-import React, { useState, useEffect } from "react"
-import Entypo from "@expo/vector-icons/Entypo"
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons"
-import { Text, ScrollView, Modal, View, TouchableOpacity, StyleSheet, Pressable, TextInput } from 'react-native'
-import { db, RECIPES_REF } from "../firebase/Config";
-import {defaultStyle} from '../styles/styles.js'
+import React, { useState } from 'react'
+import Entypo from '@expo/vector-icons/Entypo'
+import { AntDesign } from '@expo/vector-icons'
+import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal } from 'react-native'
+import { doc, updateDoc, deleteDoc } from "firebase/firestore"; 
+import { db, RECIPES_REF } from '../firebase/Config'
+import { defaultStyle } from '../styles/styles.js'
 
-export const RecipeItem = ({recipeItem: {recipeItem: title, instructions: instructions, categories: categories, ingredients: ingredients }, id}) => {
+export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: instructions, categories: categories, ingredients: ingredients, piclink: picture, id: id }}) => {
 
-    const ingredientList = ingredients.map((ingredient) =>
-        <Text key={ingredients.id}>{ingredient}</Text>
-    )
-    const categoryList = categories.map((category) =>
-            <Text key={categories.id}>{category}</Text>
-    )
+  const [ingredient, setIngredient] = useState('')
+  const [ingredientsUpdate, setIngredients] = useState([])
+  const [category, setCategory] = useState('')
+  const [categoriesUpdate, setCategories] = useState([])
 
-    const [updateTitle, setUpdateTitle] = useState(title)
-    const [updateInstructions, setUpdateInstructions] = useState(instructions)
-    const [updateCategories, setUpdateAllCategories] = useState(categories)
-    const [updateIngredients, setUpdateAllIngredients] = useState(ingredients)
+  const ingredientList = ingredients.map(ingredient => (
+    <Text key={ingredients.id}>{ingredient}</Text>
+  ))
+  const categoryList = categories.map(category => (
+    <Text key={categories.id}>{category}</Text>
+  ))
 
-    const [categoryInput, setCategoryInput] = useState('')
-    const [allCategories, setAllCategories] = useState(["",""])
-    const [ingredientInput, setIngredientInput] = useState('')
-    const [allIngredients, setAllIngredients] = useState([])
+  const remove = () => {
+    deleteDoc(doc(db, RECIPES_REF, id))
+    console.log("pressed", id)
+  }
 
-    const addCategories = () => {
-        setAllCategories(prevCategories => [...prevCategories, categoryInput])
-        setCategoryInput('')
-      }
-    
-      const addIngredients = () => {
-        setAllIngredients(prevIngredients => [...prevIngredients, ingredientInput])
-        setIngredientInput('')
-      }
+  const update = () => {
+    addCategory()
+    addIngredient()
+    // submit data
+    updateDoc(doc(db, RECIPES_REF, id), {
+        recipename: recipeName,
+        instructions: instructions,
+        categories: categoriesUpdate,
+        ingredients: ingredientsUpdate,
+        piclink: picture
+    }).then(() => {
+        //data saved
+        console.log("data submitted")
+    }).catch((error) => {
+        //fail
+        console.log(error)
+    });
+  }
 
-    const updateRecipe = () => {
-        const updatedRecipeItem = {
-            recipeItem: updateTitle,
-            instructions: updateInstructions,
-            categories: allCategories,
-            ingredients: allIngredients
-          }
-          return update(ref((db), RECIPES_REF + id), updatedRecipeItem)
-    }
+  function addIngredient() {
+    ingredientsUpdate.push(ingredient)
+    setIngredient("")
+  }
 
-    const onRemove = () => {
-        return remove(child(
-            ref(db), RECIPES_REF + id));
-    };
+  function addCategory() {
+      categoriesUpdate.push(category)
+      setCategory("")
+  }
 
-    const [modalVisible, setModalVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
 
-    return (
-        <View style={defaultStyle.recipeItem}>
+  return (
+    <View style={defaultStyle.recipeItem}>
 
+      <Modal animationType='slide' transparent={true} visible={modalVisible} onRequestClose={() => {setModalVisible(!modalVisible)}}>
+          <View>
+              <View style={defaultStyle.modalView}>
 
-        <Modal
-            animationType='slide'
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-            setModalVisible(!modalVisible)
-            }}
-        >
-            <View>
-            <View style={styles.modalView}>
+                  {/* Modal ikkunan sisältö */}
+                  <TextInput value={recipeName} onChangeText={(recipeName) => {setRecipeName(recipeName)}} placeholder="Recipe Name" style={defaultStyle.textInput}></TextInput>
+                  <TextInput value={instructions} multiline={true} onChangeText={(instructions) => {setInstructions(instructions)}} placeholder="Recipe instructions" style={defaultStyle.textInput}></TextInput>
 
+                  <TextInput value={category} onChangeText={(category) => {setCategory(category)}} placeholder="Category" style={defaultStyle.textInput}></TextInput>
+                  <View>
+                      {categoriesUpdate.map((category) => (
+                          <View>
+                              <Text>{category}</Text>
+                              <Pressable>
+                                  <Entypo name={'trash'} size={32}  />
+                              </Pressable>
+                          </View>
+                      ))}
+                  </View>
+                  <TouchableOpacity
+                  style={defaultStyle.button}
+                  activeOpacity={0.6}
+                  onPress={addCategory} >
+                      <Text style={defaultStyle.buttonText}>Add category</Text>
+                  </TouchableOpacity>
 
-
-                <TextInput style={defaultStyle.textInput} onChangeText={setUpdateTitle}>{title}</TextInput>
-                <TextInput style={defaultStyle.textInput} multiline={true} onChangeText={setUpdateInstructions}>{instructions}</TextInput>
-                
-
-                <TextInput
-                placeholder='add a category'
-                value={categoryInput}
-                onChangeText={setCategoryInput}
-                style={defaultStyle.textInput}
-                />
-                <TouchableOpacity
-                style={defaultStyle.button}
-                activeOpacity={0.6}
-                onPress={addCategories}
-                >
-                <Text style={defaultStyle.buttonText}>Add a new category</Text>
-                </TouchableOpacity>
-                <TextInput
-                placeholder='add new ingredient'
-                value={ingredientInput}
-                onChangeText={setIngredientInput}
-                style={defaultStyle.textInput}
-                />
-                <TouchableOpacity
-                style={defaultStyle.button}
-                activeOpacity={0.6}
-                onPress={addIngredients}
-                >
-                <Text style={defaultStyle.buttonText}>Add a new ingredient</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                style={defaultStyle.button}
-                activeOpacity={0.6}
-                onPress={(updateRecipe)}
-                >
-                <Text style={defaultStyle.buttonText}>Update Recipe</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                style={defaultStyle.button}
-                activeOpacity={0.6}
-                onPress={() => setModalVisible(!modalVisible)}
-                >
-                <Text style={defaultStyle.buttonText}>Hide Modal</Text>
-                </TouchableOpacity>
-            </View>
-            </View>
-        </Modal>
+                  <TextInput value={ingredient} onChangeText={(ingredient) => {setIngredient(ingredient)}} placeholder="Ingredient" style={defaultStyle.textInput}></TextInput>
+                  <View>
+                      {ingredientsUpdate.map((ingredient) => (
+                          <View>
+                              <Text>{ingredient}</Text>
+                              <Pressable>
+                                  <Entypo name={'trash'} size={32} /* onPress={onRemove} */ />
+                              </Pressable>
+                          </View>
+                      ))}
+                  </View>
+                  <TouchableOpacity
+                  style={defaultStyle.button}
+                  activeOpacity={0.6}
+                  onPress={addIngredient} >
+                      <Text style={defaultStyle.buttonText}>Add ingredient</Text>
+                  </TouchableOpacity>
 
 
+                  <TouchableOpacity
+                  style={defaultStyle.button}
+                  activeOpacity={0.6}
+                  onPress={update} >
+                      <Text style={defaultStyle.buttonText}>Update recipe</Text>
+                  </TouchableOpacity>
 
-            <Text style={defaultStyle.recipeTitle} >{title}</Text>
-            <Text>{instructions}</Text>
-            <ScrollView>{categoryList}</ScrollView>
-            <ScrollView>{ingredientList}</ScrollView>
-            <Pressable>
-                <Entypo name={"trash"} size={32} onPress={(onRemove)} />
-            </Pressable>
-            <Pressable>
-                <MaterialCommunityIcons name={"update"} size={32} onPress={() => setModalVisible(true)} />
-            </Pressable>
-        </View>
-    );
+                  <TouchableOpacity
+                  style={defaultStyle.button}
+                  activeOpacity={0.6}
+                  onPress={() => setModalVisible(!modalVisible)}
+                  >
+                      <Text style={defaultStyle.buttonText}>Cancel</Text>
+                  </TouchableOpacity>
+              </View>
+          </View>
+      </Modal>
+
+
+      {/* näkyvä resepti */}
+      <Text style={defaultStyle.recipeTitle}>{recipeName}</Text>
+      <Text>Instructions:</Text>
+      <Text>{instructions}</Text>
+      <Text>Categories:</Text>
+      <ScrollView>{categoryList}</ScrollView>
+      <Text>Ingredients:</Text>
+      <ScrollView>{ingredientList}</ScrollView>
+      <Pressable>
+        <Entypo name={'trash'} size={32} onPress={remove}/>
+      </Pressable>
+      <Pressable>
+        <AntDesign name="setting" size={32} color="black" onPress={() => setModalVisible(true)}/>
+      </Pressable>
+    </View>
+  )
 }
 
-const styles = StyleSheet.create({
-    modalView: {
-      backgroundColor: "white"
-    }
-  });
+export default RecipeItem
