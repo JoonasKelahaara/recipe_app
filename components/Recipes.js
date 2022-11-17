@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { defaultStyle } from '../styles/styles'
 import Entypo from '@expo/vector-icons/Entypo'
-import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal } from 'react-native'
+import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal, Alert, Image, Platform, Button } from 'react-native'
 import { db, RECIPES_REF } from '../firebase/Config'
 import { RecipeItem } from './RecipeItem'
 import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import * as ImagePicker from "expo-image-picker"
+
 
 export function Recipes () {
 
@@ -16,7 +18,44 @@ export function Recipes () {
     const [ingredients, setIngredients] = useState([])
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState(null);
+    const [uploading, setUploading] = useState(false)
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result.uri);
+    
+
+          setImage(result.assets[0].uri);
+
+      };
+
+    const uploadImage = async () => {
+        setUploading(true)
+        const response = await fetch(image.uri)
+        const blob = await response.blob()
+        const filename = image.uri.substring(image.uri.lastIndexOf("/")+1)
+        var ref = firebase.storage().ref().child(filename).put(blob)
+
+        try {
+            await ref
+        } catch (e) {
+            console.log(e)
+        }
+        setUploading(false)
+        Alert.alert(
+            "Photo uploaded"
+        )
+        setImage(null)
+    }
+
 
     function addIngredient() {
         ingredients.push(ingredient)
@@ -79,6 +118,22 @@ export function Recipes () {
 
                         {/* Modal ikkunan sisältö */}
                         <TextInput value={recipeName} onChangeText={(recipeName) => {setRecipeName(recipeName)}} placeholder="Recipe Name" style={defaultStyle.textInput}></TextInput>
+
+                        {/* kuvan lisäys */}
+                        <TouchableOpacity
+                        style={defaultStyle.button}
+                        activeOpacity={0.6}
+                        onPress={pickImage} >
+                            <Text style={defaultStyle.buttonText}>Pick picture</Text>
+                        </TouchableOpacity>
+                        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+                        <TouchableOpacity
+                        style={defaultStyle.button}
+                        activeOpacity={0.6}
+                        onPress={uploadImage} >
+                            <Text style={defaultStyle.buttonText}>Add picture</Text>
+                        </TouchableOpacity>
+
                         <TextInput value={instructions} multiline={true} onChangeText={(instructions) => {setInstructions(instructions)}} placeholder="Recipe instructions" style={defaultStyle.textInput}></TextInput>
 
                         <TextInput value={category} onChangeText={(category) => {setCategory(category)}} placeholder="Category" style={defaultStyle.textInput}></TextInput>
