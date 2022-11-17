@@ -72,9 +72,6 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
                       {categoriesUpdate.map((category) => (
                           <View>
                               <Text>{category}</Text>
-                              <Pressable>
-                                  <Entypo name={'trash'} size={32}  />
-                              </Pressable>
                           </View>
                       ))}
                   </View>
@@ -90,9 +87,6 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
                       {ingredientsUpdate.map((ingredient) => (
                           <View>
                               <Text>{ingredient}</Text>
-                              <Pressable>
-                                  <Entypo name={'trash'} size={32} /* onPress={onRemove} */ />
-                              </Pressable>
                           </View>
                       ))}
                   </View>

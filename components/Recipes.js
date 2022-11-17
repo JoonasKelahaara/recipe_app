@@ -16,7 +16,7 @@ export function Recipes () {
     const [ingredients, setIngredients] = useState([])
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
-    const [picture, setPicture] = useState('')
+    const [image, setImage] = useState(null)
 
     function addIngredient() {
         ingredients.push(ingredient)
