@@ -45,13 +45,13 @@ export default function App() {
 
   function ProfileScreen() {
     return(
-      <Profile navigation="Settings"/>
+      <Profile name="Settings"/>
     )
   }
 
   function SettingsScreen() {
     return(
-      <Settings name="Settings"/>
+      <Settings name="Profile"/>
     )
   }
 
@@ -106,7 +106,8 @@ export default function App() {
           <Tab.Screen name ="Profile" component={ProfileScreen} />
           <Tab.Screen name="Settings" component={SettingsScreen} options={{
             tabBarButton: () => null,
-            tabBarVisible: false
+            tabBarVisible: false,
+            tabBarStyle: {display: 'none'}
           }}/>
         </Tab.Navigator>
       </NavigationContainer>

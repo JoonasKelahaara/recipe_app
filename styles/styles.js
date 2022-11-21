@@ -118,6 +118,10 @@ export const defaultStyle = StyleSheet.create({
       settingsButton: {
         justifyContent: 'flex-end'
       },
+      settings: {
+        alignContent:'center',
+        backgroundColor: 'white'
+      },
       modalView: {
         backgroundColor: "white"
       }
