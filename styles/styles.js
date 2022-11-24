@@ -27,7 +27,8 @@ export const defaultStyle = StyleSheet.create({
       },
       header: {
         backgroundColor: '#92C591',
-        width: '30%',
+        width: 110,
+        height: 110,
         borderBottomRightRadius: 70,
         borderTopRightRadius: 1,
         
