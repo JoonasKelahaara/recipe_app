@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { defaultStyle } from '../styles/styles'
 import Entypo from '@expo/vector-icons/Entypo'
-import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal, Alert, Image, Platform, Button } from 'react-native'
+import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal, Image } from 'react-native'
 import { db, storage, RECIPES_REF } from '../firebase/Config'
 import { RecipeItem } from './RecipeItem'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -35,12 +35,16 @@ export function Recipes () {
         setImage(result.uri);
     };
 
-
     const uploadImage = async () => {
         const storageRef = ref(storage, (recipeName+".jpg"));
         const img = await fetch(image)
         const bytes = await img.blob()
         await uploadBytes(storageRef, bytes)
+
+        getDownloadURL(ref(storage, (recipeName+'.jpg')))
+        .then((url) => {
+            setImageURL(url)
+        });
     }
 
     function addIngredient() {
@@ -62,15 +66,6 @@ export function Recipes () {
             setAllRecipes(recipes)
         })
     }, [])
-
-    if (recipeName != "") {
-        getDownloadURL(ref(storage, (recipeName+'.jpg')))
-        .then((url) => {
-            setImageURL(url)
-            console.log(imageUrl)
-        });
-    }
-    
     
     function create() {
         addCategory()
@@ -90,6 +85,7 @@ export function Recipes () {
             //fail
             console.log(error)
         });
+        setModalVisible(!modalVisible)
     }
 
         //haku kriteerillä
