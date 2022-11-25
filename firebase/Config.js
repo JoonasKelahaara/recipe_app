@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore"
 import { getStorage } from "firebase/storage";
+import auth, {firebase} from '@react-native-firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,3 +24,28 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 export const RECIPES_REF = "recipes";
+
+//Login & Logout
+export const handleSignIn = async (email, password) => {
+  await firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(() => {
+      console.log(firebase.auth().currentUser);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+export const handleSignout = async () => {
+  await firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log("Signed Out");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
