@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"
+import auth, {firebase} from '@react-native-firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,3 +20,28 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const RECIPES_REF = "recipes";
+
+//Login & Logout
+export const handleSignIn = async (email, password) => {
+  await firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(() => {
+      console.log(firebase.auth().currentUser);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+export const handleSignout = async () => {
+  await firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log("Signed Out");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
