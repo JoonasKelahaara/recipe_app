@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Entypo from '@expo/vector-icons/Entypo'
 import { AntDesign } from '@expo/vector-icons'
-import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal } from 'react-native'
+import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal, Image } from 'react-native'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore"; 
 import { db, RECIPES_REF } from '../firebase/Config'
 import { defaultStyle } from '../styles/styles.js'
@@ -42,6 +42,7 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
         //fail
         console.log(error)
     });
+    setModalVisible(!modalVisible)
   }
 
   function addIngredient() {
@@ -65,6 +66,7 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
 
                   {/* Modal ikkunan sisältö */}
                   <TextInput value={recipeName} onChangeText={(recipeName) => {setRecipeName(recipeName)}} placeholder="Recipe Name" style={defaultStyle.textInput}></TextInput>
+                  <Image source={{ uri: picture }} />
                   <TextInput value={instructions} multiline={true} onChangeText={(instructions) => {setInstructions(instructions)}} placeholder="Recipe instructions" style={defaultStyle.textInput}></TextInput>
 
                   <TextInput value={category} onChangeText={(category) => {setCategory(category)}} placeholder="Category" style={defaultStyle.textInput}></TextInput>

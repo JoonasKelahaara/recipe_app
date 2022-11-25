@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { defaultStyle } from '../styles/styles'
 import Entypo from '@expo/vector-icons/Entypo'
 import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal, Alert, Image, Platform, Button } from 'react-native'
-import { db, RECIPES_REF } from '../firebase/Config'
+import { db, storage, RECIPES_REF } from '../firebase/Config'
 import { RecipeItem } from './RecipeItem'
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, getDocs } from "firebase/firestore"; 
 import * as ImagePicker from "expo-image-picker"
 
@@ -19,43 +20,28 @@ export function Recipes () {
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
     const [image, setImage] = useState(null);
-    const [uploading, setUploading] = useState(false)
+    const [imageUrl, setImageURL] = useState('')
+
+   
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
           allowsEditing: true,
           aspect: [4, 3],
           quality: 1,
         });
-    
-        console.log(result.uri);
-    
+        setImage(result.uri);
+    };
 
-          setImage(result.assets[0].uri);
-
-      };
 
     const uploadImage = async () => {
-        setUploading(true)
-        const response = await fetch(image.uri)
-        const blob = await response.blob()
-        const filename = image.uri.substring(image.uri.lastIndexOf("/")+1)
-        var ref = firebase.storage().ref().child(filename).put(blob)
-
-        try {
-            await ref
-        } catch (e) {
-            console.log(e)
-        }
-        setUploading(false)
-        Alert.alert(
-            "Photo uploaded"
-        )
-        setImage(null)
+        const storageRef = ref(storage, (recipeName+".jpg"));
+        const img = await fetch(image)
+        const bytes = await img.blob()
+        await uploadBytes(storageRef, bytes)
     }
-
 
     function addIngredient() {
         ingredients.push(ingredient)
@@ -76,17 +62,27 @@ export function Recipes () {
             setAllRecipes(recipes)
         })
     }, [])
+
+    if (recipeName != "") {
+        getDownloadURL(ref(storage, (recipeName+'.jpg')))
+        .then((url) => {
+            setImageURL(url)
+            console.log(imageUrl)
+        });
+    }
+    
     
     function create() {
         addCategory()
         addIngredient()
+        uploadImage()
         // submit data
         addDoc(collection(db, RECIPES_REF), {
             recipename: recipeName,
             instructions: instructions,
             categories: categories,
             ingredients: ingredients,
-            piclink: picture
+            piclink: imageUrl
         }).then(() => {
             //data saved
             console.log("data submitted")
@@ -114,7 +110,7 @@ export function Recipes () {
         <ScrollView style={defaultStyle.navMargin}>
             <Modal animationType='slide' transparent={true} visible={modalVisible} onRequestClose={() => {setModalVisible(!modalVisible)}}>
                 <View>
-                    <View style={defaultStyle.modalView}>
+                    <ScrollView style={defaultStyle.modalView}>
 
                         {/* Modal ikkunan sisältö */}
                         <TextInput value={recipeName} onChangeText={(recipeName) => {setRecipeName(recipeName)}} placeholder="Recipe Name" style={defaultStyle.textInput}></TextInput>
@@ -127,12 +123,6 @@ export function Recipes () {
                             <Text style={defaultStyle.buttonText}>Pick picture</Text>
                         </TouchableOpacity>
                         {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-                        <TouchableOpacity
-                        style={defaultStyle.button}
-                        activeOpacity={0.6}
-                        onPress={uploadImage} >
-                            <Text style={defaultStyle.buttonText}>Add picture</Text>
-                        </TouchableOpacity>
 
                         <TextInput value={instructions} multiline={true} onChangeText={(instructions) => {setInstructions(instructions)}} placeholder="Recipe instructions" style={defaultStyle.textInput}></TextInput>
 
@@ -187,7 +177,7 @@ export function Recipes () {
                         >
                             <Text style={defaultStyle.buttonText}>Cancel</Text>
                         </TouchableOpacity>
-                    </View>
+                    </ScrollView>
                 </View>
             </Modal>
             {/* avaa Modal ikkunan missä on reseptin lisääminen*/}
