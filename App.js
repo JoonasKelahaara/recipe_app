@@ -106,7 +106,11 @@ export default function App() {
             headerShown: false,
           })}
         >
-          <Tab.Screen name="Login" component={LoginScreen} />
+          <Tab.Screen name="Login" component={LoginScreen} /* options={{
+            tabBarButton: () => null,
+            tabBarVisible: false,
+            tabBarStyle: {display: 'none'}
+          }}  *//>
           <Tab.Screen name="Info" component={InfoScreen} />
           <Tab.Screen name="Recipes" component={RecipeScreen} />
           <Tab.Screen name="Home" component={HomeScreen} options={{
