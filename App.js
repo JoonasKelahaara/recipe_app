@@ -12,6 +12,7 @@ import Info from './components/Info'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import Settings from './components/Settings';
+import Favourites from './components/Favourites'
 import Footer from './components/Footer'
 
 
@@ -33,7 +34,7 @@ export default function App() {
 
   function InfoScreen() {
       return(
-        <Info />
+        <Info name="Settings" />
       )
   }
 
@@ -45,13 +46,19 @@ export default function App() {
 
   function ProfileScreen() {
     return(
-      <Profile name="Settings"/>
+      <Profile />
     )
   }
 
   function SettingsScreen() {
     return(
-      <Settings name="Profile"/>
+      <Settings name="Info"/>
+    )
+  }
+
+  function FavouritesScreen() {
+    return (
+      <Favourites />
     )
   }
 
@@ -69,11 +76,8 @@ export default function App() {
               let iconColor;
               let iconSize = 24;
 
-              if (route.name === 'Home') {
-                iconName = focused ? 'home' : 'home',
-                iconColor = focused ? '#808080' : 'white'
-              } else if (route.name === "Recipes") {
-                iconName = focused ? 'rest' : 'rest'
+              if (route.name === "Recipes") {
+                iconName = focused ? 'search1' : 'search1'
                 iconColor = focused ? '#808080' : 'white'
               } else if (route.name === "Info") {
                 iconName = focused ? 'infocirlceo' : 'infocirlceo'
@@ -86,6 +90,9 @@ export default function App() {
                 iconColor = focused ? '#808080' : 'white'
               } else if (route.name === "Settings") {
                 iconName = focused ? 'setting' : 'setting',
+                iconColor = focused ? '#808080' : 'white'
+              } else if (route.name === "Favourites") {
+                iconName = focused ? 'heart' : 'hearto',
                 iconColor = focused ? '#808080' : 'white'
               }
 
@@ -101,8 +108,26 @@ export default function App() {
         >
           <Tab.Screen name="Login" component={LoginScreen} />
           <Tab.Screen name="Info" component={InfoScreen} />
-          <Tab.Screen name="Home" component={HomeScreen} />
           <Tab.Screen name="Recipes" component={RecipeScreen} />
+          <Tab.Screen name="Home" component={HomeScreen} options={{
+            tabBarIcon: ({focused}) => {
+              let iconName;
+              let iconColor;
+              iconName = focused ? 'home' : 'home'
+              iconColor = focused ? '#808080' : 'white'
+              return (
+                <View style={{position:'absolute', 
+                              bottom: 0, 
+                              backgroundColor: '#92C591', 
+                              height: 70, width: 70, 
+                              alignItems: 'center', justifyContent: 'center', 
+                              borderRadius: 90, borderWidth: 2, borderColor: 'white'}}>
+                  <AntDesign name={iconName} color={iconColor} size={46} />
+                </View>
+              )
+            }
+          }} />
+          <Tab.Screen name="Favourites" component={FavouritesScreen} />
           <Tab.Screen name ="Profile" component={ProfileScreen} />
           <Tab.Screen name="Settings" component={SettingsScreen} options={{
             tabBarButton: () => null,
