@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, View, Image } from 'react-native'
-import {defaultStyle} from '../styles/styles.js';
+import { Text, View, Image } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH, data } from './CarouselCardItem';
 

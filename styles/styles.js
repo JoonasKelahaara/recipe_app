@@ -126,4 +126,5 @@ export const defaultStyle = StyleSheet.create({
       modalView: {
         backgroundColor: "white"
       }
+      
 })
