@@ -1,7 +1,7 @@
 import { LogBox, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import {defaultStyle} from './styles/styles.js'
-import React from "react"
+import React, {useState} from "react"
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from '@expo/vector-icons'
@@ -9,16 +9,25 @@ import Home from './components/Home'
 import Recipes from './components/Recipes'
 import Header from './components/Header'
 import Info from './components/Info'
+import Signin from './components/Signin'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import Settings from './components/Settings';
 import Favourites from './components/Favourites'
+import { auth } from './firebase/Config'
+import { onAuthStateChanged } from 'firebase/auth';
 import Footer from './components/Footer'
 
 //poistaa ilmoituksen "AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-async-storage/async-storage' instead of 'react-native'. See https://github.com/react-native-async-storage/async-storage"
 LogBox.ignoreLogs(["AsyncStorage"])
 
 export default function App() {
+
+  const [user, setUser] = useState({})
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser)
+  })
 
   function HomeScreen() {
     return(
@@ -40,13 +49,19 @@ export default function App() {
 
   function LoginScreen() {
     return(
-      <Login />
+      <Login name="Signin" name2="Home" />
+    )
+  }
+
+  function SigninScreen() {
+    return (
+      <Signin name="Login" />
     )
   }
 
   function ProfileScreen() {
     return(
-      <Profile />
+      <Profile name="Login"/>
     )
   }
 
@@ -69,7 +84,7 @@ export default function App() {
       <Header />
         <NavigationContainer>
         <Tab.Navigator
-          initialRouteName='Home'
+          initialRouteName='Login'
           screenOptions={({route}) => ({
             tabBarIcon: ({focused,color,size}) => {
               let iconName;
@@ -134,6 +149,11 @@ export default function App() {
           <Tab.Screen name="Favourites" component={FavouritesScreen} />
           <Tab.Screen name ="Profile" component={ProfileScreen} />
           <Tab.Screen name="Settings" component={SettingsScreen} options={{
+            tabBarButton: () => null,
+            tabBarVisible: false,
+            tabBarStyle: {display: 'none'}
+          }}/>
+          <Tab.Screen name="Signin" component={SigninScreen} options={{
             tabBarButton: () => null,
             tabBarVisible: false,
             tabBarStyle: {display: 'none'}

@@ -31,7 +31,6 @@ export const defaultStyle = StyleSheet.create({
         height: 110,
         borderBottomRightRadius: 70,
         borderTopRightRadius: 1,
-        
       },
       shadowIoS: {
         shadowColor: 'black',
