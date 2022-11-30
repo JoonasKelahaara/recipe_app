@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { LogBox, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import {defaultStyle} from './styles/styles.js'
 import React from "react"
@@ -15,8 +15,8 @@ import Settings from './components/Settings';
 import Favourites from './components/Favourites'
 import Footer from './components/Footer'
 
-
-
+//poistaa ilmoituksen "AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-async-storage/async-storage' instead of 'react-native'. See https://github.com/react-native-async-storage/async-storage"
+LogBox.ignoreLogs(["AsyncStorage"])
 
 export default function App() {
 
