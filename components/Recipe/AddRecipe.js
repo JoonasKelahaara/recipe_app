@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { defaultStyle } from '../../styles/styles'
 import Entypo from '@expo/vector-icons/Entypo'
-import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal, Image } from 'react-native'
+import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal } from 'react-native'
 import { db, storage, RECIPES_REF } from '../../firebase/Config'
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore"; 
 import * as ImagePicker from "expo-image-picker"
 
@@ -16,8 +16,7 @@ export function AddRecipe () {
     const [ingredients, setIngredients] = useState([])
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
-    const [image, setImage] = useState(null);
-    const [imageUrl, setImageURL] = useState('')  
+    const [image, setImage] = useState(null); 
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -29,8 +28,6 @@ export function AddRecipe () {
         });
         setImage(result.uri);
     };
-    
-
 
     const uploadImage = async () => {
         const storageRef = ref(storage, (recipeName+".jpg"));
@@ -38,10 +35,6 @@ export function AddRecipe () {
         const bytes = await img.blob()
         await uploadBytes(storageRef, bytes)
     }
-
-
-
-
 
     function addIngredient() {
         if (ingredient != "") {
@@ -61,21 +54,13 @@ export function AddRecipe () {
     function create() {
         addCategory()
         addIngredient()
-
-        //getDownload niin että ehtii saamaan url
-        getDownloadURL(ref(storage, (recipeName+'.jpg')))
-        .then((url) => {
-            setImageURL(url)
-        });
-        console.log(imageUrl)
-
+        uploadImage()
         // submit data
         addDoc(collection(db, RECIPES_REF), {
             recipename: recipeName,
             instructions: instructions,
             categories: categories,
             ingredients: ingredients,
-            piclink: imageUrl
         }).then(() => {
             //data saved
             console.log("data submitted")
@@ -85,18 +70,6 @@ export function AddRecipe () {
         });
         setImage(null)
     }
-
-
-        //haku kriteerillä
-    /*function readQuery() {
-        getDocs(query(collection(db, RECIPES_REF), where("categories","=",{kategorialla haku}))).then(docSnap => {
-            let users = [];
-            docSnap.forEach((doc) => {
-                users.push({ ...doc.data(), id:doc.id })
-            })
-            console.log(recipes.data())
-        })
-    } */
 
     const [modalVisible, setModalVisible] = useState(false)
 
@@ -115,12 +88,6 @@ export function AddRecipe () {
                         activeOpacity={0.6}
                         onPress={pickImage} >
                             <Text style={defaultStyle.buttonText}>Valitse kuva</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                        style={defaultStyle.button}
-                        activeOpacity={0.6}
-                        onPress={uploadImage} >
-                            <Text style={defaultStyle.buttonText}>Lataa kuva</Text>
                         </TouchableOpacity>
 
                         <TextInput value={instructions} multiline={true} onChangeText={(instructions) => {setInstructions(instructions)}} placeholder="Recipe instructions" style={defaultStyle.textInput}></TextInput>
