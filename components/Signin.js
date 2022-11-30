@@ -5,18 +5,31 @@ import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/Config'
 
-export default function Signin({ name }) {
+export default function Signin({ name, name2 }) {
 
     const [email, setEmail] = useState('')
     const [verifyEmail, setVerifyEmail] = useState('')
     const [password, setPassword] = useState('')
     const [verifyPassword, setVerifyPassword] = useState('')
+    const [message, setMessage] = useState('')
 
     const navigation = useNavigation()
 
     const register = async () => {
+
+        if(!email || !password || !verifyEmail || !verifyPassword) {
+            setMessage('Täytä kaikki kentät!')
+            return
+        }
+
+        if(email != verifyEmail || password != verifyPassword) {
+            setMessage('Tarkasta tiedot!')
+            return
+        }
+
         try{
         const user = await createUserWithEmailAndPassword(auth, email, password)
+        navigation.navigate(name2)
         } catch (err) {
             console.log(err)
         }
@@ -64,9 +77,10 @@ export default function Signin({ name }) {
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={register} >
                 <Text style={defaultStyle.buttonText}>Luo käyttäjä</Text>
             </TouchableOpacity>
-            <Text>Onko sinulla jo käyttäjä?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate(name)}>
-                <Text>Kirjaudu sisään</Text>
+            <Text style={defaultStyle.errorMessage}>{message}</Text>
+            <Text style={defaultStyle.miscText}>Onko sinulla jo käyttäjä?</Text>
+            <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name)}>
+                <Text style={defaultStyle.linkText}>Kirjaudu sisään</Text>
             </TouchableOpacity>
         </ScrollView>
     )

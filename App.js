@@ -55,7 +55,7 @@ export default function App() {
 
   function SigninScreen() {
     return (
-      <Signin name="Login" />
+      <Signin name="Login" name2="Home"/>
     )
   }
 

@@ -124,6 +124,21 @@ export const defaultStyle = StyleSheet.create({
       },
       modalView: {
         backgroundColor: "white"
+      },
+      errorMessage: {
+        textAlign: 'center',
+        color: 'red'
+      },
+      miscText: {
+        textAlign: 'center'
+      },
+      link: {
+        textAlign: 'center',
+        alignSelf: 'center'
+      },
+      linkText: {
+        textDecorationLine: 'underline',
+        color: 'blue'
       }
       
 })

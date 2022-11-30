@@ -49,9 +49,9 @@ export default function Login({ name, name2 }) {
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={login}>
                 <Text style={defaultStyle.buttonText}>Kirjaudu sisään</Text>
             </TouchableOpacity>
-            <Text>Etkö ole vielä rekisteröitynyt?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate(name)}>
-                <Text>Rekisteröidy tästä</Text>
+            <Text style={defaultStyle.miscText}>Etkö ole vielä rekisteröitynyt?</Text>
+            <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name)} >
+                <Text style={defaultStyle.linkText}>Rekisteröidy tästä</Text>
             </TouchableOpacity>
         </ScrollView>
     )
