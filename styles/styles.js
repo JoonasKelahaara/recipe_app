@@ -150,5 +150,15 @@ export const defaultStyle = StyleSheet.create({
       signInPage: {
         alignContent: 'center',
         backgroundColor: 'white'
+      },
+      infoText: {
+      fontSize: 24,
+      color: '#0A3409',
+      paddingTop: 30
+      },
+      infoTextt: {
+          fontSize: 24,
+          color: '#0A3409',
+          paddingTop: 160
       }
 })

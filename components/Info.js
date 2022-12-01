@@ -10,8 +10,17 @@ export default function Info({ name }) {
 
     return(
     <ScrollView style={defaultStyle.navMargin}>
-        <Text>Info</Text>
+        <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name)}>
+                <Text style={defaultStyle.infoTextt}>Tuki</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name)}>
+                <Text style={defaultStyle.infoText}>Käyttöehdot</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name)}>
+                <Text style={defaultStyle.infoText}>Tietosuoja</Text>
+            </TouchableOpacity>
         <TouchableOpacity style={defaultStyle.settingsButton} onPress={() => navigation.navigate(name)}>
+            <Text style={defaultStyle.infoTextt}>Asetukset</Text>
                 <AntDesign name="setting" size={34} color="black" />
             </TouchableOpacity>
     </ScrollView>
