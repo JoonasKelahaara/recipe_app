@@ -1,6 +1,7 @@
-import { View, ScrollView, TextInput, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView, TextInput, Text, TouchableOpacity, Pressable } from 'react-native';
 import { defaultStyle } from '../styles/styles.js'
 import React, {useState} from 'react'
+import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/Config'
@@ -12,6 +13,8 @@ export default function Signin({ name, name2 }) {
     const [password, setPassword] = useState('')
     const [verifyPassword, setVerifyPassword] = useState('')
     const [message, setMessage] = useState('')
+    const [securePassword, setSecurePassword] = useState(true)
+    const [secureVerifyPassword, setSecureVerifyPassword] = useState(true)
 
     const navigation = useNavigation()
 
@@ -27,8 +30,14 @@ export default function Signin({ name, name2 }) {
             return
         }
 
+        if(password.length < 8) {
+            setMessage('Salasanan on oltava vähintään 8 merkkiä pitkä')
+            return
+        }
+
         try{
         const user = await createUserWithEmailAndPassword(auth, email, password)
+        setMessage('')
         navigation.navigate(name2)
         } catch (err) {
             console.log(err)
@@ -36,7 +45,7 @@ export default function Signin({ name, name2 }) {
     }
 
     return (
-        <ScrollView >
+        <ScrollView style={defaultStyle.signInPage}>
             <Text style={defaultStyle.pageTitle}>Luo käyttäjä</Text>
             <TextInput
                 placeholder='Sähköposti'
@@ -56,24 +65,34 @@ export default function Signin({ name, name2 }) {
                 keyboardType='email-address'
                 style={defaultStyle.textInput}
             />
-            <TextInput
-                placeholder='Salasana'
-                value={password}
-                onChangeText={text => setPassword(text)}
-                autoCapitalize='none'
-                autoCorrect={false}
-                secureTextEntry={true}
-                style={defaultStyle.textInput}
-            />
-            <TextInput
-                placeholder='Varmista salasana'
-                value={verifyPassword}
-                onChangeText={text => setVerifyPassword(text)}
-                autoCapitalize='none'
-                autoCorrect={false}
-                secureTextEntry={true}
-                style={defaultStyle.textInput}
-            />
+            <View style={defaultStyle.textInput}>
+                <TextInput
+                    placeholder='Salasana (vähintään 8 merkkiä)'
+                    value={password}
+                    onChangeText={text => setPassword(text)}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    secureTextEntry={securePassword}
+                    style={defaultStyle.inputField}
+                />
+                <Pressable style={defaultStyle.eyeIcon} onPress={() => securePassword ? setSecurePassword(false) : setSecurePassword(true)}>
+                    <AntDesign name={securePassword ? 'eye' : 'eyeo'} size={26}/>
+                </Pressable>
+            </View>
+            <View style={defaultStyle.textInput}>
+                <TextInput
+                    placeholder='Varmista salasana'
+                    value={verifyPassword}
+                    onChangeText={text => setVerifyPassword(text)}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    secureTextEntry={secureVerifyPassword}
+                    style={defaultStyle.inputField}
+                />
+                <Pressable style={defaultStyle.eyeIcon} onPress={() => secureVerifyPassword ? setSecureVerifyPassword(false) : setSecureVerifyPassword(true)}>
+                    <AntDesign name={secureVerifyPassword ? 'eye' : 'eyeo'} size={26}/>
+                </Pressable>
+            </View>
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={register} >
                 <Text style={defaultStyle.buttonText}>Luo käyttäjä</Text>
             </TouchableOpacity>

@@ -1,7 +1,7 @@
 import { LogBox, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import {defaultStyle} from './styles/styles.js'
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from '@expo/vector-icons'
@@ -24,6 +24,7 @@ LogBox.ignoreLogs(["AsyncStorage"])
 export default function App() {
 
   const [user, setUser] = useState({})
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser)
@@ -126,6 +127,11 @@ export default function App() {
             tabBarVisible: false,
             tabBarStyle: {display: 'none'}
           }}  *//>
+          <Tab.Screen name="Signin" component={SigninScreen} options={{
+            tabBarButton: () => null,
+            tabBarVisible: false,
+            tabBarStyle: {display: 'none'}
+          }}/>
           <Tab.Screen name="Info" component={InfoScreen} />
           <Tab.Screen name="Recipes" component={RecipeScreen} />
           <Tab.Screen name="Home" component={HomeScreen} options={{
@@ -149,11 +155,6 @@ export default function App() {
           <Tab.Screen name="Favourites" component={FavouritesScreen} />
           <Tab.Screen name ="Profile" component={ProfileScreen} />
           <Tab.Screen name="Settings" component={SettingsScreen} options={{
-            tabBarButton: () => null,
-            tabBarVisible: false,
-            tabBarStyle: {display: 'none'}
-          }}/>
-          <Tab.Screen name="Signin" component={SigninScreen} options={{
             tabBarButton: () => null,
             tabBarVisible: false,
             tabBarStyle: {display: 'none'}

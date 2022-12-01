@@ -75,6 +75,13 @@ export const defaultStyle = StyleSheet.create({
         borderRadius: 8,
         borderColor: '#559E54',
         backgroundColor: '#E8F3E8',
+        flexDirection: 'row'
+      },
+      eyeIcon: {
+        alignItems: 'center',
+      },
+      inputField: {
+        width: '90%'
       },
       navBar: {
         position: 'absolute', 
@@ -127,7 +134,7 @@ export const defaultStyle = StyleSheet.create({
       },
       errorMessage: {
         textAlign: 'center',
-        color: 'red'
+        color: 'red',
       },
       miscText: {
         textAlign: 'center'
@@ -139,6 +146,9 @@ export const defaultStyle = StyleSheet.create({
       linkText: {
         textDecorationLine: 'underline',
         color: 'blue'
+      },
+      signInPage: {
+        alignContent: 'center',
+        backgroundColor: 'white'
       }
-      
 })
