@@ -1,17 +1,19 @@
 import React from 'react';
 import { View, Text, Dimensions, Image } from "react-native";
-import {defaultStyle} from '../styles/styles.js';
+//import {defaultStyle} from '../styles/styles.js';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 export const data = [
-  {   title:"Pääruoka",
+  {   img: require("../img/carousel_maindish.png" ),
+      title:"Pääruoka",
       //body: "Pääruoka",
-      imgUrl: "../img/carousel_maindish.png",
+      //img: "../img/carousel_maindish.png",
   },
-  {   title:"Juomat",
+  {   img: require("../img/carousel_desserts.png" ),  
+      title:"Juomat",
       //body: "Juomat",
-      imgUrl: "../img/carousel_maindish.png",
+      //img: "../img/carousel_maindish.png",
   },
 ];
 
@@ -19,7 +21,7 @@ const CarouselCardItem = ({ item, index }) => {
   return (
     <View key={index}>
       <Image
-        source={{ uri: item.imgUrl }}
+        source={ item.img}
         style={{width: ITEM_WIDTH,
           height: 300}}
       />
