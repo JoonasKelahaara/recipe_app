@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 import { defaultStyle } from '../../styles/styles'
 import Entypo from '@expo/vector-icons/Entypo'
 import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal } from 'react-native'
+import NumericInput from 'react-native-numeric-input';
+import SelectDropdown from 'react-native-select-dropdown'
+import ImageLoad from 'react-native-image-placeholder';
 import { db, storage, RECIPES_REF } from '../../firebase/Config'
 import { ref, uploadBytes } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore"; 
 import * as ImagePicker from "expo-image-picker"
+import placeholder from "../../img/empty.jpg"
 
 
 export function AddRecipe () {
@@ -16,7 +20,10 @@ export function AddRecipe () {
     const [ingredients, setIngredients] = useState([])
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
-    const [image, setImage] = useState(null); 
+    const [image, setImage] = useState(placeholder); 
+
+    const [amount, setAmount] = useState(0)
+    const unit = ["ml", "dl", "l", "mg", "g", "kg", "tl", "rl"]
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -75,42 +82,64 @@ export function AddRecipe () {
 
     return (
         <ScrollView style={defaultStyle.navMargin}>
+            {/* Modal ikkunan sisältö */}
             <Modal animationType='slide' transparent={true} visible={modalVisible} onRequestClose={() => {setModalVisible(!modalVisible)}}>
                 <View>
                     <ScrollView style={defaultStyle.modalView}>
 
-                        {/* Modal ikkunan sisältö */}
-                        <TextInput value={recipeName} onChangeText={(recipeName) => {setRecipeName(recipeName)}} placeholder="Recipe Name" style={defaultStyle.textInput}></TextInput>
+                        {/* kuva ja nimi vierekkäin */}
+                        <View style={[defaultStyle.recipeContainer, { flexDirection: "row" }]}>
 
-                        {/* kuvan lisäys */}
-                        <TouchableOpacity
-                        style={defaultStyle.button}
-                        activeOpacity={0.6}
-                        onPress={pickImage} >
-                            <Text style={defaultStyle.buttonText}>Valitse kuva</Text>
-                        </TouchableOpacity>
+                            {/* kuvan lisäys */}
+                            <View style={{ flex: 1 }} >
+                                <TouchableOpacity
+                                style={defaultStyle.recipeButton}
+                                activeOpacity={0.6}
+                                onPress={pickImage} >
+                                    <ImageLoad
+                                        style={{ width: 120, height: 125 }}
+                                        placeholderSource={require('../../img/empty.jpg')}
+                                        source={image}
+                                    />
+                                </TouchableOpacity>
+                            </View>
 
-                        <TextInput value={instructions} multiline={true} onChangeText={(instructions) => {setInstructions(instructions)}} placeholder="Recipe instructions" style={defaultStyle.textInput}></TextInput>
-
-                        <TextInput value={category} onChangeText={(category) => {setCategory(category)}} placeholder="Category" style={defaultStyle.textInput}></TextInput>
-                        <View>
-                            {categories.map((category) => (
-                                <View>
-                                    <Text>{category}</Text>
-                                    <Pressable>
-                                        <Entypo name={'trash'} size={32} /* onPress={onRemove} */ />
-                                    </Pressable>
-                                </View>
-                            ))}
+                            {/* reseptin nimi */}
+                            <View style={{ flex: 1, alignSelf: "center" }} >
+                                <TextInput value={recipeName} onChangeText={(recipeName) => {setRecipeName(recipeName)}} placeholder=" Reseptin nimi" style={defaultStyle.textInput}></TextInput>
+                            </View>
                         </View>
-                        <TouchableOpacity
-                        style={defaultStyle.button}
-                        activeOpacity={0.6}
-                        onPress={addCategory} >
-                            <Text style={defaultStyle.buttonText}>Add category</Text>
-                        </TouchableOpacity>
+                        
+                        
+                        {/* ainesosien lisäys */}
+                        <View style={[defaultStyle.recipeContainer, { flexDirection: "row" }]}>
 
-                        <TextInput value={ingredient} onChangeText={(ingredient) => {setIngredient(ingredient)}} placeholder="Ingredient" style={defaultStyle.textInput}></TextInput>
+                            {/* reseptin nimi */}
+                            <TextInput value={ingredient} onChangeText={(ingredient) => {setIngredient(ingredient)}} placeholder=" Ainesosa" style={[defaultStyle.textInput, { flex: 1 }]}></TextInput>
+
+                            <View style={{ flex: 1 }} >
+                                <NumericInput value={amount} type="up-down" onChange={amount => setAmount(amount)} minValue={0} rounded  />
+                            </View>
+                            <View style={{ flex: 1 }} >
+                                <SelectDropdown
+                                    data={unit}
+                                    onSelect={(selectedItem, index) => {
+                                        console.log(selectedItem, index)
+                                    }}
+                                    buttonTextAfterSelection={(selectedItem, index) => {
+                                        // text represented after item is selected
+                                        // if data array is an array of objects then return selectedItem.property to render after item is selected
+                                        return selectedItem
+                                    }}
+                                    rowTextForSelection={(item, index) => {
+                                        // text represented for each item in dropdown
+                                        // if data array is an array of objects then return item.property to represent item in dropdown
+                                        return item
+                                    }}
+                                />
+                            </View>
+                        </View>
+
                         <View>
                             {ingredients.map((ingredient) => (
                                 <View>
@@ -122,27 +151,67 @@ export function AddRecipe () {
                             ))}
                         </View>
                         <TouchableOpacity
-                        style={defaultStyle.button}
+                        style={defaultStyle.recipeButton}
                         activeOpacity={0.6}
                         onPress={addIngredient} >
-                            <Text style={defaultStyle.buttonText}>Add ingredient</Text>
+                            <Text style={defaultStyle.buttonText}>Vahvista ainesosa</Text>
                         </TouchableOpacity>
 
 
-                        <TouchableOpacity
-                        style={defaultStyle.button}
-                        activeOpacity={0.6}
-                        onPress={create} >
-                            <Text style={defaultStyle.buttonText}>Submit recipe</Text>
-                        </TouchableOpacity>
+                        {/* kategorioiden lisäys lisäys */}
+                        <View style={[defaultStyle.recipeContainer, { flexDirection: "row" }]}>
 
-                        <TouchableOpacity
-                        style={defaultStyle.button}
-                        activeOpacity={0.6}
-                        onPress={() => setModalVisible(!modalVisible)}
-                        >
-                            <Text style={defaultStyle.buttonText}>Cancel</Text>
-                        </TouchableOpacity>
+                            <TextInput value={category} onChangeText={(category) => {setCategory(category)}} placeholder=" Kategoria" style={[defaultStyle.textInput, { flex: 1 }]}></TextInput>
+
+                            <TouchableOpacity
+                            style={defaultStyle.recipeButton}
+                            activeOpacity={0.6}
+                            onPress={addCategory} >
+                                <Text style={defaultStyle.buttonText}>Add category</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        {/* näyttää valitut kategoriat */}
+                        <View>
+                            {categories.map((category) => (
+                                <View>
+                                    <Text>{category}</Text>
+                                    <Pressable>
+                                        <Entypo name={'trash'} size={32} /* onPress={onRemove} */ />
+                                    </Pressable>
+                                </View>
+                            ))}
+                        </View>
+
+
+
+
+
+
+
+
+                        {/* reseptin ohje */}
+                        <TextInput value={instructions} multiline={true} onChangeText={(instructions) => {setInstructions(instructions)}} placeholder=" Ohje" style={[defaultStyle.textInput, {height: 160}]}></TextInput>
+
+
+                        <View style={[defaultStyle.recipeContainer, { flexDirection: "row"}]}>
+                            {/* peruuta */}
+                            <TouchableOpacity
+                            style={[defaultStyle.recipeButton, {flex: 1}]}
+                            activeOpacity={0.6}
+                            onPress={() => setModalVisible(!modalVisible)}>
+                                <Text style={defaultStyle.buttonText}>Punainen rasti</Text>
+                            </TouchableOpacity>
+
+                            {/* lähetä resepti */}
+                            <TouchableOpacity
+                            style={[defaultStyle.recipeButton, {flex: 1}]}
+                            activeOpacity={0.6}
+                            onPress={create} >
+                                <Text style={defaultStyle.buttonText}>Vihreä väkänen</Text>
+                            </TouchableOpacity>
+                        </View>
+
                     </ScrollView>
                 </View>
             </Modal>

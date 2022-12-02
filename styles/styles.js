@@ -97,6 +97,25 @@ export const defaultStyle = StyleSheet.create({
         padding: 5,
         backgroundColor: '#E8F3E8'
       },
+      recipeContainer: {
+        flex: 1,
+        flexDirection: "row",
+        marginTop: 12,
+        padding: 12,
+        borderStyle: "solid",
+        borderColor: "#92C591"
+      },
+      recipeButton: {
+        backgroundColor: '#E8F3E8',
+        padding: 15,
+        marginLeft: 12,
+        marginRight: 12,
+        marginTop: 5,
+        marginBottom: 5,
+        borderRadius: 15,
+        borderWidth: 3,
+        borderColor: '#559E54'
+      },
       recipeTitle: {
         textAlign: 'center',
         fontSize: 25,
@@ -130,7 +149,11 @@ export const defaultStyle = StyleSheet.create({
         backgroundColor: 'white'
       },
       modalView: {
-        backgroundColor: "white"
+        marginBottom: 45,
+        backgroundColor: 'white',
+        paddingLeft: 3,
+        paddingRight: 3,
+        minheight: "auto"
       },
       errorMessage: {
         textAlign: 'center',
