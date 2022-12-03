@@ -9,6 +9,7 @@ export default function Home() {
     <ScrollView style={defaultStyle.navMargin}>
         {/* <Text>Home</Text>  */}
         <CarouselCards />
+      
     </ScrollView>
    
 
