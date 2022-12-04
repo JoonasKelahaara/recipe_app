@@ -6,43 +6,43 @@ export const foods = [
         id:1,
         title: 'Pääruoat',
         body: 'Pääruoka vaihtoehtoja',
-        img: '../img/carousel_maindish.png'
+        img: require("../img/carousel_maindish.png")
     },
     {
         id:2,
         title: 'Jälkiruoat',
         body: 'Jälkiruoka vaihtoehtoja',
-        img: '../img/carousel_desserts.png'
+        img: require("../img/carousel_desserts.png")
     },
     {
         id:3,
         title: 'Kasvisruoat',
         body: 'Kasvisruoka vaihtoehtoja',
-        img: '../img/carousel_maindish.png'
+        img: require("../img/carousel_maindish.png")
     },
     {
         id:4,
         title: 'Kalaruoat',
         body: 'Kalaruoka vaihtoehtoja',
-        img: '../img/carousel_fish.png'
+        img: require("../img/carousel_fish.png")
     },
     {
         id:5,
         title: 'Kanaruoat',
         body: 'Kanaruoka vaihtoehtoja',
-        img: '../img/carousel_maindish.png'
+        img: require("../img/carousel_maindish.png")
     },
     {
         id:6,
         title: 'Alkuruoat',
         body: 'Alkuruoka vaihtoehtoja',
-        img: '../img/food2.png'
+        img: require("../img/food2.png")
     },
     {
         id:7,
         title: 'Leivät',
         body: 'Leipä vaihtoehtoja',
-        img: '../img/breads.png'
+        img: require("../img/breads.png")
     },
 ]
 
@@ -54,19 +54,25 @@ export default function FoodPics() {
     }
 }
 
-/* const Item = ({food}) => {
+
+return (
+    <ScrollView>
+        <View >
+            <Flatlist 
+               data={foodSelection}
+               renderItem={({item}) => <Item food={item}></Item>}
+            /* {foodSelection.map((item, i) =>
+                <Text style={{fontSize:20}} key={i}>{item.title}</Text>)} */
+            />
+        </View>
+    </ScrollView>
+)
+
+const Item = ({food}) => {
     return (
         <View>
             <Text>{food.body}</Text>
+            <Image>source={{uri: food.img}}</Image>
         </View>
     )
-} */
-
-return (
-    <View style={{marginTop: StatusBar.currentHeight || 0 }}>
-        <ScrollView>
-            {foodSelection.map((item, i) =>
-                <Text style={{fontSize:20}} key={i}>{item.title}</Text>)}
-        </ScrollView>    
-    </View>
-)
+}

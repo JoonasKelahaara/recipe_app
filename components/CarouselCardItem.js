@@ -21,7 +21,7 @@ const CarouselCardItem = ({ item, index }) => {
       <Image
         source={ item.img}
         style={{width: ITEM_WIDTH,
-          height: 300}}
+        height: 300}}
       />
       <Text >{item.title}</Text>
       {/* <Text >{item.body}</Text> */}
