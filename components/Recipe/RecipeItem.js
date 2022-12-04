@@ -11,12 +11,12 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
 
   const [imageUrl, setImageURL] = useState(null)  
 
-  const ingredientList = ingredients.map((ingredient) => (
-    <Text key={ingredient}>{ingredient}</Text>
+  const ingredientList = ingredients.map((ingredient, index) => (
+    <Text key={index}>{ingredient}</Text>
   ))
 
-  const categoryList = categories.map((category) => (
-    <Text key={category}>{category}</Text>
+  const categoryList = categories.map((category, index) => (
+    <Text key={index}>{category}</Text>
   ))
 
   useEffect(() => {

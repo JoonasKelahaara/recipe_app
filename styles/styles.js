@@ -99,11 +99,14 @@ export const defaultStyle = StyleSheet.create({
       },
       recipeContainer: {
         flex: 1,
-        flexDirection: "row",
         marginTop: 12,
         padding: 12,
+        marginLeft: 12,
+        marginRight: 12,
+        borderWidth: 3,
+        borderRadius: 15,
         borderStyle: "solid",
-        borderColor: "#92C591"
+        borderColor: "#559E54"
       },
       recipeButton: {
         backgroundColor: '#E8F3E8',
@@ -115,6 +118,13 @@ export const defaultStyle = StyleSheet.create({
         borderRadius: 15,
         borderWidth: 3,
         borderColor: '#559E54'
+      },
+      recipeButtonI: {
+        padding: 15,
+        marginLeft: 12,
+        marginRight: 12,
+        marginTop: 5,
+        marginBottom: 5,
       },
       recipeTitle: {
         textAlign: 'center',
