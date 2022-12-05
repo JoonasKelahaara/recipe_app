@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { defaultStyle } from '../../styles/styles'
 import Entypo from '@expo/vector-icons/Entypo'
 import { AntDesign } from '@expo/vector-icons'
-import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal } from 'react-native'
+import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal, Image } from 'react-native'
 import NumericInput from 'react-native-numeric-input';
 import SelectDropdown from 'react-native-select-dropdown'
 import ImageLoad from 'react-native-image-placeholder';
@@ -45,14 +45,14 @@ export function AddRecipe () {
         await uploadBytes(storageRef, bytes)
     }
 
-    function addIngredient() {
+    const addIngredient = () => {
         if (ingredient != "") {
-            ingredients.push(ingredient + " " + amount + " " + selectedUnit)
+            ingredients.push(amount + " " + selectedUnit + " " + ingredient)
             setIngredient("")
         }
     }
 
-    function addCategory() {
+    const addCategory = () => {
         if (category != "") {
             categories.push(category)
             setCategory("")
@@ -100,7 +100,7 @@ export function AddRecipe () {
                                     <ImageLoad
                                         style={{ width: 120, height: 125 }}
                                         placeholderSource={require('../../img/empty.jpg')}
-                                        source={image}
+                                        source={image }
                                     />
                                 </TouchableOpacity>
                             </View>
@@ -110,7 +110,6 @@ export function AddRecipe () {
                                 <TextInput value={recipeName} onChangeText={(recipeName) => {setRecipeName(recipeName)}} placeholder=" Reseptin nimi" style={defaultStyle.textInput}></TextInput>
                             </View>
                         </View>
-                        
                         
                         {/* ainesosien lisäys */}
                         <View style={defaultStyle.recipeContainer}>
@@ -130,11 +129,12 @@ export function AddRecipe () {
                                         buttonTextStyle={{textAlign: "center"}}
                                         onSelect={(selectedItem, index) => {
                                             console.log(selectedItem, index)
+                                            setSelectedUnit(selectedItem)
                                         }}
                                         buttonTextAfterSelection={(selectedItem, index) => {
                                             // text represented after item is selected
                                             // if data array is an array of objects then return selectedItem.property to render after item is selected
-                                            setSelectedUnit(selectedItem)
+                                            
                                             return selectedItem
                                         }}
                                         rowTextForSelection={(item, index) => {
@@ -145,7 +145,11 @@ export function AddRecipe () {
                                     />
                                 </View>
                                 <View style={{ flex: 1, justifyContent: "center" }} >
-                                    <Entypo name={'circle-with-plus'} size={32} onPress={addIngredient} /* onPress={onRemove} */ />
+                                    <TouchableOpacity
+                                    activeOpacity={0.6}
+                                    onPress={addIngredient} >
+                                        <Entypo name={'circle-with-plus'} size={32} />
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                             <View>
@@ -160,46 +164,37 @@ export function AddRecipe () {
                             </View>
                         </View>
 
-                        
-                        
-
-
                         {/* kategorioiden lisäys lisäys */}
-                        <View style={[defaultStyle.recipeContainer, { flexDirection: "row" }]}>
+                        <View style={defaultStyle.recipeContainer}>
+                            <View style={[{ flexDirection: "row" }]}>
 
-                            <TextInput value={category} onChangeText={(category) => {setCategory(category)}} placeholder=" Kategoria" style={[defaultStyle.textInput, { flex: 1 }]}></TextInput>
+                                <TextInput value={category} onChangeText={(category) => {setCategory(category)}} placeholder=" Kategoria" style={[defaultStyle.textInput, { flex: 1 }]}></TextInput>
 
-                            <TouchableOpacity
-                            style={defaultStyle.recipeButton}
-                            activeOpacity={0.6}
-                            onPress={addCategory} >
-                                <Text style={defaultStyle.buttonText}>Add category</Text>
-                            </TouchableOpacity>
+                                <TouchableOpacity
+                                style={defaultStyle.recipeButton}
+                                activeOpacity={0.6}
+                                onPress={addCategory} >
+                                    <Text style={defaultStyle.buttonText}>Add category</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                            {/* näyttää valitut kategoriat */}
+                            <View>
+                                {categories.map((category, index) => (
+                                     <View style={[{flexDirection: "row"}]}>
+                                        <Text key={index}>{category}</Text>
+                                        <Pressable>
+                                            <Entypo name={'trash'} size={32} /* onPress={onRemove} */ />
+                                        </Pressable>
+                                    </View>
+                                ))}
+                            </View>
                         </View>
-
-                        {/* näyttää valitut kategoriat */}
-                        <View>
-                            {categories.map((category, index) => (
-                                <View>
-                                    <Text key={index}>{category}</Text>
-                                    <Pressable>
-                                        <Entypo name={'trash'} size={32} /* onPress={onRemove} */ />
-                                    </Pressable>
-                                </View>
-                            ))}
-                        </View>
-
-
-
-
-
-
-
 
                         {/* reseptin ohje */}
-                        <TextInput value={instructions} multiline={true} onChangeText={(instructions) => {setInstructions(instructions)}} placeholder=" Ohje" style={[defaultStyle.textInput, {height: 160, marginLeft: 12, marginRight: 12}]}></TextInput>
+                        <TextInput value={instructions} multiline={true} onChangeText={(instructions) => {setInstructions(instructions)}} placeholder=" Ohje" style={[defaultStyle.textInput, {height: 160, marginLeft: 12, marginRight: 12, marginTop: 12, marginBottom: 12}]}></TextInput>
 
-
+                        {/* ok ja cancel napit */}
                         <View style={[defaultStyle.recipeContainerI, { flexDirection: "row", marginBottom: 12}]}>
                             {/* peruuta */}
                             <TouchableOpacity
