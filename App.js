@@ -15,6 +15,8 @@ import Profile from './components/Profile'
 import Settings from './components/Settings';
 import Favourites from './components/Favourites'
 import Security from './components/Tietosuoja'
+import Support from './components/Support'
+import Terms from './components/Terms'
 import { auth } from './firebase/Config'
 import { onAuthStateChanged } from 'firebase/auth';
 import Footer from './components/Footer'
@@ -45,7 +47,7 @@ export default function App() {
 
   function InfoScreen() {
       return(
-        <Info name="Settings" name4="Security" />
+        <Info name="Settings" name2='Support' name3="Terms" name4="Security" />
       )
   }
 
@@ -85,6 +87,18 @@ export default function App() {
     )
   }
 
+  function SupportScreen() {
+    return (
+    <Support name="Info" />
+    )
+  }
+
+
+  function TermsScreen() {
+    return (
+    <Terms name="Info" />
+    )
+  }
   const Tab = createBottomTabNavigator();
 
   return (
@@ -167,8 +181,15 @@ export default function App() {
             tabBarStyle: {display: 'none'}
           }}/><Tab.Screen name="Security" component={SecurityScreen} options={{
             tabBarButton: () => null,
-            tabBarVisible: false,
-            tabBarStyle: {display: 'none'}
+            tabBarVisible: false
+          }}/>
+          <Tab.Screen name="Support" component={SupportScreen} options={{
+            tabBarButton: () => null,
+            tabBarVisible: false
+          }}/>
+          <Tab.Screen name="Terms" component={TermsScreen} options={{
+            tabBarButton: () => null,
+            tabBarVisible: false
           }}/>
         </Tab.Navigator>
       </NavigationContainer>
