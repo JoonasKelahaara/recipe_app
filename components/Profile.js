@@ -9,6 +9,7 @@ export default function Profile({ name }) {
 
     const navigation = useNavigation()
     const email = auth.currentUser?.email
+    const username = auth.currentUser?.displayName
 
     const logout = async () => {
         await signOut(auth)
@@ -21,7 +22,7 @@ export default function Profile({ name }) {
 
     return (
         <ScrollView style={defaultStyle.navMargin}>
-            <Text style={defaultStyle.pageTitle}>Käyttäjäprofiili {auth.currentUser?.email}</Text>
+            <Text style={defaultStyle.pageTitle}>Käyttäjäprofiili {username}</Text>
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={logout}>
                 <Text style={defaultStyle.buttonText}>Kirjaudu ulos</Text>
             </TouchableOpacity>

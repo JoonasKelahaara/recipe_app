@@ -3,13 +3,13 @@ import { defaultStyle } from '../styles/styles.js'
 import React, {useState} from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase/Config'
 
 export default function Signin({ name, name2 }) {
 
     const [email, setEmail] = useState('')
-    const [verifyEmail, setVerifyEmail] = useState('')
+    const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [verifyPassword, setVerifyPassword] = useState('')
     const [message, setMessage] = useState('')
@@ -20,12 +20,12 @@ export default function Signin({ name, name2 }) {
 
     const register = async () => {
 
-        if(!email || !password || !verifyEmail || !verifyPassword) {
+        if(!email || !password || !username || !verifyPassword) {
             setMessage('Täytä kaikki kentät!')
             return
         }
 
-        if(email != verifyEmail || password != verifyPassword) {
+        if(password != verifyPassword) {
             setMessage('Tarkasta tiedot!')
             return
         }
@@ -37,6 +37,9 @@ export default function Signin({ name, name2 }) {
 
         try{
         const user = await createUserWithEmailAndPassword(auth, email, password)
+        updateProfile(auth.currentUser, {
+            displayName: username
+        })
         setMessage('')
         navigation.navigate(name2)
         } catch (err) {
@@ -57,9 +60,9 @@ export default function Signin({ name, name2 }) {
                 style={defaultStyle.textInput}
             />
             <TextInput
-                placeholder='Varmista sähköposti'
-                value={verifyEmail}
-                onChangeText={text => setVerifyEmail(text)}
+                placeholder='Käyttäjänimi'
+                value={username}
+                onChangeText={text => setUserName(text)}
                 autoCapitalize='none'
                 autoCorrect={false}
                 keyboardType='email-address'
