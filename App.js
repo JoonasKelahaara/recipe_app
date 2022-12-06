@@ -131,6 +131,7 @@ export default function App() {
           >
             {!user ?  (
           <Tab.Group>
+          {/* Tänne kaikki Login screenit */}
             <Tab.Screen name="Login" component={LoginScreen} options={{
               tabBarButton: () => null,
               tabBarVisible: false,
@@ -143,6 +144,7 @@ export default function App() {
             }}/>
           </Tab.Group> ) : (
           <Tab.Group>
+            {/* Tänne kaikki sovelluksen screenit */}
             <Tab.Screen name="Info" component={InfoScreen} />
             <Tab.Screen name="Recipes" component={RecipeScreen} />
             <Tab.Screen name="Home" component={HomeScreen} options={{
