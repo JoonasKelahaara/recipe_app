@@ -8,26 +8,26 @@ import { useNavigation } from '@react-navigation/native';
 export default function Profile({ name }) {
 
     const navigation = useNavigation()
-    // const email = auth.currentUser?.email
+    const email = auth.currentUser?.email
 
     const logout = async () => {
         await signOut(auth)
         navigation.navigate(name)
     }
     
-    /* const resetPassword = async () => {
+    const resetPassword = async () => {
         await sendPasswordResetEmail(auth, email)
     }
- */
+
     return (
         <ScrollView style={defaultStyle.navMargin}>
             <Text style={defaultStyle.pageTitle}>Käyttäjäprofiili {auth.currentUser?.email}</Text>
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={logout}>
                 <Text style={defaultStyle.buttonText}>Kirjaudu ulos</Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={resetPassword}>
+            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={resetPassword}>
                 <Text style={defaultStyle.buttonText}>Vaihda salasana</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
         </ScrollView>
     )
 }
