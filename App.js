@@ -106,7 +106,7 @@ export default function App() {
       <Header />
         <NavigationContainer>
         <Tab.Navigator
-          initialRouteName='Login'
+          initialRouteName='Home'
           screenOptions={({route}) => ({
             tabBarIcon: ({focused,color,size}) => {
               let iconName;
@@ -191,6 +191,53 @@ export default function App() {
             tabBarButton: () => null,
             tabBarVisible: false
           }}/>
+          
+            {!user ?  (
+          <Tab.Group>
+            <Tab.Screen name="Login" component={LoginScreen} options={{
+              tabBarButton: () => null,
+              tabBarVisible: false,
+              tabBarStyle: {display: 'none'}
+            }} />
+            <Tab.Screen name="Signin" component={SigninScreen} options={{
+              tabBarButton: () => null,
+              tabBarVisible: false,
+              tabBarStyle: {display: 'none'}
+            }}/>
+          </Tab.Group> ) : (
+          <Tab.Group>
+            <Tab.Screen name="Info" component={InfoScreen} />
+            <Tab.Screen name="Recipes" component={RecipeScreen} />
+            <Tab.Screen name="Home" component={HomeScreen} options={{
+              tabBarIcon: ({focused}) => {
+                let iconName;
+                let iconColor;
+                iconName = focused ? 'home' : 'home'
+                iconColor = focused ? '#808080' : 'white'
+                return (
+                  <View style={{position:'absolute', 
+                                bottom: 0, 
+                                backgroundColor: '#92C591', 
+                                height: 70, width: 70, 
+                                alignItems: 'center', justifyContent: 'center', 
+                                borderRadius: 90, borderWidth: 2, borderColor: 'white'}}>
+                    <AntDesign name={iconName} color={iconColor} size={46} />
+                  </View>
+                )
+              }
+            }} />
+            <Tab.Screen name="Favourites" component={FavouritesScreen} />
+            <Tab.Screen name ="Profile" component={ProfileScreen} />
+            <Tab.Screen name="Settings" component={SettingsScreen} options={{
+              tabBarButton: () => null,
+              tabBarVisible: false,
+              tabBarStyle: {display: 'none'}
+            }}/><Tab.Screen name="Security" component={SecurityScreen} options={{
+              tabBarButton: () => null,
+              tabBarVisible: false,
+              tabBarStyle: {display: 'none'}
+            }}/>
+          </Tab.Group> )}
         </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" backgroundColor="#92C591" />
