@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { Text, View, ScrollView, Image } from 'react-native'
+import ImageLoad from 'react-native-image-placeholder';
 import { db, storage, RECIPES_REF } from '../../firebase/Config'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { defaultStyle } from '../../styles/styles.js'
+import placeholder from "../../img/logo.png"
 
 
 export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: instructions, categories: categories, ingredients: ingredients, id: id }}) => {
 
   const [imageUrl, setImageURL] = useState(null)  
 
-  const ingredientList = ingredients.map((ingredient) => (
-    <Text key={ingredient}>{ingredient}</Text>
+  const ingredientList = ingredients.map((ingredient, index) => (
+    <Text key={index}>{ingredient}</Text>
   ))
 
-  const categoryList = categories.map((category) => (
-    <Text key={category}>{category}</Text>
+  const categoryList = categories.map((category, index) => (
+    <Text key={index}>{category}</Text>
   ))
 
   useEffect(() => {
@@ -22,7 +24,6 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
     .then((url) => {
       setImageURL(url)
     });
-    console.log(imageUrl)
   }, [])
 
   return (
@@ -30,7 +31,7 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
       <View >
         <Text style={defaultStyle.recipeTitle}>{recipeName}</Text>
         <Image
-          source={{ uri: imageUrl }}
+          source={{ uri: imageUrl} || {placeholder}}
           //väliaikanen style, ei näkynyt ilman mitään styleä
           style={{ width: 400, height: 400, margin: 16 }}
         />
