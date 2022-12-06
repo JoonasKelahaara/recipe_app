@@ -193,5 +193,15 @@ export const defaultStyle = StyleSheet.create({
           fontSize: 24,
           color: '#0A3409',
           paddingTop: 160
+      },
+      profilePicture: {
+        alignSelf: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
+        width: 100,
+        height: 100,
+        borderWidth: 3,
+        borderRadius: 90,
+        borderColor: '#808080'
       }
 })
