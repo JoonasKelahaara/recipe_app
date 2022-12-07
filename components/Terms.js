@@ -13,10 +13,6 @@ export default function Terms({ name }) {
         <Text style={defaultStyle.infoText}>Yleiset käyttöehdot</Text>
         <Text style={defaultStyle.pageTitle}>Tämä sovellus on Oulun Ammattikorkeakoulun ryhmän TIK21KM projekti, kurssille
         "Mobile Project IT00CT43-3003". Käyttämällä tätä sovellusta hyväksyt tietosuojaselosteen ja yleiset käyttöehdot.</Text>
-
-        <TouchableOpacity onPress={() => navigation.navigate(name)}>
-                <AntDesign name="back" size={18} color="black" />
-        </TouchableOpacity>
     </ScrollView>
     )
 }
