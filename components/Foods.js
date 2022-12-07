@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, View } from 'react-native-web';
+import { StatusBar, View, ScrollView, Flatlist } from 'react-native-web';
 
 export const foods = [
     {
@@ -52,27 +52,27 @@ export default function FoodPics() {
     for (let i = 0; i < 20; i++) {
         foodSelection = [...foods, ...foodSelection];
     }
+
+
+
+    return (
+        // <ScrollView>
+            <View >
+                <Flatlist 
+                data={foods}
+                renderItem={({item}) => <Item food={item}></Item>}
+                /* {foodSelection.map((item, i) =>
+                    <Text style={{fontSize:20}} key={i}>{item.title}</Text>)} */
+                />
+            </View>
+        // </ScrollView>
+    )
 }
-
-
-return (
-    <ScrollView>
-        <View >
-            <Flatlist 
-               data={foodSelection}
-               renderItem={({item}) => <Item food={item}></Item>}
-            /* {foodSelection.map((item, i) =>
-                <Text style={{fontSize:20}} key={i}>{item.title}</Text>)} */
-            />
-        </View>
-    </ScrollView>
-)
-
-const Item = ({food}) => {
+/* const Item = ({food}) => {
     return (
         <View>
             <Text>{food.body}</Text>
             <Image>source={{uri: food.img}}</Image>
         </View>
     )
-}
+} */

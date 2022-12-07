@@ -9,12 +9,12 @@ export const data = [
   {  img: require("../img/carousel_maindish.png" ),
      title:"Ruoat",
      //link:"../Foods.js",
-      //body: "Ruoat",  
+      body: "Ruoka-reseptejä laidasta laitaan.",  
   },
   {   img: require("../img/carousel_drinks.png" ),  
       title:"Juomat",
       //link:"../Foods.js",
-      //body: "Juomat",
+      body: "Juoma-reseptejä laidasta laitaan.",
   },
 ];
 
@@ -29,7 +29,7 @@ const CarouselCardItem = ({ item, index }) => {
         //style={defaultStyle.carouselImage}
       />
       <Text style={defaultStyle.carouselTitle}>{item.title}</Text>
-      {/* <Text >{defaultStyle.body}</Text> */}
+      <Text style={defaultStyle.carouselBody}>{item.body}</Text> 
     </View>
     //</Router>
   )

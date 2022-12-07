@@ -225,6 +225,7 @@ export const defaultStyle = StyleSheet.create({
     carouselItemContainer: {
       borderRadius: 8,
       shadowColor: "#E8F3E8",
+      paddingBottom: 20,
       shadowOffset: {
         width: 0,
         height: 3,
@@ -235,9 +236,18 @@ export const defaultStyle = StyleSheet.create({
     },
     carouselTitle: {
       color: "#0A3409",
-      fontSize: 28,
+      backgroundColor: "#E8F3E8",
+      fontSize: 16,
       fontWeight: "bold",
       paddingLeft: 20,
-      paddingTop: 20,
+      paddingTop: 10,
     }, 
+    carouselBody: {
+      color: "#0A3409",
+      backgroundColor: "#E8F3E8",
+      fontSize: 14,
+      paddingLeft: 20,
+      paddingTop: 10,
+      paddingBottom: 10,
+    },
 })
