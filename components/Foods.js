@@ -1,78 +1,35 @@
 import React from 'react';
-import { StatusBar, View, ScrollView, Flatlist } from 'react-native-web';
-
-export const foods = [
-    {
-        id:1,
-        title: 'Pääruoat',
-        body: 'Pääruoka vaihtoehtoja',
-        img: require("../img/carousel_maindish.png")
-    },
-    {
-        id:2,
-        title: 'Jälkiruoat',
-        body: 'Jälkiruoka vaihtoehtoja',
-        img: require("../img/carousel_desserts.png")
-    },
-    {
-        id:3,
-        title: 'Kasvisruoat',
-        body: 'Kasvisruoka vaihtoehtoja',
-        img: require("../img/carousel_maindish.png")
-    },
-    {
-        id:4,
-        title: 'Kalaruoat',
-        body: 'Kalaruoka vaihtoehtoja',
-        img: require("../img/carousel_fish.png")
-    },
-    {
-        id:5,
-        title: 'Kanaruoat',
-        body: 'Kanaruoka vaihtoehtoja',
-        img: require("../img/carousel_maindish.png")
-    },
-    {
-        id:6,
-        title: 'Alkuruoat',
-        body: 'Alkuruoka vaihtoehtoja',
-        img: require("../img/food2.png")
-    },
-    {
-        id:7,
-        title: 'Leivät',
-        body: 'Leipä vaihtoehtoja',
-        img: require("../img/breads.png")
-    },
-]
+import { Image, StatusBar, View, ScrollView, Flatlist } from 'react-native-web';
+import { defaultStyle } from '../styles/styles.js';
+import { foods } from './FoodList.js';
 
 export default function FoodPics() {
 
-    let foodSelection = [];
+    /* let foodSelection = [];
     for (let i = 0; i < 20; i++) {
         foodSelection = [...foods, ...foodSelection];
-    }
+    } */
 
 
 
     return (
-        // <ScrollView>
+        <ScrollView style={defaultStyle.foodContainer}>
             <View >
-                <Flatlist 
+                <Flatlist
                 data={foods}
-                renderItem={({item}) => <Item food={item}></Item>}
-                /* {foodSelection.map((item, i) =>
-                    <Text style={{fontSize:20}} key={i}>{item.title}</Text>)} */
-                />
+                renderItem={({item}) => <Item food={item}></Item>}  
+                /> 
             </View>
-        // </ScrollView>
+        </ScrollView>
     )
 }
-/* const Item = ({food}) => {
+
+
+const Item = ({food}) => {
     return (
-        <View>
-            <Text>{food.body}</Text>
-            <Image>source={{uri: food.img}}</Image>
+        <View style={defaultStyle.foodCard}>
+            <Text>{food.title}</Text>
+            <Image style={defaultStyle.foodImage} source={food.img}></Image>
         </View>
     )
-} */
+}  

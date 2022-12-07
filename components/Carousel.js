@@ -39,7 +39,7 @@ const CarouselCards = () => {
     )
   }
   
-  export default CarouselCards
+  export default CarouselCards;
 
 
 

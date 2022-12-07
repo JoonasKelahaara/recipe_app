@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Dimensions, Image } from "react-native";
+import { Pressable } from 'react-native-web';
 import {defaultStyle} from '../styles/styles.js';
 //import {BrowserRouter as Router, Link} from 'react-router-dom';
 
@@ -20,7 +21,7 @@ export const data = [
 
 const CarouselCardItem = ({ item, index }) => {
   return (
-    //<Router>
+   
     <View style={defaultStyle.carouselItemContainer} key={index}>
       <Image
         source={ item.img}
@@ -28,10 +29,10 @@ const CarouselCardItem = ({ item, index }) => {
         height: 300}} 
         //style={defaultStyle.carouselImage}
       />
-      <Text style={defaultStyle.carouselTitle}>{item.title}</Text>
-      <Text style={defaultStyle.carouselBody}>{item.body}</Text> 
+        <Text style={defaultStyle.carouselTitle}>{item.title}</Text>
+        <Text style={defaultStyle.carouselBody}>{item.body}</Text> 
     </View>
-    //</Router>
+    
   )
 }
 

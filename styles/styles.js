@@ -227,7 +227,7 @@ export const defaultStyle = StyleSheet.create({
       height: 300,
     }, */
     carouselItemContainer: {
-      borderRadius: 8,
+      //borderRadius: 8,
       shadowColor: "#E8F3E8",
       paddingBottom: 20,
       shadowOffset: {
@@ -254,4 +254,18 @@ export const defaultStyle = StyleSheet.create({
       paddingTop: 10,
       paddingBottom: 10,
     },
+    foodContainer: {
+      flex: 1,
+      marginTop: StatusBar.currentHeight || 0
+    },
+    foodImage: {
+      width: 100,
+      height: 150,
+    },
+    foodCard: {
+      margin: 10,
+      borderWidth: 2,
+      borderRadius: 10,
+      padding: 10,
+    }
 })

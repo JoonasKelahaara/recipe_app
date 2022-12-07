@@ -2,7 +2,7 @@ import { Text, ScrollView, SafeAreaView} from 'react-native';
 import {defaultStyle} from '../styles/styles.js';
 import React from "react";
 import CarouselCards from './Carousel';
-// import FoodPics from './Foods.js';
+
 
 export default function Home() {
 
@@ -12,7 +12,6 @@ export default function Home() {
       <SafeAreaView style={defaultStyle.carouselContainer}>  
         <CarouselCards />
       </SafeAreaView>
-      {/* <FoodPics /> */}
     </ScrollView>
    
 
