@@ -85,9 +85,6 @@ export default function Tietosuoja({ name }) {
         tarvittaessa pyynnön esittäjää todistamaan henkilöllisyytensä. Rekisterinpitäjä vastaa asiakkaalle EU:n tietosuoja-asetuksessa säädetyssä
         ajassa (pääsääntöisesti kuukauden kuluessa).{"\n"}{"\n"}</Text>
 
-        <TouchableOpacity onPress={() => navigation.navigate(name)}>
-                <AntDesign name="back" size={18} color="black" />
-        </TouchableOpacity>
     </ScrollView>
     )
 }

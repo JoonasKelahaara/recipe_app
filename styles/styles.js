@@ -169,7 +169,12 @@ export const defaultStyle = StyleSheet.create({
       alignSelf: 'center'
     },
     settingsButton: {
-      justifyContent: 'flex-end'
+      alignItems:'center',
+      justifyContent:'center',
+      flex:1,
+      paddingTop:15,
+      fontSize:24,
+      color: '#0A3409'
     },
     settings: {
       alignContent:'center',
