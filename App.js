@@ -17,6 +17,7 @@ import Favourites from './components/Favourites'
 import Security from './components/Tietosuoja'
 import Support from './components/Support'
 import Terms from './components/Terms'
+import AddRecipe from './components/Recipe/AddRecipe';
 import { auth } from './firebase/Config'
 import { onAuthStateChanged } from 'firebase/auth';
 import Footer from './components/Footer'
@@ -104,6 +105,7 @@ export default function App() {
   return (
     <View style={defaultStyle.container}>
       <Header />
+      {/* <AddRecipe /> */}
       <NavigationContainer>
         <Tab.Navigator
           initialRouteName='Home'

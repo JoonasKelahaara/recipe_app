@@ -259,4 +259,17 @@ export const defaultStyle = StyleSheet.create({
       paddingTop: 10,
       paddingBottom: 10,
     },
+    floatButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#D85E47',
+      padding: 15,        
+      marginLeft: 140,
+      marginRight: 140,
+      marginTop: 5,
+      marginBottom: 5,        
+      borderRadius: 50,
+      borderWidth: 2,
+      borderColor: '#D85E47',
+    }
 })

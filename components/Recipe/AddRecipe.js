@@ -219,11 +219,13 @@ export function AddRecipe () {
             
             {/* avaa Modal ikkunan missä on reseptin lisääminen*/}
             <TouchableOpacity
-            style={defaultStyle.button}
+            style={defaultStyle.floatButton}
             activeOpacity={0.6}
             onPress={() => setModalVisible(true)}
             >
-                <Text style={defaultStyle.buttonText}>Add a new recipe</Text>
+                
+                <AntDesign name="plus" size={34} color="white" />
+
             </TouchableOpacity>
 
         </ScrollView>
