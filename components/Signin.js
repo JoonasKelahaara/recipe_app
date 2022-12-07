@@ -39,6 +39,7 @@ export default function Signin({ name, name2 }) {
         const user = await createUserWithEmailAndPassword(auth, email, password)
         updateProfile(auth.currentUser, {
             displayName: username,
+            photoURL: 'https://firebasestorage.googleapis.com/v0/b/recipe-app-c9104.appspot.com/o/profile%2Fprofile.png?alt=media&token=18374552-cb08-4441-96ee-dbdf31d0a3bc'
         })
         setMessage('')
         navigation.navigate(name2)

@@ -6,9 +6,8 @@ import { sendPasswordResetEmail, signOut, updateProfile } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons'
 import * as ImagePicker from "expo-image-picker"
-import placeholder from '../img/profile.png'
-import ImageLoad from 'react-native-image-placeholder';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import Photoform from './Photoform'
 
 export default function Profile({ name }) {
 
@@ -16,15 +15,13 @@ export default function Profile({ name }) {
     const user = auth.currentUser
     const email = auth.currentUser?.email
     const username = auth.currentUser?.displayName
-    const [photo, setPhoto] = useState(placeholder)
     const [profilePic, setProfilePic] = useState(null)
+    const [photo, setPhoto] = useState('https://firebasestorage.googleapis.com/v0/b/recipe-app-c9104.appspot.com/o/profile%2Fprofile.png?alt=media&token=18374552-cb08-4441-96ee-dbdf31d0a3bc')
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (user?.photoURL) {
-        setPhoto(user.photoURL)
-        } else {
-        setPhoto(placeholder)
+        if(user) {
+            setPhoto(user.photoURL)
         }
     }, [user])
 
@@ -35,6 +32,7 @@ export default function Profile({ name }) {
             quality: 1
         })
         setProfilePic(result.uri)
+
     }
 
     const handleUpload = async () => {
@@ -59,16 +57,14 @@ export default function Profile({ name }) {
         await sendPasswordResetEmail(auth, email)
     }
 
-    console.log(photo)
-
     return (
         <ScrollView style={defaultStyle.navMargin}>
             <View style={defaultStyle.profilePicture}>
                 <Image source={{uri:photo}} style={defaultStyle.profilePicture} resizeMode='contain'/>
             </View>
-            <Text style={defaultStyle.miscText}>{auth.currentUser.displayName}</Text>
-            <TouchableOpacity activeOpacity={0.6} >
-                <AntDesign name="upload" size={24} color="black" onPress={pickImage} />
+            <Text style={defaultStyle.miscText}>{username}</Text>
+            <TouchableOpacity activeOpacity={0.6} onPress={pickImage} >
+                <AntDesign name="upload" size={24} color="black" />
             </TouchableOpacity>
             <TouchableOpacity onPress={handleUpload}>
                 <Text>Lataa</Text>
