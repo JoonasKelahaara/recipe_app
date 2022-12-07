@@ -20,7 +20,7 @@ export default function Info({ name, name2, name3, name4 }) {
                 <Text style={defaultStyle.infoText}>Tietosuoja</Text>
             </TouchableOpacity>
         <TouchableOpacity style={defaultStyle.settingsButton} onPress={() => navigation.navigate(name)}>
-            <Text style={defaultStyle.infoTextt}>Asetukset</Text>
+            <Text style={defaultStyle.settingsButton}>Asetukset</Text>
                 <AntDesign name="setting" size={34} color="black" />
             </TouchableOpacity>
     </ScrollView>

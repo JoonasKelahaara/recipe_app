@@ -169,7 +169,12 @@ export const defaultStyle = StyleSheet.create({
       alignSelf: 'center'
     },
     settingsButton: {
-      justifyContent: 'flex-end'
+      alignItems:'center',
+      justifyContent:'center',
+      flex:1,
+      paddingTop:15,
+      fontSize:24,
+      color: '#0A3409'
     },
     settings: {
       alignContent:'center',
@@ -254,18 +259,17 @@ export const defaultStyle = StyleSheet.create({
       paddingTop: 10,
       paddingBottom: 10,
     },
-    foodContainer: {
-      flex: 1,
-      marginTop: StatusBar.currentHeight || 0
-    },
-    foodImage: {
-      width: 100,
-      height: 150,
-    },
-    foodCard: {
-      margin: 10,
+    floatButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#D85E47',
+      padding: 15,        
+      marginLeft: 140,
+      marginRight: 140,
+      marginTop: 5,
+      marginBottom: 5,        
+      borderRadius: 50,
       borderWidth: 2,
-      borderRadius: 10,
-      padding: 10,
+      borderColor: '#D85E47',
     }
 })
