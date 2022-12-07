@@ -5,7 +5,6 @@ import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase/Config'
-import placeholder from '../img/profile.png'
 
 export default function Signin({ name, name2 }) {
 
@@ -16,7 +15,6 @@ export default function Signin({ name, name2 }) {
     const [message, setMessage] = useState('')
     const [securePassword, setSecurePassword] = useState(true)
     const [secureVerifyPassword, setSecureVerifyPassword] = useState(true)
-    const [image, setImage] = useState(placeholder)
 
     const navigation = useNavigation()
 
@@ -41,7 +39,6 @@ export default function Signin({ name, name2 }) {
         const user = await createUserWithEmailAndPassword(auth, email, password)
         updateProfile(auth.currentUser, {
             displayName: username,
-            photoURL: image
         })
         setMessage('')
         navigation.navigate(name2)
