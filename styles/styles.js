@@ -44,6 +44,7 @@ export const defaultStyle = StyleSheet.create({
       height: 110,
       borderBottomRightRadius: 70,
       borderTopRightRadius: 1,
+      flexDirection: 'row'
     },
     shadowIoS: {
       shadowColor: 'black',        
@@ -163,6 +164,9 @@ export const defaultStyle = StyleSheet.create({
       margin: 5,
       alignItems: 'center',
       overflow: 'hidden',
+    },
+    textLogo: {
+      alignSelf: 'center'
     },
     settingsButton: {
       justifyContent: 'flex-end'

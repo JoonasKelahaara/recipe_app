@@ -9,6 +9,7 @@ export default function Header() {
                 <View style={defaultStyle.logoBorder}>
                     <Image source={require('../img/logo_transparent.png')} style={defaultStyle.logo} resizeMode= 'contain' />
                 </View>
+                <Image source={require('../img/Puistokemistit-logoteksti-light.png')} style={defaultStyle.textLogo} resizeMode='contain' />
             </View>
     )
 }
