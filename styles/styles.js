@@ -200,11 +200,14 @@ export const defaultStyle = StyleSheet.create({
     },
     linkText: {
       textDecorationLine: 'underline',
-      color: 'blue'
+      color: 'blue',
+      marginBottom: 5
     },
     signInPage: {
       alignContent: 'center',
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      marginLeft: 7,
+      marginRight: 7
     },
     infoText: {
       fontSize: 24,
@@ -272,9 +275,10 @@ export const defaultStyle = StyleSheet.create({
       borderWidth: 2,
       borderColor: '#D85E47',
     },
-    profilePicTitle: {
+    otherTitle: {
       fontSize: 25,
-      textAlign: 'center'
+      textAlign: 'center',
+      marginBottom: 15
     },
     userName: {
       textAlign: 'center',

@@ -2,7 +2,7 @@ import { View, ScrollView, TextInput, Text, TouchableOpacity, Image, Modal } fro
 import { defaultStyle } from '../styles/styles.js'
 import React, {useState, useEffect} from 'react'
 import { auth, storage} from '../firebase/Config'
-import { sendPasswordResetEmail, signOut, updateProfile } from 'firebase/auth';
+import { sendPasswordResetEmail, signOut, updateProfile} from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons'
 import Entypo from '@expo/vector-icons/Entypo'
@@ -56,7 +56,7 @@ export default function Profile({ name }) {
 
         updateProfile(user, {photoURL})
 
-        setProfilePic(null)
+        setProfilePic(auth.currentUser.photoURL)
         setModalVisible(!modalVisible)
         setDisabled(true)
     }
@@ -74,9 +74,11 @@ export default function Profile({ name }) {
         await sendPasswordResetEmail(auth, email)
     }
 
+    //Modalin sulku
+
     function handleModal() {
         setModalVisible(!modalVisible)
-        setProfilePic(null)
+        setProfilePic(auth.currentUser.photoURL)
         setDisabled(true)
     }
 
@@ -100,20 +102,13 @@ export default function Profile({ name }) {
             <Modal animationType='slide' visible={modalVisible} onRequestClose={() => {setModalVisible(!modalVisible)}}>
                 <View>
                     <Header />
-                    <Text style={defaultStyle.profilePicTitle} >Profiilikuvan vaihto</Text>
+                    <Text style={defaultStyle.otherTitle} >Profiilikuvan vaihto</Text>
                     <Text style={defaultStyle.miscText}>Valitse kuva</Text>
                     <View style={{alignSelf:'center'}}>
                         <TouchableOpacity
                             style={[defaultStyle.recipeButtonI, {borderWidth: 3, borderColor: '#92C591', backgroundColor: '#E8F3E8', marginBottom: 45}]}
                             activeOpacity={0.6}
                             onPress={pickImage} >
-                                {/* <ImageLoad
-                                    style={{ width: 200, height: 200 }}
-                                    loadingStyle={{size:'small', color:'grey'}}
-                                    isShowActivity={true}
-                                    placeholderSource={{uri:photo}}
-                                    source={{uri:profilePic}}
-                                /> */}
                                 <Image 
                                     style={{ width: 200, height: 200 }}
                                     defaultSource={{uri:photo}}

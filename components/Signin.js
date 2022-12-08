@@ -50,7 +50,7 @@ export default function Signin({ name, name2 }) {
 
     return (
         <ScrollView style={defaultStyle.signInPage}>
-            <Text style={defaultStyle.pageTitle}>Luo käyttäjä</Text>
+            <Text style={defaultStyle.otherTitle}>Luo käyttäjä</Text>
             <TextInput
                 placeholder='Sähköposti'
                 value={email}

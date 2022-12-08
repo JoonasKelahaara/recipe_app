@@ -1,10 +1,11 @@
-import { View, ScrollView, TextInput, Text, TouchableOpacity, Pressable } from 'react-native';
+import { View, ScrollView, TextInput, Text, TouchableOpacity, Pressable, Modal } from 'react-native';
 import { defaultStyle } from '../styles/styles.js'
 import React, {useState} from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../firebase/Config'
+import Header from './Header'
 
 export default function Login({ name, name2 }) {
 
@@ -12,9 +13,12 @@ export default function Login({ name, name2 }) {
     //testi2@testi.com testi666
 
     const [email, setEmail] = useState('');
+    const [verifyEmail, setVerifyEmail] = useState('')
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('')
     const [securePassword, setSecurePassword] = useState(true)
+    
+    const [modalVisible, setModalVisible] = useState(false)
 
     const navigation = useNavigation()
     
@@ -33,9 +37,27 @@ export default function Login({ name, name2 }) {
         }
     }
 
+    const resetPassword = async () => {
+
+        if(!email || !verifyEmail) {
+            setMessage('Puuttuvia tietoja!')
+            return
+        }
+    
+        try{
+            await sendPasswordResetEmail(auth, email)
+        } catch(err) {
+            console.log(err)
+        }
+
+        setModalVisible(false)
+        setEmail('')
+        setVerifyEmail('') 
+    }
+
     return (
-        <ScrollView style={defaultStyle.navMargin}>
-            <Text style={defaultStyle.pageTitle}>Kirjaudu sisään</Text>
+        <ScrollView style={defaultStyle.signInPage}>
+            <Text style={defaultStyle.otherTitle}>Kirjaudu sisään</Text>
             <TextInput
                 placeholder='Sähköposti'
                 value={email}
@@ -67,6 +89,33 @@ export default function Login({ name, name2 }) {
             <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name)} >
                 <Text style={defaultStyle.linkText}>Rekisteröidy tästä</Text>
             </TouchableOpacity>
+            {/* Modal salasanan unohtumiselle */}
+            <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => setModalVisible(true)}>
+                <Text style={defaultStyle.linkText}>Salasana unohtunut?</Text>
+            </TouchableOpacity>
+            <Modal animationType='slide' visible={modalVisible} onRequestClose={() => {setModalVisible(!modalVisible)}} >
+                <Header />
+                <TextInput 
+                placeholder='Sähköposti' 
+                value={email}
+                onChangeText={text => setEmail(text)}
+                autoCapitalize='none'
+                autoCorrect={false}
+                keyboardType='email-address'
+                style={[defaultStyle.textInput, {marginTop: 30}]} />
+                <TextInput 
+                placeholder='Sähköposti' 
+                value={verifyEmail}
+                onChangeText={text => setVerifyEmail(text)}
+                autoCapitalize='none'
+                autoCorrect={false}
+                keyboardType='email-address'
+                style={defaultStyle.textInput} />
+                <Text style={defaultStyle.errorMessage} >{message}</Text>
+                <TouchableOpacity style={defaultStyle.button} onPress={resetPassword}>
+                    <Text style={defaultStyle.buttonText}>Lähetä pyyntö</Text>
+                </TouchableOpacity>
+            </Modal>
         </ScrollView>
     )
 }
