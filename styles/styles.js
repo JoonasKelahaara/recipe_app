@@ -220,8 +220,8 @@ export const defaultStyle = StyleSheet.create({
       alignSelf: 'center',
       alignContent: 'center',
       justifyContent: 'center',        
-      width: 100,
-      height: 100,
+      width: 150,
+      height: 150,
       borderWidth: 3,
       borderRadius: 90,
       borderColor: '#808080'
@@ -271,5 +271,15 @@ export const defaultStyle = StyleSheet.create({
       borderRadius: 50,
       borderWidth: 2,
       borderColor: '#D85E47',
+    },
+    profilePicTitle: {
+      fontSize: 25,
+      textAlign: 'center'
+    },
+    userName: {
+      textAlign: 'center',
+      fontSize: 16,
+      fontWeight: 'bold',
+      marginBottom: 10
     }
 })
