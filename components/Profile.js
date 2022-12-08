@@ -17,8 +17,8 @@ export default function Profile({ name }) {
     const user = auth.currentUser
     const email = auth.currentUser?.email
     const username = auth.currentUser?.displayName
-    const [profilePic, setProfilePic] = useState(null)
     const [photo, setPhoto] = useState('https://firebasestorage.googleapis.com/v0/b/recipe-app-c9104.appspot.com/o/profile%2Fprofile.png?alt=media&token=18374552-cb08-4441-96ee-dbdf31d0a3bc')
+    const [profilePic, setProfilePic] = useState(auth.currentUser.photoURL)
     const [disabled, setDisabled] = useState(true)
 
     useEffect(() => {
@@ -107,13 +107,17 @@ export default function Profile({ name }) {
                             style={[defaultStyle.recipeButtonI, {borderWidth: 3, borderColor: '#92C591', backgroundColor: '#E8F3E8', marginBottom: 45}]}
                             activeOpacity={0.6}
                             onPress={pickImage} >
-                                <ImageLoad
+                                {/* <ImageLoad
                                     style={{ width: 200, height: 200 }}
                                     loadingStyle={{size:'small', color:'grey'}}
                                     isShowActivity={true}
-                                    placeholderSource={{uri:'https://firebasestorage.googleapis.com/v0/b/recipe-app-c9104.appspot.com/o/profile%2Fprofile.png?alt=media&token=18374552-cb08-4441-96ee-dbdf31d0a3bc'}}
-                                    source={{uri:photo}}
-                                />
+                                    placeholderSource={{uri:photo}}
+                                    source={{uri:profilePic}}
+                                /> */}
+                                <Image 
+                                    style={{ width: 200, height: 200 }}
+                                    defaultSource={{uri:photo}}
+                                    source={{uri:profilePic}} />
                         </TouchableOpacity>
                     </View>
                 <View style={[defaultStyle.recipeContainerI, { flexDirection: "row", marginBottom: 12}]}>
