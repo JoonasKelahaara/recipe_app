@@ -186,7 +186,6 @@ export default function App() {
             <Tab.Screen name="Settings" component={SettingsScreen} options={{
               tabBarButton: () => null,
               tabBarVisible: false,
-              tabBarStyle: {display: 'none'}
             }}/>
             <Tab.Screen name="Security" component={SecurityScreen} options={{
               tabBarButton: () => null,

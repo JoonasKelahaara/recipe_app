@@ -171,6 +171,7 @@ export const defaultStyle = StyleSheet.create({
     settingsButton: {
       alignItems:'center',
       justifyContent:'center',
+      alignSelf: 'center',
       flex:1,
       paddingTop:15,
       fontSize:24,
@@ -190,6 +191,10 @@ export const defaultStyle = StyleSheet.create({
     errorMessage: {
       textAlign: 'center',
       color: 'red',
+    },
+    successMessage: {
+      textAlign: 'center',
+      color: '#41ab2c',
     },
     miscText: {
       textAlign: 'center'
@@ -292,5 +297,9 @@ export const defaultStyle = StyleSheet.create({
       justifyContent: 'center',
       zIndex: 0,
       position: 'absolute',
+    },
+    flexRow: {
+      flex: 1,
+      flexDirection: 'row',
     }
 })

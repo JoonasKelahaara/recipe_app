@@ -1,4 +1,5 @@
 import { View, ScrollView, Text, TouchableOpacity, Image, Modal, ActivityIndicator } from 'react-native';
+import Checkbox from 'expo-checkbox';
 import { defaultStyle } from '../styles/styles.js'
 import React, {useState, useEffect} from 'react'
 import { auth, storage} from '../firebase/Config'
@@ -20,7 +21,12 @@ export default function Profile({ name }) {
     const [photo, setPhoto] = useState('https://firebasestorage.googleapis.com/v0/b/recipe-app-c9104.appspot.com/o/profile%2Fprofile.png?alt=media&token=18374552-cb08-4441-96ee-dbdf31d0a3bc')
     const [profilePic, setProfilePic] = useState(auth.currentUser.photoURL)
     const [disabled, setDisabled] = useState(true)
+    const [disabled2, setDisabled2] = useState(true)
     const [loading, setLoading] = useState(false)
+    const [messageLoading, setMessageLoading] = useState(false)
+    const [confirm, setConfirm] = useState(false)
+    const [modalMessage, setModalMessage] = useState('')
+    const [profileMessage, setProfileMessage] = useState('')
 
     useEffect(() => {
         if(user?.photoURL) {
@@ -30,6 +36,12 @@ export default function Profile({ name }) {
 
     function onLoading(value, label) {
         setLoading(value)
+    }
+
+    const showMessage = () => {
+        setTimeout(() => {
+            setProfileMessage('')
+        }, 5000)
     }
 
     //Kuvan valinta
@@ -81,7 +93,19 @@ export default function Profile({ name }) {
     //Salasanan vaihto sähköpostilla
     
     const resetPassword = async () => {
+        if(confirm){
+        setMessageLoading(true)
         await sendPasswordResetEmail(auth, email)
+        setProfileMessage('Sähköpostipyyntö lähetetty, tämä voi viedä muutaman minuutin.')
+        setModalMessage('')
+        setModalVisible2(false)
+        setConfirm(false)
+        showMessage()
+        } else {
+            setModalMessage('Valitse ruutu ennen pyynnön lähettämistä!')
+            return
+        }
+        setMessageLoading(false)
     }
 
     //Modalin sulku
@@ -93,7 +117,16 @@ export default function Profile({ name }) {
         setLoading(false)
     }
 
+    function handleModal2() {
+        setModalVisible2(!modalVisible2)
+        setConfirm(false)
+        setDisabled2(true)
+        setModalMessage('')
+        setMessageLoading(false)
+    }
+
     const [modalVisible, setModalVisible] = useState(false)
+    const [modalVisible2, setModalVisible2] = useState(false)
 
     return (
         <ScrollView style={defaultStyle.navMargin}>
@@ -114,9 +147,10 @@ export default function Profile({ name }) {
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={logout}>
                 <Text style={defaultStyle.buttonText}>Kirjaudu ulos</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={resetPassword}>
+            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => setModalVisible2(true)}>
                 <Text style={defaultStyle.buttonText}>Vaihda salasana</Text>
             </TouchableOpacity>
+            <Text style={defaultStyle.successMessage}>{profileMessage}</Text>
             {/* Modali profiilikuvan vaihdolle */}
             <Modal animationType='slide' visible={modalVisible} onRequestClose={() => {setModalVisible(!modalVisible)}}>
                 <View>
@@ -144,6 +178,26 @@ export default function Profile({ name }) {
                     </TouchableOpacity>
                 </View>
                 <ActivityIndicator animating={loading} size='large' color='grey' />
+                </View>
+            </Modal>
+            {/* Modal salasanan vaihdon varmistamiseksi */}
+            <Modal animationType='slide' transparent={true} visible={modalVisible2} onRequestClose={() => {setModalVisible2(!modalVisible2)}}>
+                <View style={{backgroundColor:'white'}}>
+                    <Header />
+                    <Text style={defaultStyle.otherTitle} >Salasanan vaihto</Text>
+                    <Text style={[defaultStyle.miscText, {marginBottom: 25}]}>Haluatko varmasti vaihtaa salasanasi?</Text>
+                    <Checkbox style={{alignSelf:'center'}} value={confirm} onValueChange={setConfirm} />
+                    <View style={[defaultStyle.recipeContainerI, { flexDirection: "row", marginBottom: 12}]}>
+                        <TouchableOpacity style={[{flex: 1, justifyContent:"center", alignContent:"center", alignItems: "center"}]} onPress={handleModal2}>
+                            <Entypo name={'circle-with-cross'} size={68} color="red" />
+                        </TouchableOpacity>
+                        <ActivityIndicator animating={messageLoading} size='large' color='grey' />
+                        <TouchableOpacity style={[{flex: 1, alignItems: "center"}]} activeOpacity={0.6} onPress={resetPassword}>
+                            <AntDesign name="checkcircle" size={64} color="green" />
+                        </TouchableOpacity>
+                    </View>
+                    <Text style={defaultStyle.errorMessage}>{modalMessage}</Text>
+                    <View style={{backgroundColor:'#92C591', height:3, marginTop: 15}}></View>
                 </View>
             </Modal>
         </ScrollView>
