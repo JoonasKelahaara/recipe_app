@@ -285,5 +285,12 @@ export const defaultStyle = StyleSheet.create({
       fontSize: 16,
       fontWeight: 'bold',
       marginBottom: 10
+    },
+    loading: {
+      alignSelf: 'center',
+      alignContent: 'center',
+      justifyContent: 'center',
+      zIndex: 0,
+      position: 'absolute',
     }
 })

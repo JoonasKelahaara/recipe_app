@@ -1,10 +1,10 @@
-import { View, ScrollView, TextInput, Text, TouchableOpacity, Pressable } from 'react-native';
+import { View, ScrollView, TextInput, Text, TouchableOpacity, Pressable, ActivityIndicator } from 'react-native';
 import { defaultStyle } from '../styles/styles.js'
 import React, {useState} from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../firebase/Config'
+import { createUserWithEmailAndPassword, updateProfile, signInWithRedirect, GoogleAuthProvider } from 'firebase/auth';
+import { auth, provider } from '../firebase/Config'
 
 export default function Signin({ name, name2 }) {
 
@@ -15,8 +15,11 @@ export default function Signin({ name, name2 }) {
     const [message, setMessage] = useState('')
     const [securePassword, setSecurePassword] = useState(true)
     const [secureVerifyPassword, setSecureVerifyPassword] = useState(true)
+    const [loading, setLoading] = useState(false)
 
     const navigation = useNavigation()
+
+    // Käyttäjän rekisteröinti sähköpostilla
 
     const register = async () => {
 
@@ -36,6 +39,7 @@ export default function Signin({ name, name2 }) {
         }
 
         try{
+        setLoading(true)
         const user = await createUserWithEmailAndPassword(auth, email, password)
         updateProfile(auth.currentUser, {
             displayName: username,
@@ -44,8 +48,16 @@ export default function Signin({ name, name2 }) {
         setMessage('')
         navigation.navigate(name2)
         } catch (err) {
+            setMessage('Jokin meni pieleen, yritä uudestaan!')
             console.log(err)
         }
+        setLoading(false)
+    }
+
+    //Käyttäjän rekisteröinti Googlella
+
+    const registerWithGoogle = () => {
+
     }
 
     return (
@@ -105,6 +117,10 @@ export default function Signin({ name, name2 }) {
             <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name)}>
                 <Text style={defaultStyle.linkText}>Kirjaudu sisään</Text>
             </TouchableOpacity>
+            {/* <TouchableOpacity style={defaultStyle.button} onPress={registerWithGoogle}>
+                <Text style={defaultStyle.buttonText}>Luo käyttäjä Google-tilillä</Text>
+            </TouchableOpacity> */}
+            <ActivityIndicator animating={loading} size='large' color='grey' />
         </ScrollView>
     )
 }

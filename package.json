@@ -16,6 +16,8 @@
     "@react-navigation/native": "^6.0.13",
     "deprecated-react-native-prop-types": "^2.3.0",
     "expo": "~46.0.16",
+    "expo-document-picker": "~10.3.0",
+    "expo-file-system": "~14.1.0",
     "expo-image-picker": "~13.3.1",
     "expo-status-bar": "~1.4.0",
     "firebase": "^9.13.0",
@@ -24,6 +26,7 @@
     "patch-package": "^6.5.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
+    "react-google-button": "^0.7.2",
     "react-native": "0.69.6",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-image-placeholder": "^1.0.14",
@@ -34,8 +37,7 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-web": "~0.18.7",
     "react-navigation": "^4.4.4",
-    "expo-document-picker": "~10.3.0",
-    "expo-file-system": "~14.1.0"
+    "expo-google-app-auth": "~8.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

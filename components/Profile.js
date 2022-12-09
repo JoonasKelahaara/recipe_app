@@ -1,4 +1,4 @@
-import { View, ScrollView, TextInput, Text, TouchableOpacity, Image, Modal } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, Image, Modal, ActivityIndicator } from 'react-native';
 import { defaultStyle } from '../styles/styles.js'
 import React, {useState, useEffect} from 'react'
 import { auth, storage} from '../firebase/Config'
@@ -20,12 +20,17 @@ export default function Profile({ name }) {
     const [photo, setPhoto] = useState('https://firebasestorage.googleapis.com/v0/b/recipe-app-c9104.appspot.com/o/profile%2Fprofile.png?alt=media&token=18374552-cb08-4441-96ee-dbdf31d0a3bc')
     const [profilePic, setProfilePic] = useState(auth.currentUser.photoURL)
     const [disabled, setDisabled] = useState(true)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if(user?.photoURL) {
             setPhoto(user.photoURL)
         }
-    }, [user])
+    }, [user.photoURL])
+
+    function onLoading(value, label) {
+        setLoading(value)
+    }
 
     //Kuvan valinta
 
@@ -47,6 +52,7 @@ export default function Profile({ name }) {
     //Kuvan lataaminen firebaseen käyttäjälle
 
     const handleUpload = async () => {
+        setLoading(true)
         const storageRef = ref(storage, ('profile/' + user.uid + '.jpg'))
         const img = await fetch(profilePic)
         const bytes = await img.blob()
@@ -55,10 +61,14 @@ export default function Profile({ name }) {
         const photoURL = await getDownloadURL(storageRef)
 
         updateProfile(user, {photoURL})
-
-        setProfilePic(auth.currentUser.photoURL)
-        setModalVisible(!modalVisible)
-        setDisabled(true)
+        .then(() => {
+            setProfilePic(auth.currentUser.photoURL)
+            setModalVisible(!modalVisible)
+            setDisabled(true)
+            handleModal()
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
     //Uloskirjautuminen
@@ -80,6 +90,7 @@ export default function Profile({ name }) {
         setModalVisible(!modalVisible)
         setProfilePic(auth.currentUser.photoURL)
         setDisabled(true)
+        setLoading(false)
     }
 
     const [modalVisible, setModalVisible] = useState(false)
@@ -87,8 +98,16 @@ export default function Profile({ name }) {
     return (
         <ScrollView style={defaultStyle.navMargin}>
             <View style={defaultStyle.profilePicture}>
+            {loading && <View style={defaultStyle.loading} >
+                    <ActivityIndicator color='grey' size='large'/>
+                    </View>}
                 <TouchableOpacity activeOpacity={0.6} onPress={() => setModalVisible(true)}>
-                    <Image source={{uri:photo}} style={defaultStyle.profilePicture} resizeMode='contain'/>
+                    {<Image source={{uri:photo}} 
+                            style={defaultStyle.profilePicture} 
+                            resizeMode='contain'
+                            onLoadStart={() => onLoading(true, 'onLoadStart')}
+                            onLoadEnd={() => onLoading(false, 'onLoadEnd')}
+                            />}
                 </TouchableOpacity>
             </View>
             <Text style={defaultStyle.userName}>{username}</Text>
@@ -124,6 +143,7 @@ export default function Profile({ name }) {
                         <AntDesign name="checkcircle" size={64} color={disabled? "grey" : "green"} />
                     </TouchableOpacity>
                 </View>
+                <ActivityIndicator animating={loading} size='large' color='grey' />
                 </View>
             </Modal>
         </ScrollView>

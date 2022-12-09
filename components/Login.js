@@ -1,10 +1,11 @@
-import { View, ScrollView, TextInput, Text, TouchableOpacity, Pressable, Modal } from 'react-native';
+import { View, ScrollView, TextInput, Text, TouchableOpacity, Pressable, Modal, ActivityIndicator } from 'react-native';
 import { defaultStyle } from '../styles/styles.js'
 import React, {useState} from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../firebase/Config'
+import GoogleButton from 'react-google-button'
 import Header from './Header'
 
 export default function Login({ name, name2 }) {
@@ -17,10 +18,13 @@ export default function Login({ name, name2 }) {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('')
     const [securePassword, setSecurePassword] = useState(true)
+    const [loading, setLoading] = useState(false)
     
     const [modalVisible, setModalVisible] = useState(false)
 
     const navigation = useNavigation()
+
+    //Sisään kirjautuminen
     
     const login = async () => {
         if(!email || !password) {
@@ -29,13 +33,17 @@ export default function Login({ name, name2 }) {
         }
 
         try {
+            setLoading(true)
             await signInWithEmailAndPassword(auth, email, password)
             navigation.navigate(name2)
         } catch (err) {
             console.log(err)
             setMessage('Väärät käyttäjätiedot!')
         }
+        setLoading(false)
     }
+
+    //Salasanan uusiminen
 
     const resetPassword = async () => {
 
@@ -56,7 +64,7 @@ export default function Login({ name, name2 }) {
     }
 
     return (
-        <ScrollView style={defaultStyle.signInPage}>
+        <ScrollView style={defaultStyle.signInPage} keyboardShouldPersistTaps={'handled'}>
             <Text style={defaultStyle.otherTitle}>Kirjaudu sisään</Text>
             <TextInput
                 placeholder='Sähköposti'
@@ -89,10 +97,14 @@ export default function Login({ name, name2 }) {
             <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name)} >
                 <Text style={defaultStyle.linkText}>Rekisteröidy tästä</Text>
             </TouchableOpacity>
-            {/* Modal salasanan unohtumiselle */}
             <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => setModalVisible(true)}>
                 <Text style={defaultStyle.linkText}>Salasana unohtunut?</Text>
             </TouchableOpacity>
+            {/* <TouchableOpacity style={defaultStyle.button}>
+                <Text style={defaultStyle.buttonText}>Kirjaudu sisään Google-tilillä</Text>
+            </TouchableOpacity> */}
+            <ActivityIndicator animating={loading} size='large' color='grey' />
+            {/* Modal salasanan unohtumiselle */}
             <Modal animationType='slide' visible={modalVisible} onRequestClose={() => {setModalVisible(!modalVisible)}} >
                 <Header />
                 <TextInput 
