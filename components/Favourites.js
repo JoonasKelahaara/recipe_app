@@ -4,8 +4,8 @@ import React from "react"
 
 export default function Favourites() {
     return(
-    <ScrollView style={defaultStyle.navMargin}>
-        <Text style={defaultStyle.pageTitle}>Favourites</Text>
+    <ScrollView style={defaultStyle.viewBorder}>
+        <Text style={defaultStyle.infoHeader}>Favourites</Text>
     </ScrollView>
     )
 }

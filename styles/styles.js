@@ -315,6 +315,20 @@ export const defaultStyle = StyleSheet.create({
       paddingTop: '5%',
       marginLeft:'15%',
       marginRight:'15%',
-      marginTop:'10%'
-    }
+      marginTop:'10%',
+    },
+    settingsButton2: {
+      flex: 1,
+      flexDirection: 'row',
+      alignContent:'center',
+      justifyContent:'flex-start',
+      paddingLeft: 7,
+    },
+    settingsButtonText: {
+      fontSize: 20,
+      marginBottom: 10,
+      textDecorationLine: 'underline',
+      textDecorationColor: '#8EC641',
+      paddingLeft: 5,
+    },
 })

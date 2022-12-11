@@ -4,6 +4,7 @@ import ImageLoad from 'react-native-image-placeholder';
 import { db, storage, RECIPES_REF } from '../../firebase/Config'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { defaultStyle } from '../../styles/styles.js'
+import LikeRecipe from './LikeRecipe';
 import placeholder from "../../img/logo.png"
 
 
@@ -44,6 +45,7 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
         <Text />
         <Text>Ainesosat:</Text>
         <ScrollView>{ingredientList}</ScrollView>
+        <LikeRecipe />
       </View>
     </ScrollView>
   )
