@@ -21,7 +21,7 @@ export function AddRecipe () {
     const [ingredients, setIngredients] = useState([])
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
-    const [image, setImage] = useState(placeholder); 
+    const [image, setImage] = useState('../../img/empty.jpg'); 
 
     const [amount, setAmount] = useState(0)
     const unit = ["ml", "dl", "l", "mg", "g", "kg", "tl", "rl"]
@@ -99,8 +99,7 @@ export function AddRecipe () {
                                 onPress={pickImage} >
                                     <ImageLoad
                                         style={{ width: 120, height: 125 }}
-                                        placeholderSource={require('../../img/empty.jpg')}
-                                        source={image }
+                                        source={{uri: image }}
                                     />
                                 </TouchableOpacity>
                             </View>
@@ -154,10 +153,10 @@ export function AddRecipe () {
                             </View>
                             <View>
                                 {ingredients.map((ingredients, index) => (
-                                    <View style={[{flexDirection: "row"}]}>
+                                    <View style={[{flexDirection: "row", paddingLeft: 12, paddingTop: 8, borderBottomWidth: 2}]}>
                                         <Text key={index}>{ingredients}</Text>
                                         <Pressable>
-                                            <Entypo name={'circle-with-cross'} size={32} /* onPress={removeIngredient} */  />
+                                            <Entypo name={'circle-with-cross'}  size={32} /* onPress={removeIngredient} */  />
                                         </Pressable>
                                     </View>
                                 ))}
@@ -181,10 +180,10 @@ export function AddRecipe () {
                             {/* näyttää valitut kategoriat */}
                             <View>
                                 {categories.map((category, index) => (
-                                     <View style={[{flexDirection: "row"}]}>
+                                     <View style={[{flexDirection: "row", paddingLeft: 12, paddingTop: 8, borderBottomWidth: 2}]}>
                                         <Text key={index}>{category}</Text>
                                         <Pressable>
-                                            <Entypo name={'trash'} size={32} /* onPress={onRemove} */ />
+                                        <Entypo name={'circle-with-cross'} size={32} /* onPress={removeIngredient} */  />
                                         </Pressable>
                                     </View>
                                 ))}
