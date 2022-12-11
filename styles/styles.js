@@ -301,5 +301,15 @@ export const defaultStyle = StyleSheet.create({
     flexRow: {
       flex: 1,
       flexDirection: 'row',
+    },
+    viewBorder: {
+    backgroundColor: '#ffffff',
+      borderColor: '#8EC641',
+      borderWidth: 3,
+      borderRadius: 20,
+      paddingTop: '15%',
+      marginLeft:'15%',
+      marginRight:'15%',
+      marginTop:'10%'
     }
 })
