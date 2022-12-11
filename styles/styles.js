@@ -222,7 +222,12 @@ export const defaultStyle = StyleSheet.create({
     infoTextt: {
       fontSize: 24,
       color: '#0A3409',          
-      paddingTop: 160
+      paddingTop: 140
+    },
+    infoHeader: {
+      textAlign: 'center',
+      fontSize: 42,
+      color: '#8EC641'
     },
     profilePicture: {
       alignSelf: 'center',
@@ -307,7 +312,7 @@ export const defaultStyle = StyleSheet.create({
       borderColor: '#8EC641',
       borderWidth: 3,
       borderRadius: 20,
-      paddingTop: '15%',
+      paddingTop: '5%',
       marginLeft:'15%',
       marginRight:'15%',
       marginTop:'10%'
