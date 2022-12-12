@@ -4,7 +4,8 @@ import React, {useState} from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword, updateProfile, signInWithRedirect, GoogleAuthProvider } from 'firebase/auth';
-import { auth, provider } from '../firebase/Config'
+import { auth, provider, LIKES_REF, db } from '../firebase/Config'
+import { addDoc, collection, setDoc } from 'firebase/firestore';
 
 export default function Signin({ name, name2 }) {
 
@@ -45,23 +46,27 @@ export default function Signin({ name, name2 }) {
             displayName: username,
             photoURL: 'https://firebasestorage.googleapis.com/v0/b/recipe-app-c9104.appspot.com/o/profile%2Fprofile.png?alt=media&token=18374552-cb08-4441-96ee-dbdf31d0a3bc'
         })
-        setMessage('')
+        const docRef = doc(db, 'favourites', 'testi')
+        const payload = {name: 'empty', value: 'empty'}
+        setDoc(docRef, payload)
         navigation.navigate(name2)
+        setMessage('')
         } catch (err) {
             setMessage('Jokin meni pieleen, yritä uudestaan!')
             console.log(err)
+            setLoading(false)
         }
         setLoading(false)
     }
 
     //Käyttäjän rekisteröinti Googlella
 
-    const registerWithGoogle = () => {
+    /* const registerWithGoogle = () => {
 
-    }
+    } */
 
     return (
-        <ScrollView style={defaultStyle.signInPage}>
+        <ScrollView style={defaultStyle.signInPage} keyboardShouldPersistTaps={'handled'}>
             <Text style={defaultStyle.otherTitle}>Luo käyttäjä</Text>
             <TextInput
                 placeholder='Sähköposti'
