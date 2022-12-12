@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet, StatusBar, PixelRatio, Dimensions } from "react-native";
 
 //VÄRIT: 
 //      INPUTTIEN TAUSTAVÄRI: #E8F3E8
@@ -217,17 +217,19 @@ export const defaultStyle = StyleSheet.create({
     infoText: {
       fontSize: 24,
       color: '#0A3409',
-      paddingTop: 30
+      paddingTop: 30,
+      alignSelf: 'center',
     },
     infoTextt: {
       fontSize: 24,
       color: '#0A3409',          
-      paddingTop: 140
+      paddingTop: 70
     },
     infoHeader: {
       textAlign: 'center',
       fontSize: 42,
-      color: '#8EC641'
+      color: '#8EC641',
+      width: 120, 
     },
     profilePicture: {
       alignSelf: 'center',
@@ -307,15 +309,20 @@ export const defaultStyle = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
     },
+
+
+    
     viewBorder: {
     backgroundColor: '#ffffff',
-      borderColor: '#8EC641',
-      borderWidth: 3,
-      borderRadius: 20,
-      paddingTop: '5%',
-      marginLeft:'15%',
-      marginRight:'15%',
-      marginTop:'10%',
+    borderColor: '#8EC641',
+    borderWidth: 10 / PixelRatio.get(),
+    borderRadius: 20,
+    paddingTop: '5%',
+    marginLeft:'15%',
+    marginRight:'15%',
+    marginTop:'10%',
+    width: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').width * 0.2),
+    height: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height * 0.18),
     },
     settingsButton2: {
       flex: 1,

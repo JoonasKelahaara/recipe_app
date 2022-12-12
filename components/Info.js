@@ -9,9 +9,15 @@ export default function Info({ name, name2, name3, name4 }) {
     const navigation = useNavigation()
 
     return (
-        <View style={defaultStyle.viewBorder}>
-            <ScrollView style={defaultStyle.navMargin}>
-                <Text style={defaultStyle.infoHeader}>Info</Text>
+        <ScrollView style={defaultStyle.navMargin}>
+            <View style={defaultStyle.viewBorder}>
+    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <View style={{flex: 1, height: 3, backgroundColor: '#8EC641'}} />
+    <View>
+    <Text style={defaultStyle.infoHeader}>Info</Text>
+     </View>
+    <View style={{flex: 1, height: 3, backgroundColor: '#8EC641'}} />
+    </View>
                 <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name2)}>
                     <Text style={defaultStyle.infoTextt}>Tuki</Text>
                 </TouchableOpacity>
@@ -24,7 +30,8 @@ export default function Info({ name, name2, name3, name4 }) {
                     <TouchableOpacity style={defaultStyle.settingsButton} onPress={() => navigation.navigate(name)}>
                         <Text style={defaultStyle.settingsButton}><AntDesign name="setting" size={34} color="#8EC641" />Asetukset</Text>
                     </TouchableOpacity>
-            </ScrollView>
-        </View>
+            </View>
+        </ScrollView>
+        
     )
 }
