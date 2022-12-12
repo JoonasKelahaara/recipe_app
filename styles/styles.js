@@ -231,6 +231,11 @@ export const defaultStyle = StyleSheet.create({
       color: '#8EC641',
       width: 120, 
     },
+    infoLine: {
+       flex: 1,
+       height: 3,
+       backgroundColor: '#8EC641'},
+
     profilePicture: {
       alignSelf: 'center',
       alignContent: 'center',
@@ -309,9 +314,6 @@ export const defaultStyle = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
     },
-
-
-    
     viewBorder: {
       backgroundColor: '#ffffff',
       borderColor: '#8EC641',
