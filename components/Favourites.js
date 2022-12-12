@@ -5,7 +5,7 @@ import React from "react"
 export default function Favourites() {
     return(
     <ScrollView style={defaultStyle.viewBorder}>
-        <Text style={defaultStyle.infoHeader}>Favourites</Text>
+        <Text style={defaultStyle.infoHeader}>Suosikit</Text>
     </ScrollView>
     )
 }
