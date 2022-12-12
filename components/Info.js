@@ -7,12 +7,17 @@ import { useNavigation } from '@react-navigation/native';
 export default function Info({ name, name2, name3, name4 }) {
 
     const navigation = useNavigation()
-    
 
     return (
         <ScrollView style={defaultStyle.navMargin}>
             <View style={defaultStyle.viewBorder}>
-                <Text style={defaultStyle.infoHeader}>Info</Text>
+    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <View style={{flex: 1, height: 3, backgroundColor: '#8EC641'}} />
+    <View>
+    <Text style={defaultStyle.infoHeader}>Info</Text>
+     </View>
+    <View style={{flex: 1, height: 3, backgroundColor: '#8EC641'}} />
+    </View>
                 <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name2)}>
                     <Text style={defaultStyle.infoTextt}>Tuki</Text>
                 </TouchableOpacity>
