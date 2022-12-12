@@ -20,7 +20,8 @@ import Terms from './components/Terms'
 import AddRecipe from './components/Recipe/AddRecipe';
 import { auth } from './firebase/Config'
 import { onAuthStateChanged } from 'firebase/auth';
-import Footer from './components/Footer'
+import Footer from './components/Footer';
+import Foods from './components/Foods';
 
 //poistaa ilmoituksen "AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-async-storage/async-storage' instead of 'react-native'. See https://github.com/react-native-async-storage/async-storage"
 LogBox.ignoreLogs(["AsyncStorage has been extracted"])
@@ -101,6 +102,12 @@ export default function App() {
     )
   }
   const Tab = createBottomTabNavigator();
+
+  function FoodsScreen() {
+    return (
+      <Foods name="Foods" name2="Drinks" />
+    )
+  }
 
   return (
     <View style={defaultStyle.container}>
