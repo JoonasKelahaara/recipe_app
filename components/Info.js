@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function Info({ name, name2, name3, name4 }) {
 
     const navigation = useNavigation()
+    
 
     return (
         <ScrollView style={defaultStyle.navMargin}>

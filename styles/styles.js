@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet, StatusBar, PixelRatio, Dimensions } from "react-native";
 
 //VÄRIT: 
 //      INPUTTIEN TAUSTAVÄRI: #E8F3E8
@@ -307,15 +307,20 @@ export const defaultStyle = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
     },
+
+
+    
     viewBorder: {
     backgroundColor: '#ffffff',
-      borderColor: '#8EC641',
-      borderWidth: 3,
-      borderRadius: 20,
-      paddingTop: '5%',
-      marginLeft:'15%',
-      marginRight:'15%',
-      marginTop:'10%',
+    borderColor: '#8EC641',
+    borderWidth: 10 / PixelRatio.get(),
+    borderRadius: 20,
+    paddingTop: '5%',
+    marginLeft:'15%',
+    marginRight:'15%',
+    marginTop:'10%',
+    width: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').width * 0.2),
+    height: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height * 0.18),
     },
     settingsButton2: {
       flex: 1,
