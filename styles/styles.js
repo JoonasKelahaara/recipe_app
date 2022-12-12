@@ -217,17 +217,19 @@ export const defaultStyle = StyleSheet.create({
     infoText: {
       fontSize: 24,
       color: '#0A3409',
-      paddingTop: 30
+      paddingTop: 30,
+      alignSelf: 'center',
     },
     infoTextt: {
       fontSize: 24,
       color: '#0A3409',          
-      paddingTop: 140
+      paddingTop: 70
     },
     infoHeader: {
       textAlign: 'center',
       fontSize: 42,
-      color: '#8EC641'
+      color: '#8EC641',
+      width: 120, 
     },
     profilePicture: {
       alignSelf: 'center',
