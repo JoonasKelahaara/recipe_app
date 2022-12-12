@@ -1,5 +1,4 @@
 import { StyleSheet, View, StatusBar, PixelRatio, Dimensions } from "react-native";
-import Responsive from 'react-native-responsive-screen';
 
 //VÄRIT: 
 //      INPUTTIEN TAUSTAVÄRI: #E8F3E8
@@ -315,18 +314,16 @@ export const defaultStyle = StyleSheet.create({
     
     viewBorder: {
       backgroundColor: '#ffffff',
-    borderColor: '#8EC641',
-    borderWidth: 1,
-    borderRadius: 20,
-    paddingTop: '5%',
-    marginLeft:'10%',
-    marginRight:'15%',
-    marginTop:'10%',
-    width: Responsive.width(80),
-    height: Responsive.height(80),
-
-
-    },
+      borderColor: '#8EC641',
+      borderWidth: 10 / PixelRatio.get(),
+      borderRadius: 20,
+      paddingTop: '5%',
+      marginLeft:'15%',
+      marginRight:'15%',
+      marginTop:'10%',
+      width: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').width * 0.2),
+      height: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height * 0.18),
+      },
     settingsButton2: {
       flex: 1,
       flexDirection: 'row',
