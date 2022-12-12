@@ -46,13 +46,21 @@ export default function Signin({ name, name2 }) {
             displayName: username,
             photoURL: 'https://firebasestorage.googleapis.com/v0/b/recipe-app-c9104.appspot.com/o/profile%2Fprofile.png?alt=media&token=18374552-cb08-4441-96ee-dbdf31d0a3bc'
         })
-        const docRef = doc(db, 'favourites', 'testi')
-        const payload = {name: 'empty', value: 'empty'}
-        setDoc(docRef, payload)
         navigation.navigate(name2)
+        addDoc(collection(db, 'favourites'), {
+            name: auth.currentUser.uid,
+            value: auth.currentUser.displayName
+        })
         setMessage('')
         } catch (err) {
-            setMessage('Jokin meni pieleen, yritä uudestaan!')
+            const errorCode = err.code
+            if(errorCode === 'auth/email-already-in-use'){
+                setMessage('Tällä sähköpostilla on jo käyttäjä!')
+            }else if(errorCode === 'auth/invalid-email') {
+                setMessage('Syötä oikea sähköpostiosoite!')
+            } else {
+                setMessage('Jokin meni pieleen, yritä uudestaan!')
+            }
             console.log(err)
             setLoading(false)
         }
