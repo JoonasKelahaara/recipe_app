@@ -14,7 +14,7 @@ export default function FoodPics() {
 
 
     return (
-        <ScrollView style={defaultStyle.foodContainer}>
+        <ScrollView /* style={defaultStyle.foodContainer} */>
             <View >
                 <Flatlist
                 data={foods}
@@ -28,9 +28,9 @@ export default function FoodPics() {
 
 const Item = ({food}) => {
     return (
-        <View style={defaultStyle.foodCard}>
+        <View /* style={defaultStyle.foodCard} */>
             <Text>{food.title}</Text>
-            <Image style={defaultStyle.foodImage} source={food.img}></Image>
+            <Image /* style={defaultStyle.foodImage} */ source={food.img}></Image>
         </View>
     )
 }   
