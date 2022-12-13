@@ -63,6 +63,7 @@ export const defaultStyle = StyleSheet.create({
       paddingBottom: 5,
       paddingLeft: 3,        
       paddingRight: 3,
+      fontFamily:'Roboto'
     },
     button: {
       backgroundColor: '#E8F3E8',
@@ -77,7 +78,8 @@ export const defaultStyle = StyleSheet.create({
     },
     buttonText: {
       textAlign: 'center',
-      fontSize: 15      
+      fontSize: 15,
+      fontFamily:'Roboto'      
     },
     textInput: {
       marginTop: 3,        
@@ -148,7 +150,8 @@ export const defaultStyle = StyleSheet.create({
     },
     pageTitle: {
       fontSize: 16,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontFamily:'Roboto'
     },
     logo: {
       flex: 1,
@@ -197,7 +200,8 @@ export const defaultStyle = StyleSheet.create({
       color: '#41ab2c',
     },
     miscText: {
-      textAlign: 'center'
+      textAlign: 'center',
+      fontFamily: 'Roboto'
     },
     link: {
       textAlign: 'center',
@@ -298,7 +302,8 @@ export const defaultStyle = StyleSheet.create({
     otherTitle: {
       fontSize: 25,
       textAlign: 'center',
-      marginBottom: 15
+      marginBottom: 15,
+      fontFamily:'Quicksand'
     },
     userName: {
       textAlign: 'center',
@@ -344,5 +349,6 @@ export const defaultStyle = StyleSheet.create({
       textDecorationLine: 'underline',
       textDecorationColor: '#8EC641',
       paddingLeft: 5,
+      fontFamily: 'Roboto'
     },
 })

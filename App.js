@@ -23,11 +23,16 @@ import { onAuthStateChanged } from 'firebase/auth';
 import Footer from './components/Footer';
 import Foods from './components/Foods';
 import Drinks from './components/Drinks'
+import { useFonts } from 'expo-font';
 
 //poistaa ilmoituksen "AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-async-storage/async-storage' instead of 'react-native'. See https://github.com/react-native-async-storage/async-storage"
 LogBox.ignoreLogs(["AsyncStorage has been extracted"])
 
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    'Quicksand': require('./assets/fonts/Quicksand/static/Quicksand-Regular.ttf'),
+  });
 
   const [user, setUser] = useState({})
   const [isLoggedIn, setIsLoggedIn] = useState(false)

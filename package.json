@@ -39,7 +39,8 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-web": "~0.18.7",
     "react-navigation": "^4.4.4",
-    "expo-checkbox": "~2.2.0"
+    "expo-checkbox": "~2.2.0",
+    "expo-font": "~10.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
