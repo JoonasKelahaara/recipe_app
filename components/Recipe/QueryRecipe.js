@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { defaultStyle } from '../styles/styles'
+import { defaultStyle } from '../../styles/styles'
 import { Text, View, ScrollView } from 'react-native'
-import { db, RECIPES_REF } from '../firebase/Config'
+import { db, RECIPES_REF, auth } from '../../firebase/Config'
 import { collection, getDocs, where, query } from "firebase/firestore";
 
-import { RecipeItem } from './Recipe/RecipeItem'
-import { AddRecipe } from './Recipe/AddRecipe'
-export function Recipes () {
+import { RecipeItem } from './RecipeItem'
+
+export function QueryRecipe () {
+    const username = auth.currentUser?.displayName
 
     {/* Hakee kaikki reseptit */}
     const [allRecipes, setAllRecipes] = useState([])
     
     useEffect(() => {
-        getDocs(collection(db, RECIPES_REF)).then(docSnap => {
+        getDocs(query(collection(db, RECIPES_REF), where("username", "==", username))).then(docSnap => {
             let recipes = [];
             docSnap.forEach((doc) => {
                 recipes.push({ ...doc.data(), id:doc.id })
@@ -26,7 +27,6 @@ export function Recipes () {
     return (
         <ScrollView style={defaultStyle.navMargin}>
                 {/* Reseptin lisäys */}
-            <AddRecipe></AddRecipe>
 
             {/* näyttää kaikki reseptit */}
             <ScrollView>
@@ -45,4 +45,4 @@ export function Recipes () {
     )
 }
 
-export default Recipes
+export default QueryRecipe
