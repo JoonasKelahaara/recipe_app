@@ -323,8 +323,10 @@ export const defaultStyle = StyleSheet.create({
       marginLeft:'15%',
       marginRight:'15%',
       marginTop:'10%',
-      width: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').width * 0.2),
-      height: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height * 0.18),
+      flex: 1,
+      alignItems: 'center',
+      width: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').width * 0.19),
+  height: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height * 0.18),
       },
     settingsButton2: {
       flex: 1,

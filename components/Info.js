@@ -10,6 +10,7 @@ export default function Info({ name, name2, name3, name4 }) {
 
     return (
         <ScrollView style={defaultStyle.navMargin}>
+            <View style={{ flex: 1, alignItems: 'center' }}></View>
             <View style={defaultStyle.viewBorder}>
 
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
