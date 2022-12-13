@@ -235,8 +235,9 @@ export const defaultStyle = StyleSheet.create({
       textAlign: 'center',
       fontSize: 42,
       color: '#8EC641',
-      width: 120, 
-      fontFamily:'Quicksand'
+      fontFamily:'Quicksand',
+      paddingLeft: 15,
+      paddingRight: 15
     },
     infoLine: {
        flex: 1,

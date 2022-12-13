@@ -17,6 +17,7 @@ import Favourites from './components/Favourites'
 import Security from './components/Tietosuoja'
 import Support from './components/Support'
 import Terms from './components/Terms'
+import UserRecipes from './components/Recipe/UserRecipes.js';
 import AddRecipe from './components/Recipe/AddRecipe';
 import { auth } from './firebase/Config'
 import { onAuthStateChanged } from 'firebase/auth';
@@ -73,7 +74,7 @@ export default function App() {
 
   function ProfileScreen() {
     return(
-      <Profile name="Login"/>
+      <Profile name="Login" name2="UserRecipe"/>
     )
   }
 
@@ -105,6 +106,12 @@ export default function App() {
   function TermsScreen() {
     return (
     <Terms name="Info" />
+    )
+  }
+
+  function UserRecipeScreen() {
+    return(
+      <UserRecipes name="Profile" />
     )
   }
 
@@ -214,6 +221,10 @@ export default function App() {
               tabBarVisible: false,
             }}/>
             <Tab.Screen name="Foods" component={FoodsScreen} options={{
+              tabBarButton: () => null,
+              tabBarVisible: false,
+            }}/>
+            <Tab.Screen name="UserRecipe" component={UserRecipeScreen} options={{
               tabBarButton: () => null,
               tabBarVisible: false,
             }}/>

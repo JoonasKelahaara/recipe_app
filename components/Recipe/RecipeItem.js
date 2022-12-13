@@ -31,11 +31,13 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
     <ScrollView style={defaultStyle.recipeItem}>
       <View >
         <Text style={defaultStyle.recipeTitle}>{recipeName}</Text>
+        { imageUrl? (
         <Image
           source={{ uri: imageUrl} || {placeholder}}
           //väliaikanen style, ei näkynyt ilman mitään styleä
           style={{ width: 400, height: 400, margin: 16 }}
         />
+      ): (<Text style={{textAlign:'center'}}>Ei kuvaa saatavilla</Text>)}
         <Text />
         <Text>Ohjeet:</Text>
         <Text>{instructions}</Text>

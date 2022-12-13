@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { defaultStyle } from '../../styles/styles'
-import { Text, View, ScrollView } from 'react-native'
+import { Text, View, ScrollView, ActivityIndicator } from 'react-native'
 import { db, RECIPES_REF, auth } from '../../firebase/Config'
 import { collection, getDocs, where, query } from "firebase/firestore";
 
@@ -8,16 +8,20 @@ import { RecipeItem } from './RecipeItem'
 
 export function QueryRecipe () {
     const username = auth.currentUser?.displayName
+    const [loading, setLoading] = useState(false)
+    const [message, setMessage] = useState('Ei reseptejä')
 
     {/* Hakee kaikki reseptit */}
     const [allRecipes, setAllRecipes] = useState([])
     
     useEffect(() => {
+        setLoading(true)
         getDocs(query(collection(db, RECIPES_REF), where("username", "==", username))).then(docSnap => {
             let recipes = [];
             docSnap.forEach((doc) => {
                 recipes.push({ ...doc.data(), id:doc.id })
             })
+            setLoading(false)
             setAllRecipes(recipes)
         })
     }, [])
@@ -30,6 +34,7 @@ export function QueryRecipe () {
 
             {/* näyttää kaikki reseptit */}
             <ScrollView>
+            <ActivityIndicator animating={loading} size='large' color='grey' />
                 {recipeKeys.length > 0 ? (
                 recipeKeys.map(key => (
                     <View>
@@ -37,7 +42,7 @@ export function QueryRecipe () {
                     </View>
                 ))
                 ) : (
-                <Text>There are no items</Text>
+                <Text>{message}</Text>
                 )}
             </ScrollView>
 

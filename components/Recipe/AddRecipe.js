@@ -26,7 +26,7 @@ export function AddRecipe () {
     const username = auth.currentUser?.displayName
 
     const [amount, setAmount] = useState(0)
-    const unit = ["ml", "dl", "l", "mg", "g", "kg", "tl", "rl"]
+    const unit = ["ml", "cl", "dl", "l", "mg", "g", "kg", "tl", "rl"]
     const [selectedUnit, setSelectedUnit] = useState("ml")
 
     const pickImage = async () => {

@@ -12,7 +12,7 @@ import ImageLoad from 'react-native-image-placeholder';
 import Header from './Header'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
-export default function Profile({ name }) {
+export default function Profile({ name, name2 }) {
 
     const navigation = useNavigation()
     const user = auth.currentUser
@@ -144,6 +144,9 @@ export default function Profile({ name }) {
                 </TouchableOpacity>
             </View>
             <Text style={defaultStyle.userName}>{username}</Text>
+            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => navigation.navigate(name2) }>
+                <Text style={defaultStyle.buttonText}>Omat reseptit</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={logout}>
                 <Text style={defaultStyle.buttonText}>Kirjaudu ulos</Text>
             </TouchableOpacity>
