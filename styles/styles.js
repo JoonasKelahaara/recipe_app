@@ -335,7 +335,7 @@ export const defaultStyle = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       width: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').width * 0.19),
-  height: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height * 0.18),
+      height: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height * 0.18),
       },
     settingsButton2: {
       flex: 1,
