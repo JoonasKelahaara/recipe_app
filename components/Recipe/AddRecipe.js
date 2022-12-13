@@ -3,6 +3,7 @@ import { defaultStyle } from '../../styles/styles'
 import Entypo from '@expo/vector-icons/Entypo'
 import { AntDesign } from '@expo/vector-icons'
 import { Text, TextInput, View, TouchableOpacity, ScrollView, Pressable, Modal, Image } from 'react-native'
+import { auth} from '../../firebase/Config'
 import NumericInput from 'react-native-numeric-input';
 import SelectDropdown from 'react-native-select-dropdown'
 import ImageLoad from 'react-native-image-placeholder';
@@ -22,6 +23,7 @@ export function AddRecipe () {
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
     const [image, setImage] = useState('../../img/empty.jpg'); 
+    const username = auth.currentUser?.displayName
 
     const [amount, setAmount] = useState(0)
     const unit = ["ml", "dl", "l", "mg", "g", "kg", "tl", "rl"]
@@ -69,6 +71,7 @@ export function AddRecipe () {
             instructions: instructions,
             categories: categories,
             ingredients: ingredients,
+            username: username
         }).then(() => {
             //data saved
             console.log("data submitted")
@@ -77,6 +80,8 @@ export function AddRecipe () {
             console.log(error)
         });
         setImage(null)
+        setModalVisible(!modalVisible)
+        
     }
 
     const [modalVisible, setModalVisible] = useState(false)

@@ -1,14 +1,15 @@
 import React from 'react';
-import { Image, StatusBar, View, ScrollView, Flatlist } from 'react-native-web';
+import { Image, StatusBar, View, ScrollView, Flatlist } from 'react-native';
 import { defaultStyle } from '../styles/styles.js';
 import { foods } from './FoodList.js';
 
+
 export default function FoodPics() {
 
-    /* let foodSelection = [];
+    let foodSelection = [];
     for (let i = 0; i < 20; i++) {
         foodSelection = [...foods, ...foodSelection];
-    } */
+    } 
 
 
 
@@ -32,4 +33,4 @@ const Item = ({food}) => {
             <Image style={defaultStyle.foodImage} source={food.img}></Image>
         </View>
     )
-}  
+}   
