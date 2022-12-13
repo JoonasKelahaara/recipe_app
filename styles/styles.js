@@ -219,17 +219,20 @@ export const defaultStyle = StyleSheet.create({
       color: '#0A3409',
       paddingTop: 30,
       alignSelf: 'center',
+      fontFamily:'Roboto'
     },
     infoTextt: {
       fontSize: 24,
       color: '#0A3409',          
-      paddingTop: 70
+      paddingTop: 70,
+      fontFamily:'Roboto'
     },
     infoHeader: {
       textAlign: 'center',
       fontSize: 42,
       color: '#8EC641',
       width: 120, 
+      fontFamily:'Quicksand'
     },
     infoLine: {
        flex: 1,
