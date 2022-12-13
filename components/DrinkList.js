@@ -9,13 +9,13 @@ export const drinks = [
         id:2,
         title: 'Moctails',
         //body: '',
-        img: require("../img/carousel_mocktails.png")
+        img: require("../img/carousel-mocktails.png")
     },
     {
         id:3,
         title: 'Summer drinks',
         //body: '',
-        img: require("../img/carousel_summerdrinks.png")
+        img: require("../img/carousel-summerdrinks.png")
     },
     {
         id:4,
