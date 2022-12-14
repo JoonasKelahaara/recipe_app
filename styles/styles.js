@@ -176,7 +176,7 @@ export const defaultStyle = StyleSheet.create({
       justifyContent:'center',
       alignSelf: 'center',
       flex:1,
-      paddingTop:15,
+      paddingTop:20,
       fontSize:24,
       color: '#0A3409'
     },

@@ -9,9 +9,10 @@ export default function Favourites() {
         <View style={defaultStyle.viewBorder}>
 
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <View style={{flex: 1, height: 3, backgroundColor: '#8EC641'}} />
+            <View style={defaultStyle.infoLine} />
             <Text style={defaultStyle.infoHeader}>Suosikit</Text>
-        </View>
+            <View style={defaultStyle.infoLine} />
+            </View>
         </View>
     </ScrollView>
     )

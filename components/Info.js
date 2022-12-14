@@ -17,7 +17,7 @@ export default function Info({ name, name2, name3, name4 }) {
             <Text style={defaultStyle.infoHeader}>Info</Text>
             <View style={defaultStyle.infoLine} />
             </View>
-    
+
                 <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name2)}>
                     <Text style={defaultStyle.infoTextt}>Tuki</Text>
                 </TouchableOpacity>
