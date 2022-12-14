@@ -4,7 +4,7 @@ import { Text, View, ScrollView, ActivityIndicator } from 'react-native'
 import { db, RECIPES_REF, auth } from '../../firebase/Config'
 import { collection, getDocs, where, query } from "firebase/firestore";
 
-import { RecipeItem } from './RecipeItem'
+import { RecipeItemUpdate } from './RecipeItemUpdate'
 
 export function QueryRecipe () {
     const username = auth.currentUser?.displayName
@@ -38,7 +38,7 @@ export function QueryRecipe () {
                 {recipeKeys.length > 0 ? (
                 recipeKeys.map(key => (
                     <View>
-                        <RecipeItem key={key} id={key} recipeItem={allRecipes[key]} />
+                        <RecipeItemUpdate key={key} id={key} recipeItem={allRecipes[key]} />
                     </View>
                 ))
                 ) : (
