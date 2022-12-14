@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword, updateProfile, signInWithRedirect, GoogleAuthProvider } from 'firebase/auth';
 import { auth, provider, LIKES_REF, db } from '../firebase/Config'
-import { addDoc, collection, setDoc } from 'firebase/firestore';
+import { addDoc, collection, setDoc, doc } from 'firebase/firestore';
 
 export default function Signin({ name, name2 }) {
 
@@ -45,12 +45,13 @@ export default function Signin({ name, name2 }) {
         updateProfile(auth.currentUser, {
             displayName: username,
             photoURL: 'https://firebasestorage.googleapis.com/v0/b/recipe-app-c9104.appspot.com/o/profile%2Fprofile.png?alt=media&token=18374552-cb08-4441-96ee-dbdf31d0a3bc'
-        })
+        }).then(() => {
+            createLikesDoc()
+            console.log('Document created')
+        }).catch((err) => {
+            console.log(err)
+        });
         navigation.navigate(name2)
-        addDoc(collection(db, 'favourites'), {
-            name: auth.currentUser.uid,
-            value: auth.currentUser.displayName
-        })
         setMessage('')
         } catch (err) {
             const errorCode = err.code
@@ -65,6 +66,12 @@ export default function Signin({ name, name2 }) {
             setLoading(false)
         }
         setLoading(false)
+    }
+
+    const createLikesDoc = async () => {
+        const docRef = doc(db, "favourites", auth.currentUser.uid)
+        const payload = {name: auth.currentUser.uid, value: auth.currentUser.displayName}
+        await setDoc(docRef, payload)
     }
 
     //Käyttäjän rekisteröinti Googlella
