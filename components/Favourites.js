@@ -1,4 +1,4 @@
-import { Text, ScrollView, View} from 'react-native';
+import { Text, ScrollView, View, Button} from 'react-native';
 import {defaultStyle} from '../styles/styles.js'
 import React, { useState, useEffect } from "react"
 import { collection, getDoc, where, query, documentId, doc } from "firebase/firestore";
@@ -16,7 +16,10 @@ export default function Favourites() {
 
     const getLikes = async () => {
         const docRef = doc(db, LIKES_REF, userId)
-        await getDoc(docRef)
+        await getDoc(docRef).then((docSnap) => {
+            console.log(docSnap.data())
+        })
+        
     }
 
     return(
@@ -28,7 +31,7 @@ export default function Favourites() {
             <Text style={defaultStyle.infoHeader}>Suosikit</Text>
             <View>{liked}</View>
             <View style={defaultStyle.infoLine} />
-            </View>
+        </View>
     </ScrollView>
     )
 }
