@@ -87,12 +87,12 @@ export function AddRecipe () {
     const [modalVisible, setModalVisible] = useState(false)
 
     return (
-        <ScrollView style={defaultStyle.navMargin}>
+        <View>
             {/* Modal ikkunan sisältö */}
-            <Modal animationType='slide' transparent={true} visible={modalVisible} onRequestClose={() => {setModalVisible(!modalVisible)}}>
+            <Modal animationType='slide' visible={modalVisible} onRequestClose={() => {setModalVisible(!modalVisible)}}>
                 <View>
                     <ScrollView style={defaultStyle.modalView}>
-
+                        <Text style={defaultStyle.otherTitle}>Lisää resepti</Text>
                         {/* kuva ja nimi vierekkäin */}
                         <View style={[{ flexDirection: "row" }]}>
 
@@ -222,17 +222,16 @@ export function AddRecipe () {
             </Modal>
             
             {/* avaa Modal ikkunan missä on reseptin lisääminen*/}
-            <TouchableOpacity
-            style={defaultStyle.floatButton}
-            activeOpacity={0.6}
-            onPress={() => setModalVisible(true)}
-            >
-                
-                <AntDesign name="plus" size={34} color="white" />
+                <TouchableOpacity
+                style={defaultStyle.floatButton}
+                activeOpacity={0.6}
+                onPress={() => setModalVisible(true)}
+                >
+                    
+                    <AntDesign name="plus" size={34} color="white" />
 
-            </TouchableOpacity>
-
-        </ScrollView>
+                </TouchableOpacity>
+        </View>
     )
 }
 

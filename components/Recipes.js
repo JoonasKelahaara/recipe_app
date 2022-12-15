@@ -26,9 +26,10 @@ export function Recipes () {
     return (
         <ScrollView style={defaultStyle.navMargin}>
                 {/* Reseptin lisäys */}
-            <AddRecipe></AddRecipe>
+            {/* <AddRecipe></AddRecipe> */}
 
             {/* näyttää kaikki reseptit */}
+            <Text style={defaultStyle.infoHeader}>Reseptit</Text>
             <ScrollView>
                 {recipeKeys.length > 0 ? (
                 recipeKeys.map(key => (

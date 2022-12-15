@@ -126,10 +126,12 @@ export default function App() {
   return (
     <View style={defaultStyle.container}>
       <Header />
-      {/* <AddRecipe /> */}
+      <AddRecipe ></AddRecipe>
       <NavigationContainer>
         <Tab.Navigator
           initialRouteName='Home'
+          backBehavior='history'
+          sceneContainerStyle='background'
           screenOptions={({route}) => ({
             tabBarIcon: ({focused,color,size}) => {
               let iconName;
