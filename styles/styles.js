@@ -176,7 +176,7 @@ export const defaultStyle = StyleSheet.create({
       justifyContent:'center',
       alignSelf: 'center',
       flex:1,
-      paddingTop:15,
+      paddingTop:20,
       fontSize:24,
       color: '#0A3409'
     },
@@ -233,7 +233,7 @@ export const defaultStyle = StyleSheet.create({
     },
     infoHeader: {
       textAlign: 'center',
-      fontSize: 42,
+      fontSize: 40,
       color: '#8EC641',
       fontFamily:'Quicksand',
       paddingLeft: 15,
@@ -260,8 +260,9 @@ export const defaultStyle = StyleSheet.create({
       height: 300,
     }, */
     carouselItemContainer: {
-      //borderRadius: 8,
-      shadowColor: "#E8F3E8",
+      //borderRadius: 20,
+      //borderColor: '#808080',
+      shadowColor: '#E8F3E8',
       paddingBottom: 20,
       shadowOffset: {
         width: 0,
@@ -272,6 +273,7 @@ export const defaultStyle = StyleSheet.create({
       elevation: 7,
     },
     carouselTitle: {
+      fontFamily:'Quicksand',
       color: "#0A3409",
       backgroundColor: "#E8F3E8",
       fontSize: 16,
@@ -282,7 +284,7 @@ export const defaultStyle = StyleSheet.create({
     carouselBody: {
       color: "#0A3409",
       backgroundColor: "#E8F3E8",
-      fontSize: 14,
+      fontSize: 16,
       paddingLeft: 20,
       paddingTop: 10,
       paddingBottom: 10,
@@ -329,13 +331,10 @@ export const defaultStyle = StyleSheet.create({
       borderWidth: 10 / PixelRatio.get(),
       borderRadius: 20,
       paddingTop: '5%',
+      paddingBottom: '30%',
       marginLeft:'15%',
       marginRight:'15%',
       marginTop:'10%',
-      flex: 1,
-      alignItems: 'center',
-      width: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').width * 0.19),
-      height: PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height * 0.18),
       },
     settingsButton2: {
       flex: 1,
