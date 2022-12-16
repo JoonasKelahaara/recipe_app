@@ -320,7 +320,7 @@ export const RecipeItemUpdate = ({
           <Image
             source={{ uri: imageUrl } || { placeholder }}
             //väliaikanen style, ei näkynyt ilman mitään styleä
-            style={{ width: 400, height: 400, margin: 16 }}
+            style={{height: 300, margin: 8}} 
           />
         ) : (
           <Text style={{ textAlign: 'center' }}>Ei kuvaa saatavilla</Text>

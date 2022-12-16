@@ -102,8 +102,8 @@ export function AddRecipe () {
                                 style={defaultStyle.recipeButtonI}
                                 activeOpacity={0.6}
                                 onPress={pickImage} >
-                                    <ImageLoad
-                                        style={{ width: 120, height: 125 }}
+                                    <Image
+                                        style={{ width: 120, height: 125, backgroundColor: "grey" }}
                                         source={{uri: image }}
                                     />
                                 </TouchableOpacity>

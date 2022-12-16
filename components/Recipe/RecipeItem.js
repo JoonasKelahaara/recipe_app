@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Text, View, ScrollView, Image } from 'react-native'
 import ImageLoad from 'react-native-image-placeholder';
 import { db, storage, RECIPES_REF } from '../../firebase/Config'
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL } from "firebase/storage";
 import { defaultStyle } from '../../styles/styles.js'
 import LikeRecipe from './LikeRecipe';
 import placeholder from "../../img/logo.png"
@@ -33,11 +33,11 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
         <Text style={defaultStyle.recipeTitle}>{recipeName}</Text>
         { imageUrl? (
         <Image
-          source={{ uri: imageUrl} || {placeholder}}
+          source={{ uri: imageUrl}}
           //väliaikanen style, ei näkynyt ilman mitään styleä
-          style={{ width: 400, height: 400, margin: 16 }}
+          style={{height: 300, margin: 8}} 
         />
-      ): (<Text style={{textAlign:'center'}}>Ei kuvaa saatavilla</Text>)}
+        ): (<Text style={{textAlign:'center'}}>Ei kuvaa saatavilla</Text>)}
         <Text />
         <Text>Ohjeet:</Text>
         <Text>{instructions}</Text>
