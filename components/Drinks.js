@@ -2,16 +2,17 @@ import React from 'react';
 import { Image, StatusBar, View, ScrollView, Flatlist } from 'react-native';
 import { defaultStyle } from '../styles/styles.js';
 import { drinks } from './DrinkList.js';
+import { useNavigation } from '@react-navigation/native';
 
 
-export default function DrinkPics() {
+export default function Drinks({ name }) {
 
-    let drinkSelection = [];
+    const navigation = useNavigation()
+
+    /* let drinkSelection = [];
     for (let i = 0; i < 20; i++) {
         drinkSelection = [...drinks, ...drinkSelection];
-    } 
-
-
+    }  */
 
     return (
         <ScrollView /* style={defaultStyle.foodContainer} */>
@@ -25,7 +26,6 @@ export default function DrinkPics() {
     )
 }
 
-
 const Item = ({drink}) => {
     return (
         <View /* style={defaultStyle.foodCard} */>
@@ -33,4 +33,4 @@ const Item = ({drink}) => {
             <Image /* style={defaultStyle.foodImage} */ source={drink.img}></Image>
         </View>
     )
-}   
+}  
