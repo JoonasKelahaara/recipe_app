@@ -4,7 +4,7 @@ import { defaultStyle } from '../styles/styles.js';
 import { foods } from './FoodList.js';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Foods({ name }) {
+export default function Foods() {
 
     const navigation = useNavigation()
 
@@ -14,7 +14,7 @@ export default function Foods({ name }) {
     }  */
 
     return (
-        <ScrollView /* style={defaultStyle.foodContainer} */>
+        <ScrollView >
             <View >
                 <Flatlist
                     data={foods}
@@ -22,15 +22,15 @@ export default function Foods({ name }) {
                 /> 
             </View>
         </ScrollView>
-    )
+    );
 }
 
 
 const Item = ({food}) => {
     return (
-        <View /* style={defaultStyle.foodCard} */>
+        <View >
             <Text>{food.title}</Text>
-            <Image /* style={defaultStyle.foodImage} */ source={food.img}></Image>
+            <Image source={food.img}></Image>
         </View>
     )
 }   

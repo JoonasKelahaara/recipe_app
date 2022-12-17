@@ -228,10 +228,8 @@ export default function App() {
               tabBarButton: () => null,
               tabBarVisible: false,
             }}/>
-            <Tab.Screen name="Foods" component={FoodsScreen} options={{
-              tabBarButton: () => null,
-              tabBarVisible: false,
-            }}/>
+            <Tab.Screen name="Foods" component={FoodsScreen} />
+            <Tab.Screen name="Drinks" component={DrinksScreen} />
             <Tab.Screen name="UserRecipe" component={UserRecipeScreen} options={{
               tabBarButton: () => null,
               tabBarVisible: false,
