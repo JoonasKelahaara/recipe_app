@@ -300,7 +300,7 @@ export const defaultStyle = StyleSheet.create({
       borderWidth: 2,
       borderColor: '#D85E47',
       marginRight: 15,
-      marginBottom: 10
+      marginBottom: 10,
     },
     otherTitle: {
       fontSize: 25,
@@ -331,7 +331,7 @@ export const defaultStyle = StyleSheet.create({
       borderWidth: 10 / PixelRatio.get(),
       borderRadius: 20,
       paddingTop: '5%',
-      paddingBottom: '30%',
+      paddingBottom: '10%',
       marginLeft:'15%',
       marginRight:'15%',
       marginTop:'10%',
