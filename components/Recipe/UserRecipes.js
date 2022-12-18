@@ -11,7 +11,11 @@ export default function UserRecipes({ name }) {
 
     return(
         <ScrollView style={defaultStyle.navMargin}>
-            <Text style={[defaultStyle.infoHeader, {marginBottom: 10}]}>Omat reseptit</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={defaultStyle.infoLine} />
+                <Text style={defaultStyle.infoHeader}>Omat reseptit</Text>
+                <View style={defaultStyle.infoLine} />
+            </View>
             <QueryRecipe />
         </ScrollView>
     )

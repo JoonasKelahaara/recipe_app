@@ -32,11 +32,10 @@ export function QueryRecipe () {
 
     return (
         <ScrollView style={defaultStyle.navMargin}>
-                {/* Reseptin lisäys */}
 
             {/* näyttää kaikki reseptit */}
             <ScrollView>
-            <ActivityIndicator animating={loading} size='large' color='grey' />
+                <ActivityIndicator animating={loading} size='large' color='grey' />
                 {recipeKeys.length > 0 ? (
                 recipeKeys.map(key => (
                     <View>

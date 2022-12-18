@@ -11,6 +11,13 @@ import placeholder from "../../img/logo.png"
 export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: instructions, categories: categories, ingredients: ingredients, id: id }}) => {
 
   const [imageUrl, setImageURL] = useState(null)  
+  const [recipeIttem, setRecipeIttem] = useState({recipeItem: { recipename: recipeName, instructions: instructions, categories: categories, ingredients: ingredients, id: id }})
+
+  const [selectedItem, setSelectedItem] = useState(null)
+
+  function close () {
+    setSelectedItem(null)
+  }
 
   const ingredientList = ingredients.map((ingredient, index) => (
     <Text key={index}>{ingredient}</Text>
@@ -27,27 +34,26 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName, instructions: 
     });
   }, [])
 
+  console.log(selectedItem)
+
   return (
     <ScrollView style={defaultStyle.recipeItem}>
-      <View >
-        <Text style={defaultStyle.recipeTitle}>{recipeName}</Text>
-        { imageUrl? (
-        <Image
-          source={{ uri: imageUrl}}
-          //väliaikanen style, ei näkynyt ilman mitään styleä
-          style={{height: 300, margin: 8}} 
-        />
-        ): (<Text style={{textAlign:'center'}}>Ei kuvaa saatavilla</Text>)}
-        <Text />
-        <Text>Ohjeet:</Text>
-        <Text>{instructions}</Text>
-        <Text />
-        <Text>Kategoriat:</Text>
-        <ScrollView>{categoryList}</ScrollView>
-        <Text />
-        <Text>Ainesosat:</Text>
-        <ScrollView>{ingredientList}</ScrollView>
-        <LikeRecipe />
+      <View>
+        {/* kuva */}
+        <View>
+          { imageUrl? (
+          <Image
+            source={{ uri: imageUrl}}
+            //väliaikanen style, ei näkynyt ilman mitään styleä
+            style={{height: 200, resizeMode: "cover", borderTopLeftRadius: 6, borderTopRightRadius: 6}} 
+          />
+          ): (<Text style={{textAlign:'center'}}>Ei kuvaa saatavilla</Text>)}
+        </View>
+        {/* nimi */}
+        <View>
+          <Text style={defaultStyle.recipeTitle}>{recipeName}</Text>
+          <LikeRecipe />
+        </View>
       </View>
     </ScrollView>
   )
