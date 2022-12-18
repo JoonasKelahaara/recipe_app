@@ -15,7 +15,7 @@ export const foods = [
         id:3,
         title: 'Kasvisruoat',
         body: 'Kasvisruoka vaihtoehtoja',
-        img: require("../img/carousel_maindish.png")
+        img: require("../img/pic2.png")
     },
     {
         id:4,
