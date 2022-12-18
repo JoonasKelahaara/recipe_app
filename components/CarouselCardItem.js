@@ -1,3 +1,6 @@
+// Kotisivun karuselli - toimii, mutta linkitys ruoka- ja juomasivuille epäonnistui.
+// Karuselli vaihdettiin pois, jotta linkitys seuraaville sivuille saatiin toimimaan
+
 import React from 'react';
 import { View, Text, Dimensions, Image } from "react-native";
 import { Pressable } from 'react-native';
