@@ -26,8 +26,8 @@ export function QueryRecipe () {
             setLoading(false)
             setAllRecipes(recipes)
         })
-    }, [isFocused])
-    
+    }, [isFocused, props])
+
     let recipeKeys = Object.keys(allRecipes)
 
     return (
