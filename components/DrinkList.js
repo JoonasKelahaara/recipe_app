@@ -1,3 +1,5 @@
+// Listaa juomakategoriat ja kuvat
+
 export const drinks = [
     {
         id:1,

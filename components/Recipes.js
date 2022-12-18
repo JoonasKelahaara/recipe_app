@@ -29,7 +29,12 @@ export function Recipes () {
             {/* <AddRecipe></AddRecipe> */}
 
             {/* näyttää kaikki reseptit */}
+            <View style={{ flex: 1, alignItems: 'center' }}></View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={defaultStyle.infoLine} />
             <Text style={defaultStyle.infoHeader}>Reseptit</Text>
+            <View style={defaultStyle.infoLine} />
+            </View>
             <ScrollView>
                 {recipeKeys.length > 0 ? (
                 recipeKeys.map(key => (

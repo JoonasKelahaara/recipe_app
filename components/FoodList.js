@@ -1,3 +1,5 @@
+// Listaa ruokakategoriat sekä kuvat
+
 export const foods = [
     {
         id:1,

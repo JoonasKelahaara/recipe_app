@@ -107,6 +107,7 @@ export const defaultStyle = StyleSheet.create({
     },
     recipeItem: {
       margin: 5,
+      marginTop: 20,
       borderWidth: 3,
       borderRadius: 8,
       borderColor: '#559E54',
@@ -264,15 +265,16 @@ export const defaultStyle = StyleSheet.create({
       fontFamily:'Quicksand',
       color: "#0A3409",
       backgroundColor: "#E8F3E8",
-      fontSize: 20,
+      fontSize: 25,
       fontWeight: "bold",
       textAlign:'center',
       padding: 10,
+      borderBottomWidth: 1
     }, 
     carouselBody: {
       color: "#0A3409",
       backgroundColor: "#E8F3E8",
-      fontSize: 16,
+      fontSize: 20,
       paddingLeft: 20,
       paddingTop: 10,
       paddingBottom: 10,

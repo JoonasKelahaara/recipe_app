@@ -19,13 +19,18 @@ export default function Drinks() {
 
     return (
         <ScrollView style={defaultStyle.navMargin}>
+            <View style={{ flex: 1, alignItems: 'center' }}></View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={defaultStyle.infoLine} />
             <Text style={defaultStyle.infoHeader}>Kategoriat</Text>
-            <ScrollView style={defaultStyle.foodItem}>
+            <View style={defaultStyle.infoLine} />
+            </View>
+            <ScrollView >
             {drinks.map((d,i) => {
                 return (
-                    <View>
+                    <View style={defaultStyle.recipeItem}>
                         <Text key={i} style={defaultStyle.carouselTitle}>{d.title}</Text>
-                        <Image source={d.img} style={{width: ITEM_WIDTH,height: 300}}></Image>
+                        <Image source={d.img} style={{width: ITEM_WIDTH, height: 300, marginLeft: 10, marginBottom: 20}}></Image>
                     </View>
                 )
             })}
