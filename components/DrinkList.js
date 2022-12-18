@@ -1,13 +1,13 @@
 export const drinks = [
     {
         id:1,
-        title: 'Coctails',
+        title: 'Cocktails',
         //body: '',
         img: require("../img/carousel_drinks.png")
     },
     {
         id:2,
-        title: 'Moctails',
+        title: 'Mocktails',
         //body: '',
         img: require("../img/carousel-mocktails.png")
     },

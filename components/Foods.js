@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Image, Text, StatusBar, SafeAreaView, View, ScrollView, Flatlist, TouchableOpacity } from 'react-native';
+import { Image, Text, StatusBar, SafeAreaView, View, ScrollView, Flatlist, TouchableOpacity, Dimensions } 
+from 'react-native';
 import { defaultStyle } from '../styles/styles.js';
 import { foods } from './FoodList.js';
 import { useNavigation } from '@react-navigation/native';
  
 export default function Foods() {
 
+    // Testailuja, millä eri tavoilla saadaan kuvat nätisti listoiksi. 
+    // Vaati jostain syystä hyvin paljon aikaa, ei mennyt kuten strömssössä.
     /*     const Item = ({ item, onPress, backgroundColor, textColor }) => (
             <TouchableOpacity onPress={onPress} >
                 <Text>{item.title}</Text>
@@ -47,6 +50,8 @@ export default function Foods() {
 
 
         const navigation = useNavigation()
+        const SLIDER_WIDTH = Dimensions.get('window').width + 80;
+        const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
         /* let foodSelection = [];
             for (let i = 0; i < 20; i++) {
@@ -54,9 +59,18 @@ export default function Foods() {
         } */
 
         return (
-            <ScrollView >
-                <Text>testi</Text>
-                <Image source={foods.img}></Image>
+            <ScrollView style={defaultStyle.navMargin}>
+            <Text style={defaultStyle.infoHeader}>Kategoriat</Text>
+            <ScrollView style={defaultStyle.foodItem}>
+            {foods.map((f,i) => {
+                return (
+                    <View>
+                        <Text key={i} style={defaultStyle.carouselTitle}>{f.title}</Text>
+                        <Image source={f.img} style={{width: ITEM_WIDTH,height: 300}}></Image>
+                    </View>
+                )
+            })} 
+            </ScrollView>
                 {/* <View >
                     <Flatlist
                         data={foods}
@@ -68,11 +82,11 @@ export default function Foods() {
 }
 
 
-const Item = ({food}) => {
+/* const Item = ({food}) => {
     return (
         <View >
             <Text>{food.title}</Text>
             <Image source={food.img}></Image>
         </View>
     ) 
-}   
+}   */ 

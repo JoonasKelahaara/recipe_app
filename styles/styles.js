@@ -255,22 +255,10 @@ export const defaultStyle = StyleSheet.create({
       borderColor: '#808080'
     },
     // Home screen carousel styling
-    /* carouselImage: {
-      width: ITEM_WIDTH,
-      height: 300,
-    }, */
     carouselItemContainer: {
-      //borderRadius: 20,
-      //borderColor: '#808080',
-      shadowColor: '#E8F3E8',
-      paddingBottom: 20,
-      shadowOffset: {
-        width: 0,
-        height: 3,
-      },
-      shadowOpacity: 0.29,
-      shadowRadius: 4.65,
-      elevation: 7,
+      flex: 1,
+      textAlign:'center',
+      backgroundColor: "#E8F3E8",
     },
     carouselTitle: {
       fontFamily:'Quicksand',
@@ -296,6 +284,14 @@ export const defaultStyle = StyleSheet.create({
       padding: 10,
       backgroundColor: "#E8F3E8",
       alignContent: 'center'
+    },
+    foodItem: {
+      margin: 5,
+      borderWidth: 3,
+      borderRadius: 8,
+      borderColor: '#559E54',
+      padding: 5,
+      backgroundColor: '#E8F3E8'
     },
     floatButton: {
       alignItems: 'center',
