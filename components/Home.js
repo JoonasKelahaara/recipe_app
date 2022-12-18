@@ -11,7 +11,7 @@ export default function Home({ name, name2 }) {
   const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
     return(
-      <ScrollView>
+      <ScrollView style={defaultStyle.navMargin}>
         <View style={{ flex: 1, alignItems: 'center' }}></View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View style={defaultStyle.infoLine} />
@@ -46,6 +46,9 @@ export default function Home({ name, name2 }) {
           </TouchableOpacity>
           </View>
         </ScrollView>
+
+
+
       </ScrollView>
 
   );
