@@ -70,7 +70,7 @@ export default function Signin({ name, name2 }) {
 
     const createLikesDoc = async () => {
         const docRef = doc(db, "favourites", auth.currentUser.uid)
-        const payload = {name: null, likes: null}
+        const payload = {likes: null}
         await setDoc(docRef, payload)
     }
 

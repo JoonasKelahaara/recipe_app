@@ -276,10 +276,10 @@ export const defaultStyle = StyleSheet.create({
       fontFamily:'Quicksand',
       color: "#0A3409",
       backgroundColor: "#E8F3E8",
-      fontSize: 16,
+      fontSize: 20,
       fontWeight: "bold",
-      paddingLeft: 20,
-      paddingTop: 10,
+      textAlign:'center',
+      padding: 10,
     }, 
     carouselBody: {
       color: "#0A3409",
@@ -289,6 +289,14 @@ export const defaultStyle = StyleSheet.create({
       paddingTop: 10,
       paddingBottom: 10,
     }, 
+    imageCard: {
+      margin: 10,
+      borderWidth: 2,
+      borderRadius: 10,
+      padding: 10,
+      backgroundColor: "#E8F3E8",
+      alignContent: 'center'
+    },
     floatButton: {
       alignItems: 'center',
       justifyContent: 'center',
