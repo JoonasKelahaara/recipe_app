@@ -5,11 +5,13 @@ import { db, RECIPES_REF, auth } from '../../firebase/Config'
 import { collection, getDocs, where, query } from "firebase/firestore";
 
 import { RecipeItemUpdate } from './RecipeItemUpdate'
+import { useIsFocused } from '@react-navigation/native';
 
 export function QueryRecipe () {
     const username = auth.currentUser?.displayName
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('Ei reseptejä')
+    const isFocused = useIsFocused();
 
     {/* Hakee kaikki reseptit */}
     const [allRecipes, setAllRecipes] = useState([])
@@ -24,8 +26,8 @@ export function QueryRecipe () {
             setLoading(false)
             setAllRecipes(recipes)
         })
-    }, [])
-
+    }, [isFocused])
+    
     let recipeKeys = Object.keys(allRecipes)
 
     return (
