@@ -106,13 +106,12 @@ export const defaultStyle = StyleSheet.create({
       bottom: 0,
     },
     recipeItem: {
-      margin: 5,
+      margin: 16,
       marginTop: 20,
       borderWidth: 3,
       borderRadius: 8,
       borderColor: '#559E54',
-      padding: 5,
-      backgroundColor: '#E8F3E8'
+      backgroundColor: '#E8F3E8',
     },
     recipeContainer: {
       flex: 1,
@@ -144,10 +143,21 @@ export const defaultStyle = StyleSheet.create({
       marginBottom: 5,
     },
     recipeTitle: {
-      textAlign: 'center',
+      paddingLeft: 4,
       fontSize: 25,
       fontWeight: 'bold',
-      borderBottomWidth: 1
+    },
+    recipeDetails: {
+      backgroundColor: "#92C591",
+      borderRadius: 6,
+      margin: 12,
+    },
+    detailsTitle: {
+      fontSize: 20,
+      padding: 12
+    },
+    detailsText: {
+      padding: 12
     },
     pageTitle: {
       fontSize: 16,

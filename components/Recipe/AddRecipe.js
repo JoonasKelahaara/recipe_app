@@ -160,9 +160,6 @@ export function AddRecipe () {
                                 {ingredients.map((ingredients, index) => (
                                     <View style={[{flexDirection: "row", paddingLeft: 12, paddingTop: 8, borderBottomWidth: 2}]}>
                                         <Text key={index}>{ingredients}</Text>
-                                        <Pressable>
-                                            <Entypo name={'circle-with-cross'}  size={32} /* onPress={removeIngredient} */  />
-                                        </Pressable>
                                     </View>
                                 ))}
                             </View>
@@ -187,9 +184,6 @@ export function AddRecipe () {
                                 {categories.map((category, index) => (
                                      <View style={[{flexDirection: "row", paddingLeft: 12, paddingTop: 8, borderBottomWidth: 2}]}>
                                         <Text key={index}>{category}</Text>
-                                        <Pressable>
-                                        <Entypo name={'circle-with-cross'} size={32} /* onPress={removeIngredient} */  />
-                                        </Pressable>
                                     </View>
                                 ))}
                             </View>

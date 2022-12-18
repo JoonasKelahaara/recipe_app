@@ -112,6 +112,7 @@ export const RecipeItemUpdate = ({
       >
         <View>
           <ScrollView style={defaultStyle.modalView}>
+          <Text style={defaultStyle.otherTitle}>Muokkaa reseptiä</Text>
             {/* kuva ja nimi vierekkäin */}
             <View style={[{ flexDirection: 'row' }]}>
               {/* reseptin nimi */}
@@ -119,7 +120,7 @@ export const RecipeItemUpdate = ({
                 style={{
                   flex: 1,
                   alignSelf: 'center',
-                  marginLeft: -8,
+                  
                   marginRight: 12
                 }}
               >
@@ -199,12 +200,6 @@ export const RecipeItemUpdate = ({
                     ]}
                   >
                     <Text key={index}>{ingredients}</Text>
-                    <Pressable>
-                      <Entypo
-                        name={'circle-with-cross'}
-                        size={32} /* onPress={removeIngredient} */
-                      />
-                    </Pressable>
                   </View>
                 ))}
               </View>
@@ -245,12 +240,6 @@ export const RecipeItemUpdate = ({
                     ]}
                   >
                     <Text key={index}>{category}</Text>
-                    <Pressable>
-                      <Entypo
-                        name={'circle-with-cross'}
-                        size={32} /* onPress={removeIngredient} */
-                      />
-                    </Pressable>
                   </View>
                 ))}
               </View>
@@ -314,38 +303,36 @@ export const RecipeItemUpdate = ({
           </ScrollView>
         </View>
       </Modal>
+
       <View>
-        <Text style={defaultStyle.recipeTitle}>{recipeName}</Text>
-        {imageUrl ? (
+        <View>
+          { imageUrl? (
           <Image
-            source={{ uri: imageUrl } || { placeholder }}
+            source={{ uri: imageUrl}}
             //väliaikanen style, ei näkynyt ilman mitään styleä
-            style={{height: 300, margin: 8}} 
+            style={{height: 200, resizeMode: "cover", borderTopLeftRadius: 6, borderTopRightRadius: 6}} 
           />
-        ) : (
-          <Text style={{ textAlign: 'center' }}>Ei kuvaa saatavilla</Text>
-        )}
-        <Text />
-        <Text>Ohjeet:</Text>
-        <Text>{instructions}</Text>
-        <Text />
-        <Text>Kategoriat:</Text>
-        <ScrollView>{categoryList}</ScrollView>
-        <Text />
-        <Text>Ainesosat:</Text>
-        <ScrollView>{ingredientList}</ScrollView>
-        <Pressable>
-          <Entypo name={'trash'} size={32} onPress={remove} />
-        </Pressable>
-        <Pressable>
-          <AntDesign
-            name='setting'
-            size={32}
-            color='black'
-            onPress={() => setModalVisible(true)}
-          />
-        </Pressable>
+          ): (<Text style={{textAlign:'center'}}>Ei kuvaa saatavilla</Text>)}
+        </View>
+        <View>
+          <Text style={[defaultStyle.recipeTitle, {marginLeft: 12}]}>{recipeName}</Text>
+        </View>
+        <View style={{flexDirection: 'row', alignItems: 'center', margin: 12}}>
+          <Text>Muokkaa </Text>
+          <Pressable>
+            <AntDesign name='setting' size={32} color='black' onPress={() => setModalVisible(true)} />
+          </Pressable>
+          <Text>      </Text>
+          <Text>Poista resepti</Text>
+          <Pressable>
+            <Entypo name={'trash'} size={32} onPress={remove} />
+          </Pressable>
+        </View>
       </View>
+
+
+
+
     </ScrollView>
   )
 }
