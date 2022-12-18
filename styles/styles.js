@@ -342,7 +342,7 @@ export const defaultStyle = StyleSheet.create({
       paddingBottom: '10%',
       marginLeft:'15%',
       marginRight:'15%',
-      marginTop:'10%',
+      marginTop:'0%',
       },
     settingsButton2: {
       flex: 1,
