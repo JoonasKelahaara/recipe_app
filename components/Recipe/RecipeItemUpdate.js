@@ -7,6 +7,7 @@ import SelectDropdown from 'react-native-select-dropdown'
 import Entypo from '@expo/vector-icons/Entypo'
 import { AntDesign } from '@expo/vector-icons'
 import { TextInput, TouchableOpacity, Pressable, Modal } from 'react-native'
+import { useIsFocused } from '@react-navigation/native';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { defaultStyle } from '../../styles/styles.js'
 import placeholder from '../../img/logo.png'
@@ -26,6 +27,7 @@ export const RecipeItemUpdate = ({
   const [ingredientsUpdate, setIngredients] = useState([])
   const [category, setCategory] = useState('')
   const [categoriesUpdate, setCategories] = useState([])
+  const isFocused = useIsFocused();
 
   const [imageUrl, setImageURL] = useState(null)
 
@@ -96,7 +98,7 @@ export const RecipeItemUpdate = ({
       setImageURL(url)
       console.log(url)
     })
-  }, [])
+  }, [isFocused])
 
   
 

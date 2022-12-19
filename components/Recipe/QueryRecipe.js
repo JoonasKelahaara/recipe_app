@@ -3,6 +3,7 @@ import { defaultStyle } from '../../styles/styles'
 import { Text, View, ScrollView, ActivityIndicator } from 'react-native'
 import { db, RECIPES_REF, auth } from '../../firebase/Config'
 import { collection, getDocs, where, query } from "firebase/firestore";
+import { useRoute } from '@react-navigation/native';
 
 import { RecipeItemUpdate } from './RecipeItemUpdate'
 import { useIsFocused } from '@react-navigation/native';
@@ -11,14 +12,22 @@ export function QueryRecipe () {
     const username = auth.currentUser?.displayName
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('Ei reseptejä')
+    const [category, setCategory] = useState('categories')
+    const [value, setValue] = useState(username)
     const isFocused = useIsFocused();
 
+    const route = useRoute();
+    
     {/* Hakee kaikki reseptit */}
     const [allRecipes, setAllRecipes] = useState([])
-    
+    const test = route.params.f
+
+    console.log(test.title)
+
+
     useEffect(() => {
         setLoading(true)
-        getDocs(query(collection(db, RECIPES_REF), where("username", "==", username))).then(docSnap => {
+        getDocs(query(collection(db, RECIPES_REF), where(category, "array-contains", test.title))).then(docSnap => {
             let recipes = [];
             docSnap.forEach((doc) => {
                 recipes.push({ ...doc.data(), id:doc.id })
@@ -26,12 +35,13 @@ export function QueryRecipe () {
             setLoading(false)
             setAllRecipes(recipes)
         })
-    }, [isFocused])
+    }, [isFocused, test])
 
     let recipeKeys = Object.keys(allRecipes)
 
     return (
         <ScrollView style={defaultStyle.navMargin}>
+
 
             {/* näyttää kaikki reseptit */}
             <ScrollView>

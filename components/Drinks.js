@@ -5,7 +5,7 @@ import { drinks } from './DrinkList.js';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function Drinks() {
+export default function Drinks(name2) {
 
     const navigation = useNavigation();
     const SLIDER_WIDTH = Dimensions.get('window').width + 80;

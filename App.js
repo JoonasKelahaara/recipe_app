@@ -22,6 +22,7 @@ import AddRecipe from './components/Recipe/AddRecipe';
 import { auth } from './firebase/Config'
 import { onAuthStateChanged } from 'firebase/auth';
 import Footer from './components/Footer';
+import QueryRecipe from './components/Recipe/QueryRecipe.js';
 import Foods from './components/Foods';
 import Drinks from './components/Drinks';
 import { useFonts } from 'expo-font';
@@ -115,9 +116,15 @@ export default function App() {
     )
   }
 
+  function QueryRecipeScreen() {
+    return(
+      <QueryRecipe name="foods" />
+    )
+  }
+
   function FoodsScreen() {
     return (
-      <Foods name="Home"/>
+      <Foods name="Home" name2="QueryRecipe"/>
     )
   }
 
@@ -237,6 +244,10 @@ export default function App() {
               tabBarVisible: false,
             }}/>
             <Tab.Screen name="UserRecipe" component={UserRecipeScreen} options={{
+              tabBarButton: () => null,
+              tabBarVisible: false,
+            }}/>
+            <Tab.Screen name="QueryRecipe" component={QueryRecipeScreen} options={{
               tabBarButton: () => null,
               tabBarVisible: false,
             }}/>

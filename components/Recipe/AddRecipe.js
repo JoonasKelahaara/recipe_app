@@ -26,7 +26,7 @@ export function AddRecipe () {
     const username = auth.currentUser?.displayName
 
     const [amount, setAmount] = useState(0)
-    const unit = ["ml", "cl", "dl", "l", "mg", "g", "kg", "tl", "rl"]
+    const unit = ["ml", "cl", "dl", "l", "mg", "g", "kg", "tl", "rkl", "kpl", "plo"]
     const [selectedUnit, setSelectedUnit] = useState("ml")
 
     const pickImage = async () => {
@@ -123,7 +123,7 @@ export function AddRecipe () {
                                 <TextInput value={ingredient} onChangeText={(ingredient) => {setIngredient(ingredient)}} placeholder=" Ainesosa" style={[defaultStyle.textInput, { flex: 4 }]}></TextInput>
 
                                 <View style={{ flex: 2 }} >
-                                    <NumericInput value={amount} totalWidth={60} totalHeight={50} type="up-down" onChange={amount => setAmount(amount)} minValue={0} rounded style={{width: 6}} />
+                                    <NumericInput value={amount} totalWidth={60} totalHeight={50} type="up-down" onChange={amount => setAmount(amount)} minValue={0} step={1} valueType="real" rounded style={{width: 6}} />
                                 </View>
                                 <View style={{ flex: 2 }} >
                                     <SelectDropdown

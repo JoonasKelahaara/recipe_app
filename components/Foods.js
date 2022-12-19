@@ -5,7 +5,7 @@ import { defaultStyle } from '../styles/styles.js';
 import { foods } from './FoodList.js';
 import { useNavigation } from '@react-navigation/native';
  
-export default function Foods() {
+export default function Foods({name2}) {
 
     const navigation = useNavigation()
     const SLIDER_WIDTH = Dimensions.get('window').width + 80;
@@ -28,8 +28,10 @@ export default function Foods() {
             {foods.map((f,i) => {
                 return (
                     <View style={defaultStyle.recipeItem}>
-                        <Text key={i} style={defaultStyle.carouselTitle}>{f.title}</Text>
-                        <Image source={f.img} style={{width: ITEM_WIDTH,height: 300, marginLeft: 10, marginBottom: 20}}></Image>
+                        <TouchableOpacity onPress={() => navigation.navigate(name2, {f})}>
+                            <Text key={i} style={defaultStyle.carouselTitle}>{f.title}</Text>
+                            <Image source={f.img} style={{width: ITEM_WIDTH,height: 300, marginLeft: 10, marginBottom: 20}}></Image>
+                        </TouchableOpacity>
                     </View>
                 )
             })} 
