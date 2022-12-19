@@ -27,9 +27,9 @@ export default function Info({ name, name2, name3, name4 }) {
                 <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name4)}>
                     <Text style={defaultStyle.infoText}>Tietosuoja</Text>
                 </TouchableOpacity>
-                    <TouchableOpacity style={defaultStyle.settingsButton} onPress={() => navigation.navigate(name)}>
-                        <Text style={defaultStyle.settingsButton}><AntDesign name="setting" size={34} color="#8EC641" />Asetukset</Text>
-                    </TouchableOpacity>
+                <TouchableOpacity style={defaultStyle.settingsButton} onPress={() => navigation.navigate(name)}>
+                    <Text style={defaultStyle.settingsButton}><AntDesign name="setting" size={34} color="#8EC641" />Asetukset</Text>
+                </TouchableOpacity>
             </View>
         </ScrollView>
         

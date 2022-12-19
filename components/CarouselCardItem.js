@@ -1,8 +1,11 @@
+// Kotisivun karuselli - toimii, mutta linkitys ruoka- ja juomasivuille epäonnistui.
+// Karuselli vaihdettiin pois, jotta linkitys seuraaville sivuille saatiin toimimaan
+
 import React from 'react';
 import { View, Text, Dimensions, Image } from "react-native";
 import { Pressable } from 'react-native';
 import {defaultStyle} from '../styles/styles.js';
-import  FoodPics  from './Foods.js';
+import  Foods  from './Foods.js';
 //import { useNavigation } from '@react-navigation/native';
 //import {BrowserRouter as Router, Link} from 'react-router-dom';
 

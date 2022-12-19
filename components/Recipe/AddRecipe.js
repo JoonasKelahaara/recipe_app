@@ -26,7 +26,7 @@ export function AddRecipe () {
     const username = auth.currentUser?.displayName
 
     const [amount, setAmount] = useState(0)
-    const unit = ["ml", "cl", "dl", "l", "mg", "g", "kg", "tl", "rl"]
+    const unit = ["ml", "cl", "dl", "l", "mg", "g", "kg", "tl", "rkl", "kpl", "plo"]
     const [selectedUnit, setSelectedUnit] = useState("ml")
 
     const pickImage = async () => {
@@ -102,8 +102,8 @@ export function AddRecipe () {
                                 style={defaultStyle.recipeButtonI}
                                 activeOpacity={0.6}
                                 onPress={pickImage} >
-                                    <ImageLoad
-                                        style={{ width: 120, height: 125 }}
+                                    <Image
+                                        style={{ width: 120, height: 125, backgroundColor: "grey" }}
                                         source={{uri: image }}
                                     />
                                 </TouchableOpacity>
@@ -123,7 +123,7 @@ export function AddRecipe () {
                                 <TextInput value={ingredient} onChangeText={(ingredient) => {setIngredient(ingredient)}} placeholder=" Ainesosa" style={[defaultStyle.textInput, { flex: 4 }]}></TextInput>
 
                                 <View style={{ flex: 2 }} >
-                                    <NumericInput value={amount} totalWidth={60} totalHeight={50} type="up-down" onChange={amount => setAmount(amount)} minValue={0} rounded style={{width: 6}} />
+                                    <NumericInput value={amount} totalWidth={60} totalHeight={50} type="up-down" onChange={amount => setAmount(amount)} minValue={0} step={1} valueType="real" rounded style={{width: 6}} />
                                 </View>
                                 <View style={{ flex: 2 }} >
                                     <SelectDropdown
@@ -160,9 +160,6 @@ export function AddRecipe () {
                                 {ingredients.map((ingredients, index) => (
                                     <View style={[{flexDirection: "row", paddingLeft: 12, paddingTop: 8, borderBottomWidth: 2}]}>
                                         <Text key={index}>{ingredients}</Text>
-                                        <Pressable>
-                                            <Entypo name={'circle-with-cross'}  size={32} /* onPress={removeIngredient} */  />
-                                        </Pressable>
                                     </View>
                                 ))}
                             </View>
@@ -187,9 +184,6 @@ export function AddRecipe () {
                                 {categories.map((category, index) => (
                                      <View style={[{flexDirection: "row", paddingLeft: 12, paddingTop: 8, borderBottomWidth: 2}]}>
                                         <Text key={index}>{category}</Text>
-                                        <Pressable>
-                                        <Entypo name={'circle-with-cross'} size={32} /* onPress={removeIngredient} */  />
-                                        </Pressable>
                                     </View>
                                 ))}
                             </View>

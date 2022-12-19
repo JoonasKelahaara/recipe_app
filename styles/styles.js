@@ -106,12 +106,12 @@ export const defaultStyle = StyleSheet.create({
       bottom: 0,
     },
     recipeItem: {
-      margin: 5,
+      margin: 16,
+      marginTop: 20,
       borderWidth: 3,
       borderRadius: 8,
       borderColor: '#559E54',
-      padding: 5,
-      backgroundColor: '#E8F3E8'
+      backgroundColor: '#E8F3E8',
     },
     recipeContainer: {
       flex: 1,
@@ -143,10 +143,21 @@ export const defaultStyle = StyleSheet.create({
       marginBottom: 5,
     },
     recipeTitle: {
-      textAlign: 'center',
+      paddingLeft: 4,
       fontSize: 25,
       fontWeight: 'bold',
-      borderBottomWidth: 1
+    },
+    recipeDetails: {
+      backgroundColor: "#92C591",
+      borderRadius: 6,
+      margin: 12,
+    },
+    detailsTitle: {
+      fontSize: 20,
+      padding: 12
+    },
+    detailsText: {
+      padding: 12
     },
     pageTitle: {
       fontSize: 16,
@@ -255,40 +266,45 @@ export const defaultStyle = StyleSheet.create({
       borderColor: '#808080'
     },
     // Home screen carousel styling
-    /* carouselImage: {
-      width: ITEM_WIDTH,
-      height: 300,
-    }, */
     carouselItemContainer: {
-      //borderRadius: 20,
-      //borderColor: '#808080',
-      shadowColor: '#E8F3E8',
-      paddingBottom: 20,
-      shadowOffset: {
-        width: 0,
-        height: 3,
-      },
-      shadowOpacity: 0.29,
-      shadowRadius: 4.65,
-      elevation: 7,
+      flex: 1,
+      textAlign:'center',
+      backgroundColor: "#E8F3E8",
     },
     carouselTitle: {
       fontFamily:'Quicksand',
       color: "#0A3409",
       backgroundColor: "#E8F3E8",
-      fontSize: 16,
+      fontSize: 25,
       fontWeight: "bold",
-      paddingLeft: 20,
-      paddingTop: 10,
+      textAlign:'center',
+      padding: 10,
+      borderBottomWidth: 1
     }, 
     carouselBody: {
       color: "#0A3409",
       backgroundColor: "#E8F3E8",
-      fontSize: 16,
+      fontSize: 20,
       paddingLeft: 20,
       paddingTop: 10,
       paddingBottom: 10,
     }, 
+    imageCard: {
+      margin: 10,
+      borderWidth: 2,
+      borderRadius: 10,
+      padding: 10,
+      backgroundColor: "#E8F3E8",
+      alignContent: 'center'
+    },
+    foodItem: {
+      margin: 5,
+      borderWidth: 3,
+      borderRadius: 8,
+      borderColor: '#559E54',
+      padding: 5,
+      backgroundColor: '#E8F3E8'
+    },
     floatButton: {
       alignItems: 'center',
       justifyContent: 'center',
@@ -300,7 +316,7 @@ export const defaultStyle = StyleSheet.create({
       borderWidth: 2,
       borderColor: '#D85E47',
       marginRight: 15,
-      marginBottom: 10
+      marginBottom: 10,
     },
     otherTitle: {
       fontSize: 25,
@@ -331,10 +347,10 @@ export const defaultStyle = StyleSheet.create({
       borderWidth: 10 / PixelRatio.get(),
       borderRadius: 20,
       paddingTop: '5%',
-      paddingBottom: '30%',
+      paddingBottom: '10%',
       marginLeft:'15%',
       marginRight:'15%',
-      marginTop:'10%',
+      marginTop:'0%',
       },
     settingsButton2: {
       flex: 1,
