@@ -20,14 +20,15 @@ export function QueryRecipe () {
     
     {/* Hakee kaikki reseptit */}
     const [allRecipes, setAllRecipes] = useState([])
-    const test = route.params.f
 
-    console.log(test.title)
+    const q = query(collection(db, RECIPES_REF), where(route.params.category , route.params.search , route.params.value))
 
+    /* setQuery(route.params.category + route.params.search + route.params.value) */
+    /* console.log(query) */
 
     useEffect(() => {
         setLoading(true)
-        getDocs(query(collection(db, RECIPES_REF), where(category, "array-contains", test.title))).then(docSnap => {
+        getDocs(q).then(docSnap => {
             let recipes = [];
             docSnap.forEach((doc) => {
                 recipes.push({ ...doc.data(), id:doc.id })
@@ -35,7 +36,7 @@ export function QueryRecipe () {
             setLoading(false)
             setAllRecipes(recipes)
         })
-    }, [isFocused, test])
+    }, [isFocused])
 
     let recipeKeys = Object.keys(allRecipes)
 

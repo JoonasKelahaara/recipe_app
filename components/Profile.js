@@ -144,7 +144,7 @@ export default function Profile({ name, name2 }) {
                 </TouchableOpacity>
             </View>
             <Text style={defaultStyle.userName}>{username}</Text>
-            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => navigation.navigate(name2) }>
+            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => navigation.navigate(name2, {category: "username", search: "==", value: username}) }>
                 <Text style={defaultStyle.buttonText}>Omat reseptit</Text>
             </TouchableOpacity>
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={logout}>
