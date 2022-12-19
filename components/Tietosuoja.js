@@ -1,4 +1,4 @@
-import { Text, ScrollView, TouchableOpacity} from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {defaultStyle} from '../styles/styles.js'
 import { AntDesign } from '@expo/vector-icons'
 import React from "react"
@@ -10,6 +10,12 @@ export default function Tietosuoja({ name }) {
 
     return(
     <ScrollView style={defaultStyle.navMargin}>
+        <View style={defaultStyle.viewBorder}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={defaultStyle.infoLine} />
+            <Text style={defaultStyle.infoHeader}>Tietosuoja</Text>
+        <View style={defaultStyle.infoLine} />
+        </View>
         <Text style={defaultStyle.infoText}>Rekisteri- ja tietosuojaseloste</Text>
         <Text style={defaultStyle.pageTitle}>Tämä on Puistokemistien EU:n yleisen tietosuoja-asetuksen (GDPR) mukainen rekisteri- ja tietosuojaseloste.
          Laadittu 06.12.2022. Viimeisin muutos 06.12.2022.</Text>
@@ -84,7 +90,7 @@ export default function Tietosuoja({ name }) {
         käsittelyn rajoittaminen tietyissä tilanteissa. Pyynnöt tulee toimittaa rekisterinpitäjälle kasvotusten kahvikupposen kera. Rekisterinpitäjä voi pyytää
         tarvittaessa pyynnön esittäjää todistamaan henkilöllisyytensä. Rekisterinpitäjä vastaa asiakkaalle EU:n tietosuoja-asetuksessa säädetyssä
         ajassa (pääsääntöisesti kuukauden kuluessa).{"\n"}{"\n"}</Text>
-
+        </View>
     </ScrollView>
     )
 }

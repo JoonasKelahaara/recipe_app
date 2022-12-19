@@ -161,7 +161,9 @@ export const defaultStyle = StyleSheet.create({
     },
     pageTitle: {
       fontSize: 16,
-      fontWeight: 'bold',
+      //fontWeight: 'bold',
+      paddingTop: 30,
+      alignSelf: 'center',
       fontFamily:'Roboto'
     },
     logo: {
@@ -245,6 +247,14 @@ export const defaultStyle = StyleSheet.create({
     infoHeader: {
       textAlign: 'center',
       fontSize: 40,
+      color: '#8EC641',
+      fontFamily:'Quicksand',
+      paddingLeft: 15,
+      paddingRight: 15
+    },
+    infoHeader2: {
+      textAlign: 'center',
+      fontSize: 36,
       color: '#8EC641',
       fontFamily:'Quicksand',
       paddingLeft: 15,
