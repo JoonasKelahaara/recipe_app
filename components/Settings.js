@@ -16,9 +16,15 @@ export default function Settings({ name }) {
     const toggleSwitch = () => setIsEnabled(previousState => !previousState)
 
     return(
-        <View style={defaultStyle.viewBorder}>
-            <ScrollView style={defaultStyle.navMargin}>
+        
+        <ScrollView style={defaultStyle.navMargin}>
+            <View style={defaultStyle.viewBorder}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={defaultStyle.infoLine} />
                 <Text style={defaultStyle.infoHeader}>Asetukset</Text>
+                <View style={defaultStyle.infoLine} />
+            </View >
+            <Text>{"\n"}</Text>
                 <TouchableOpacity style={defaultStyle.settingsButton2} >
                     <AntDesign name='user' color='black' size={26}/>
                     <Text style={defaultStyle.settingsButtonText}>Oma tili</Text>
@@ -44,7 +50,8 @@ export default function Settings({ name }) {
                     <Text style={defaultStyle.settingsButtonText}>Ilmoita häiriö</Text>
                     <MaterialIcons name="keyboard-arrow-right" size={32} color="black" />
                 </TouchableOpacity>
-            </ScrollView>
-        </View>
+            </View>
+        </ScrollView>
+       
     )
 }

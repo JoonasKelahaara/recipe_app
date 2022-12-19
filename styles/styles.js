@@ -366,7 +366,7 @@ export const defaultStyle = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
       alignContent:'center',
-      justifyContent:'flex-start',
+      justifyContent:'center',
       paddingLeft: 7,
     },
     settingsButtonText: {
