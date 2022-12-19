@@ -221,7 +221,6 @@ export function AddRecipe () {
                 activeOpacity={0.6}
                 onPress={() => setModalVisible(true)}
                 >
-                    
                     <AntDesign name="plus" size={34} color="white" />
 
                 </TouchableOpacity>

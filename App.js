@@ -1,4 +1,4 @@
-import { LogBox, View } from 'react-native';
+import { ImageBackground, LogBox, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import {defaultStyle} from './styles/styles.js'
 import React, {useState, useEffect} from "react"
@@ -139,7 +139,6 @@ export default function App() {
   return (
     <View style={defaultStyle.container}>
       <Header />
-      <AddRecipe ></AddRecipe>
       <NavigationContainer>
         <Tab.Navigator
           initialRouteName='Home'

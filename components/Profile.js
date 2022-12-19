@@ -1,4 +1,4 @@
-import { View, ScrollView, Text, TouchableOpacity, Image, Modal, ActivityIndicator } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, Image, Modal, ActivityIndicator, ImageBackground } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { defaultStyle } from '../styles/styles.js'
 import React, {useState, useEffect} from 'react'
@@ -126,6 +126,7 @@ export default function Profile({ name, name2 }) {
 
     const [modalVisible, setModalVisible] = useState(false)
     const [modalVisible2, setModalVisible2] = useState(false)
+    const [modalVisible3, setModalVisible3] = useState(false)
 
     return (
         <ScrollView style={defaultStyle.navMargin}>
@@ -146,11 +147,11 @@ export default function Profile({ name, name2 }) {
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => navigation.navigate(name2, {category: "username", search: "==", value: username, screen: "omat"}) }>
                 <Text style={defaultStyle.buttonText}>Omat reseptit</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={logout}>
-                <Text style={defaultStyle.buttonText}>Kirjaudu ulos</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => setModalVisible2(true)}>
                 <Text style={defaultStyle.buttonText}>Vaihda salasana</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => setModalVisible3(true)}>
+                <Text style={defaultStyle.buttonText}>Kirjaudu ulos</Text>
             </TouchableOpacity>
             <Text style={defaultStyle.successMessage}>{profileMessage}</Text>
             {/* Modali profiilikuvan vaihdolle */}
@@ -200,6 +201,20 @@ export default function Profile({ name, name2 }) {
                     </View>
                     <Text style={defaultStyle.errorMessage}>{modalMessage}</Text>
                     <View style={{backgroundColor:'#92C591', height:3, marginTop: 15}}></View>
+                </View>
+            </Modal>
+            <Modal animationType='slide' transparent={true} visible={modalVisible3} onRequestClose={() => {setModalVisible3(!modalVisible3)}}>
+                <View style={{backgroundColor: 'white'}}>
+                    <Header />
+                    <Text style={defaultStyle.otherTitle}>Haluatko varmasti kirjautua ulos?</Text>
+                    <View style={[defaultStyle.recipeContainerI, { flexDirection: "row", marginBottom: 12}]}>
+                        <TouchableOpacity style={[{flex: 1, justifyContent:"center", alignContent:"center", alignItems: "center"}]} onPress={() => setModalVisible3(false)}>
+                            <Entypo name={'circle-with-cross'} size={68} color="red" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[{flex: 1, alignItems: "center"}]} activeOpacity={0.6} onPress={logout}>
+                            <AntDesign name="checkcircle" size={64} color="green" />
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </Modal>
         </ScrollView>

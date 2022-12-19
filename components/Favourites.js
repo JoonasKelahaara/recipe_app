@@ -1,4 +1,4 @@
-import { Text, ScrollView, View, Button} from 'react-native';
+import { Text, ScrollView, View, Button, ImageBackground} from 'react-native';
 import {defaultStyle} from '../styles/styles.js'
 import React, { useState, useEffect } from "react"
 import { collection, getDoc, where, query, documentId, doc } from "firebase/firestore";
@@ -18,19 +18,15 @@ export default function Favourites() {
         const docRef = doc(db, LIKES_REF, userId)
         await getDoc(docRef).then((docSnap) => {
             console.log(docSnap.data())
-            let results = []
+            let results = [] 
         })
-        
     }
 
     return(
     <ScrollView style={defaultStyle.navMargin}>
-        <View style={{ flex: 1, alignItems: 'center' }}></View>
-
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View style={defaultStyle.infoLine} />
             <Text style={defaultStyle.infoHeader}>Suosikit</Text>
-            <View>{liked}</View>
             <View style={defaultStyle.infoLine} />
         </View>
     </ScrollView>

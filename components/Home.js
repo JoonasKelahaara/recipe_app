@@ -1,8 +1,9 @@
-import { Text, Image, View, ScrollView, TouchableOpacity, Dimensions, SafeAreaView} from 'react-native';
+import { Text, Image, View, ScrollView, TouchableOpacity, Dimensions, SafeAreaView, ImageBackground } from 'react-native';
 import {defaultStyle} from '../styles/styles.js';
 import React from 'react';
 //import CarouselCards from './Carousel';
 import { useNavigation } from '@react-navigation/native';
+import AddRecipe from './Recipe/AddRecipe.js';
 
 export default function Home({ name, name2 }) {
 
@@ -15,7 +16,7 @@ export default function Home({ name, name2 }) {
         <View style={{ flex: 1, alignItems: 'center' }}></View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View style={defaultStyle.infoLine} />
-            <Text style={defaultStyle.infoHeader}>Pääkategoriat</Text>
+            <Text style={[defaultStyle.infoHeader, {marginBottom: 15}]}>Pääkategoriat</Text>
             <View style={defaultStyle.infoLine} />
             </View>
         <ScrollView >
@@ -28,8 +29,8 @@ export default function Home({ name, name2 }) {
             <Image source={require("../img/carousel_maindish.png")}
               style={{width: ITEM_WIDTH,
               height: 300,
-              marginLeft: 10, 
-              marginBottom: 20
+              marginBottom: 20,
+              alignSelf:'center'
               }}>
             </Image>
           </TouchableOpacity>
@@ -40,15 +41,13 @@ export default function Home({ name, name2 }) {
             <Image source={require("../img/carousel_drinks.png")}
               style={{width: ITEM_WIDTH,
               height: 300,
-              marginLeft: 10, 
-              marginBottom: 20}}>
+              marginBottom: 20,
+              alignSelf:'center'
+              }}>
             </Image>
           </TouchableOpacity>
           </View>
         </ScrollView>
-
-
-
       </ScrollView>
 
   );

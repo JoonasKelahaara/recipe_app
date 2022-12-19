@@ -89,16 +89,15 @@ export default function Login({ name, name2 }) {
                     <AntDesign name={securePassword ? 'eye' : 'eyeo'} size={26}/>
                 </Pressable>
             </View>
+            <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => setModalVisible(true)}>
+                <Text style={defaultStyle.linkText}>Salasana unohtunut?</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={login}>
                 <Text style={defaultStyle.buttonText}>Kirjaudu sisään</Text>
             </TouchableOpacity>
             <Text style={defaultStyle.errorMessage} >{message}</Text>
-            <Text style={defaultStyle.miscText}>Etkö ole vielä rekisteröitynyt?</Text>
             <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => navigation.navigate(name)} >
-                <Text style={defaultStyle.linkText}>Rekisteröidy tästä</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={defaultStyle.link} activeOpacity={0.6} onPress={() => setModalVisible(true)}>
-                <Text style={defaultStyle.linkText}>Salasana unohtunut?</Text>
+                <Text style={defaultStyle.linkText}>Ei tiliä? Rekisteröidy tästä</Text>
             </TouchableOpacity>
             {/* <TouchableOpacity style={defaultStyle.button}>
                 <Text style={defaultStyle.buttonText}>Kirjaudu sisään Google-tilillä</Text>
@@ -116,7 +115,7 @@ export default function Login({ name, name2 }) {
                 keyboardType='email-address'
                 style={[defaultStyle.textInput, {marginTop: 30}]} />
                 <TextInput 
-                placeholder='Sähköposti' 
+                placeholder='Sähköposti uudestaan' 
                 value={verifyEmail}
                 onChangeText={text => setVerifyEmail(text)}
                 autoCapitalize='none'

@@ -74,12 +74,12 @@ export const defaultStyle = StyleSheet.create({
       marginBottom: 5,        
       borderRadius: 15,
       borderWidth: 3,
-      borderColor: '#559E54'
+      borderColor: '#8EC641'
     },
     buttonText: {
       textAlign: 'center',
       fontSize: 15,
-      fontFamily:'Roboto'      
+      fontFamily: 'Roboto'      
     },
     textInput: {
       marginTop: 3,        
@@ -216,12 +216,13 @@ export const defaultStyle = StyleSheet.create({
     },
     link: {
       textAlign: 'center',
-      alignSelf: 'center'
+      alignSelf: 'center',
+      marginBottom: 5
     },
     linkText: {
       textDecorationLine: 'underline',
-      color: 'blue',
-      marginBottom: 5
+      marginBottom: 5,
+      fontSize: 20
     },
     signInPage: {
       alignContent: 'center',
@@ -304,6 +305,11 @@ export const defaultStyle = StyleSheet.create({
       borderColor: '#559E54',
       padding: 5,
       backgroundColor: '#E8F3E8'
+    },
+    float: {
+      position: 'absolute',
+      bottom: 10,
+      backgroundColor: 'black',
     },
     floatButton: {
       alignItems: 'center',

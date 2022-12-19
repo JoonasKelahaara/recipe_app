@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { defaultStyle } from '../styles/styles'
-import { Text, View, ScrollView, TouchableOpacity, Image, Pressable } from 'react-native'
+import { Text, View, ScrollView, TouchableOpacity, Image, Pressable, ActivityIndicator } from 'react-native'
 import Entypo from '@expo/vector-icons/Entypo'
 import { db, storage, RECIPES_REF } from '../firebase/Config'
 import { ref, getDownloadURL } from "firebase/storage";
@@ -13,6 +13,7 @@ import { AddRecipe } from './Recipe/AddRecipe'
 export function Recipes () {
 
     const [selectedItem, setSelectedItem] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     function close () {
         setSelectedItem(null)
@@ -25,12 +26,14 @@ export function Recipes () {
     const [allRecipes, setAllRecipes] = useState([])
     
     useEffect(() => {
+        setLoading(true)
         getDocs(collection(db, RECIPES_REF)).then(docSnap => {
             let recipes = [];
             docSnap.forEach((doc) => {
                 recipes.push({ ...doc.data(), id:doc.id })
             })
             setAllRecipes(recipes)
+            setLoading(false)
         })
     }, [])
 
@@ -85,7 +88,7 @@ export function Recipes () {
                         <ScrollView style={defaultStyle.detailsText}>{categoryList}</ScrollView>
                     </View>
                     <Pressable onPress={close}>
-                        <Text style={defaultStyle.detailsTitle}>sulje ohje</Text>
+                        <Text style={defaultStyle.detailsTitle}>Sulje ohje</Text>
                     </Pressable>
                 </View>
             </ScrollView>
@@ -103,6 +106,8 @@ export function Recipes () {
                 <Text style={defaultStyle.infoHeader}>Reseptit</Text>
                 <View style={defaultStyle.infoLine} />
                 </View>
+                <ActivityIndicator animating={loading} size='large' color='grey' />
+                <AddRecipe />
             <ScrollView>
                 {recipeKeys.length > 0 ? (
                 recipeKeys.map(key => (
@@ -113,7 +118,7 @@ export function Recipes () {
                     </View>
                 ))
                 ) : (
-                <Text>There are no items</Text>
+                <Text>Ei reseptejä</Text>
                 )}
                 </ScrollView>
     
