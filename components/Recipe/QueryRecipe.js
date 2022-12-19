@@ -8,7 +8,6 @@ import { useRoute } from '@react-navigation/native';
 
 import { RecipeItemUpdate } from './RecipeItemUpdate'
 import { useIsFocused } from '@react-navigation/native';
-import { Recipes } from "../Recipes"
 import RecipeItem from "./RecipeItem"
 import LikeRecipe from "./LikeRecipe"
 
@@ -28,14 +27,14 @@ export function QueryRecipe () {
     }
 
     const route = useRoute();
-    
-    {/* Hakee kaikki reseptit */}
+
     const [allRecipes, setAllRecipes] = useState([])
 
     const q = query(collection(db, RECIPES_REF), where(route.params.category , route.params.search , route.params.value))
 
-    useEffect(() => {
+    useEffect( () => {
         setLoading(true)
+        setAllRecipes([])
         getDocs(q).then(docSnap => {
             let recipes = [];
             docSnap.forEach((doc) => {
@@ -121,30 +120,24 @@ export function QueryRecipe () {
         } else {
             return(
             <ScrollView style={defaultStyle.navMargin}>
-                    {/* Reseptin lisäys */}
-                {/* <AddRecipe></AddRecipe> */}
-
-                {/* näyttää kaikki reseptit */}
-                <View style={{ flex: 1, alignItems: 'center' }}></View>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <View style={defaultStyle.infoLine} />
-                <Text style={defaultStyle.infoHeader}>Reseptit</Text>
-                <View style={defaultStyle.infoLine} />
+                    <View style={defaultStyle.infoLine} />
+                    <Text style={defaultStyle.infoHeader}>Reseptit</Text>
+                    <View style={defaultStyle.infoLine} />
                 </View>
-            <ScrollView>
-                {recipeKeys.length > 0 ? (
-                recipeKeys.map(key => (
-                    <View>
-                        <TouchableOpacity onPress={() => setSelectedItem(allRecipes[key])}>
-                            <RecipeItem key={key} id={key} recipeItem={allRecipes[key]} />
-                        </TouchableOpacity>  
-                    </View>
-                ))
-                ) : (
-                <Text>There are no items</Text>
-                )}
+                <ScrollView>
+                    {recipeKeys.length > 0 ? (
+                    recipeKeys.map(key => (
+                        <View>
+                            <TouchableOpacity onPress={() => setSelectedItem(allRecipes[key])}>
+                                <RecipeItem key={key} id={key} recipeItem={allRecipes[key]} />
+                            </TouchableOpacity>  
+                        </View>
+                    ))
+                    ) : (
+                    <Text>There are no items</Text>
+                    )}
                 </ScrollView>
-    
             </ScrollView>
             )
         }
