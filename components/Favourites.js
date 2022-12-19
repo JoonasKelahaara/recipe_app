@@ -18,6 +18,7 @@ export default function Favourites() {
         const docRef = doc(db, LIKES_REF, userId)
         await getDoc(docRef).then((docSnap) => {
             console.log(docSnap.data())
+            let results = []
         })
         
     }

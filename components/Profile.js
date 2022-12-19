@@ -8,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons'
 import Entypo from '@expo/vector-icons/Entypo'
 import * as ImagePicker from "expo-image-picker"
-import ImageLoad from 'react-native-image-placeholder';
 import Header from './Header'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
