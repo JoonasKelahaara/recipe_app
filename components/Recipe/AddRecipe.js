@@ -27,7 +27,9 @@ export function AddRecipe () {
 
     const [amount, setAmount] = useState(0)
     const unit = ["ml", "cl", "dl", "l", "mg", "g", "kg", "tl", "rkl", "kpl", "plo"]
+    const categorySelection = ["Pääruoat", "Jälkiruoat", "Kasvisruoat", "Kalaruoat", "Kanaruoat", "Alkuroat", "Leivät", "Drinkit", "Alkoholittomat drinkit", "Kesäiset drinkit", "Lämpimät drinkit", "Kausi drinkit"]
     const [selectedUnit, setSelectedUnit] = useState("ml")
+    const [selectedCategory, setSelectedCategory] = useState("Pääruoat")
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -55,10 +57,8 @@ export function AddRecipe () {
     }
 
     const addCategory = () => {
-        if (category != "") {
-            categories.push(category)
-            setCategory("")
-        }
+            categories.push(selectedCategory)
+            setSelectedCategory("")
     }
     
     function create() {
@@ -168,8 +168,30 @@ export function AddRecipe () {
                         {/* kategorioiden lisäys lisäys */}
                         <View style={defaultStyle.recipeContainer}>
                             <View style={[{ flexDirection: "row" }]}>
-
-                                <TextInput value={category} onChangeText={(category) => {setCategory(category)}} placeholder=" Kategoria" style={[defaultStyle.textInput, { flex: 1 }]}></TextInput>
+                                <View style={{ flex: 1 }}>
+                                    <SelectDropdown
+                                        data={categorySelection}
+                                        defaultValueByIndex={0}
+                                        buttonStyle={{width: 170}}
+                                        buttonTextStyle={{textAlign: "center"}}
+                                        onSelect={(selectedItem, index) => {
+                                            console.log(selectedItem, index)
+                                            setSelectedCategory(selectedItem)
+                                        }}
+                                        buttonTextAfterSelection={(selectedItem, index) => {
+                                            // text represented after item is selected
+                                            // if data array is an array of objects then return selectedItem.property to render after item is selected
+                                            
+                                            return selectedItem
+                                        }}
+                                        rowTextForSelection={(item, index) => {
+                                            // text represented for each item in dropdown
+                                            // if data array is an array of objects then return item.property to represent item in dropdown
+                                            return item
+                                        }}
+                                    />
+                                </View>
+                                
 
                                 <TouchableOpacity
                                 style={defaultStyle.recipeButton}
@@ -181,9 +203,9 @@ export function AddRecipe () {
 
                             {/* näyttää valitut kategoriat */}
                             <View>
-                                {categories.map((category, index) => (
+                                {categories.map((categories, index) => (
                                      <View style={[{flexDirection: "row", paddingLeft: 12, paddingTop: 8, borderBottomWidth: 2}]}>
-                                        <Text key={index}>{category}</Text>
+                                        <Text key={index}>{categories}</Text>
                                     </View>
                                 ))}
                             </View>
