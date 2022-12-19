@@ -35,7 +35,7 @@ export function Recipes () {
     }, [])
 
     let recipeKeys = Object.keys(allRecipes)
-    console.log(selectedItem)
+
 
     
 
