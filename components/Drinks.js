@@ -1,11 +1,11 @@
 import React from 'react';
-import { Image, Text, StatusBar, View, ScrollView, Flatlist, Dimensions } from 'react-native';
+import { Image, Text, StatusBar, View, ScrollView, Flatlist, Dimensions, TouchableOpacity } from 'react-native';
 import { defaultStyle } from '../styles/styles.js';
 import { drinks } from './DrinkList.js';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function Drinks(name2) {
+export default function Drinks({name3}) {
 
     const navigation = useNavigation();
     const SLIDER_WIDTH = Dimensions.get('window').width + 80;
@@ -29,8 +29,10 @@ export default function Drinks(name2) {
             {drinks.map((d,i) => {
                 return (
                     <View style={defaultStyle.recipeItem}>
-                        <Text key={i} style={defaultStyle.carouselTitle}>{d.title}</Text>
-                        <Image source={d.img} style={{width: ITEM_WIDTH, height: 300, marginLeft: 10, marginBottom: 20}}></Image>
+                        <TouchableOpacity onPress={() => navigation.navigate(name3, {category: "categories", search: "array-contains", value: d.title})}>
+                            <Text key={i} style={defaultStyle.carouselTitle}>{d.title}</Text>
+                            <Image source={d.img} style={{width: ITEM_WIDTH, height: 300, marginLeft: 10, marginBottom: 20}}></Image>
+                        </TouchableOpacity>
                     </View>
                 )
             })}

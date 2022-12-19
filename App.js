@@ -130,7 +130,7 @@ export default function App() {
 
   function DrinksScreen() {
     return (
-      <Drinks name="Home"/>
+      <Drinks name="Home" name3="QueryRecipe"/>
     )
   }
 

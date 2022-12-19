@@ -23,9 +23,6 @@ export function QueryRecipe () {
 
     const q = query(collection(db, RECIPES_REF), where(route.params.category , route.params.search , route.params.value))
 
-    /* setQuery(route.params.category + route.params.search + route.params.value) */
-    /* console.log(query) */
-
     useEffect(() => {
         setLoading(true)
         getDocs(q).then(docSnap => {
