@@ -31,7 +31,7 @@ export default function Drinks({name3}) {
                     <View style={defaultStyle.recipeItem}>
                         <TouchableOpacity onPress={() => navigation.navigate(name3, {category: "categories", search: "array-contains", value: d.title})}>
                             <Text key={i} style={defaultStyle.carouselTitle}>{d.title}</Text>
-                            <Image source={d.img} style={{width: ITEM_WIDTH, height: 300, marginLeft: 10, marginBottom: 20}}></Image>
+                            <Image source={d.img} style={{width: ITEM_WIDTH, height: 300, marginLeft: 4, marginBottom: 20}}></Image>
                         </TouchableOpacity>
                     </View>
                 )

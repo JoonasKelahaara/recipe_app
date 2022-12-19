@@ -29,8 +29,8 @@ export default function Home({ name, name2 }) {
             <Image source={require("../img/carousel_maindish.png")}
               style={{width: ITEM_WIDTH,
               height: 300,
-              marginBottom: 20,
-              alignSelf:'center'
+              marginLeft: 4, 
+              marginBottom: 20
               }}>
             </Image>
           </TouchableOpacity>
@@ -41,9 +41,8 @@ export default function Home({ name, name2 }) {
             <Image source={require("../img/carousel_drinks.png")}
               style={{width: ITEM_WIDTH,
               height: 300,
-              marginBottom: 20,
-              alignSelf:'center'
-              }}>
+              marginLeft: 4, 
+              marginBottom: 20}}>
             </Image>
           </TouchableOpacity>
           </View>
