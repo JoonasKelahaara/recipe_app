@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, ScrollView, TouchableOpacity, Image, Pressable } from 'react-native'
+import { Text, View, ScrollView, TouchableOpacity, Image, Pressable, ActivityIndicator } from 'react-native'
 
 import { db, storage, RECIPES_REF } from '../firebase/Config'
 import { ref, getDownloadURL } from "firebase/storage";
@@ -100,6 +100,7 @@ export function Recipes () {
                     <View style={defaultStyle.infoLine} />
                 </View>
                 <ScrollView>
+                <ActivityIndicator animating={loading} size='large' color='grey' />
                     {recipeKeys.length > 0 ? (
                     recipeKeys.map(key => (
                         <View>
@@ -109,7 +110,8 @@ export function Recipes () {
                         </View>
                     ))
                     ) : (
-                    <Text>There are no items</Text>
+                        
+                    <Text>Reseptejä ladataan</Text>
                     )}
                 </ScrollView>
             </ScrollView>
