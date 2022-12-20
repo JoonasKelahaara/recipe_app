@@ -4,6 +4,7 @@ import { db, storage, RECIPES_REF } from '../firebase/Config'
 import { ref, getDownloadURL } from "firebase/storage";
 import { collection, getDocs, where, query } from "firebase/firestore";
 import AddRecipe from './Recipe/AddRecipe'; 
+import { AntDesign } from '@expo/vector-icons'; 
 import { RecipeItem } from './Recipe/RecipeItem'
 import LikeRecipe from './Recipe/LikeRecipe';
 
@@ -114,10 +115,14 @@ export function Recipes () {
                     <View style={defaultStyle.infoLine} />
                 </View>
                 <AddRecipe />
-                <View>
-                    <TextInput value={hakuValue} onChangeText={(hakuValue) => {setHakuValue(hakuValue)}} placeholder=" Hae reseptejä" style={[defaultStyle.textInput]}></TextInput>
-                    <TouchableOpacity activeOpacity={0.6} onPress={haku}>
-                        <Text style={defaultStyle.otherTitle}>Hae</Text>
+                <View style={defaultStyle.textInput}>
+                    <TextInput value={hakuValue} onChangeText={(hakuValue) => {setHakuValue(hakuValue)}} 
+                                placeholder=" Hae reseptejä"
+                                returnKeyType='search' 
+                                style={defaultStyle.inputField}
+                                onSubmitEditing={haku}></TextInput>
+                    <TouchableOpacity activeOpacity={0.6} onPress={haku} style={defaultStyle.eyeIcon}>
+                        <AntDesign name="search1" size={26} color="black" />
                     </TouchableOpacity>
                 </View>
                 <ScrollView>
