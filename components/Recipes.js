@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, ScrollView, TouchableOpacity, Image, Pressable, ActivityIndicator } from 'react-native'
+import { Text, View, ScrollView, TouchableOpacity, Image, Pressable, ActivityIndicator, TextInput } from 'react-native'
 import { db, storage, RECIPES_REF } from '../firebase/Config'
 import { ref, getDownloadURL } from "firebase/storage";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, where, query } from "firebase/firestore";
 import AddRecipe from './Recipe/AddRecipe'; 
 import { RecipeItem } from './Recipe/RecipeItem'
 import LikeRecipe from './Recipe/LikeRecipe';
@@ -15,6 +15,7 @@ export function Recipes () {
     const [imageUrl, setImageURL] = useState(null)
     const [selectedItem, setSelectedItem] = useState(null)
     const [loading, setLoading] = useState(false)
+    const [hakuValue, setHakuValue] = useState(null)
 
     function close () {
         setSelectedItem(null)
@@ -33,6 +34,21 @@ export function Recipes () {
             setLoading(false)
         })
     }, [])
+
+    const haku = () => {
+        setAllRecipes([])
+        setLoading(true)
+        const q = query(collection(db, RECIPES_REF), where("recipename" , "==" , hakuValue ))
+        getDocs(q).then(docSnap => {
+            let recipes = [];
+            docSnap.forEach((doc) => {
+                recipes.push({ ...doc.data(), id:doc.id })
+            })
+            setAllRecipes(recipes)
+            setLoading(false)
+            setHakuValue(null)
+        })
+    }
 
     let recipeKeys = Object.keys(allRecipes)
 
@@ -98,6 +114,12 @@ export function Recipes () {
                     <View style={defaultStyle.infoLine} />
                 </View>
                 <AddRecipe />
+                <View>
+                    <TextInput value={hakuValue} onChangeText={(hakuValue) => {setHakuValue(hakuValue)}} placeholder=" Hae reseptejä" style={[defaultStyle.textInput]}></TextInput>
+                    <TouchableOpacity activeOpacity={0.6} onPress={haku}>
+                        <Text style={defaultStyle.otherTitle}>Hae</Text>
+                    </TouchableOpacity>
+                </View>
                 <ScrollView>
                 <ActivityIndicator animating={loading} size='large' color='grey' />
                     {recipeKeys.length > 0 ? (
