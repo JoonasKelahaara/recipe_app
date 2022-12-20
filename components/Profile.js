@@ -144,9 +144,6 @@ export default function Profile({ name, name2 }) {
                 </TouchableOpacity>
             </View>
             <Text style={defaultStyle.userName}>{username}</Text>
-            {/* <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => navigation.navigate(name2, {category: "username", search: "==", value: username, screen: "omat"}) }>
-                <Text style={defaultStyle.buttonText}>Omat reseptit</Text>
-            </TouchableOpacity> */}
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => setModalVisible2(true)}>
                 <Text style={defaultStyle.buttonText}>Vaihda salasana</Text>
             </TouchableOpacity>
