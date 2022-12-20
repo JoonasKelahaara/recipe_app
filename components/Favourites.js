@@ -5,6 +5,7 @@ import { collection, getDocs, where, query } from "firebase/firestore";
 import { db, RECIPES_REF, auth } from '../firebase/Config'
 import AddRecipe from './Recipe/AddRecipe.js';
 import { RecipeItemUpdate } from './Recipe/RecipeItemUpdate'
+import RecipeItem from './Recipe/RecipeItem.js';
 
 export default function Favourites() {
     const username = auth.currentUser?.displayName
@@ -32,7 +33,7 @@ export default function Favourites() {
 
     return(
     <ScrollView style={defaultStyle.navMargin}>
-        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 15}}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View style={defaultStyle.infoLine} />
             <Text style={defaultStyle.infoHeader}>Omat reseptit</Text>
             <View style={defaultStyle.infoLine} />
