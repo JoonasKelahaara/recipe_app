@@ -136,8 +136,6 @@ export default function App() {
 
   const Tab = createBottomTabNavigator();
 
-  console.log(auth.currentUser?.displayName)
-
   return (
     <View style={defaultStyle.container}>
       <Header />
@@ -218,14 +216,12 @@ export default function App() {
                 )
               }
             }} />
-            <Tab.Screen name="Favourites" component={FavouritesScreen}
-                        initialParams={{category: "username", search: "==", value: auth.currentUser?.displayName, screen: "omat" }} 
-            />
+            <Tab.Screen name="Favourites" component={FavouritesScreen} />
             <Tab.Screen name ="Profile" component={ProfileScreen} />
             <Tab.Screen name="Settings" component={SettingsScreen} options={{
               tabBarButton: () => null,
               tabBarVisible: false,
-            }}/>
+            }}/> 
             <Tab.Screen name="Security" component={SecurityScreen} options={{
               tabBarButton: () => null,
               tabBarVisible: false,

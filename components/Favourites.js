@@ -16,7 +16,6 @@ export default function Favourites() {
             <View style={defaultStyle.infoLine} />
         </View>
         <AddRecipe />
-        <QueryRecipe />
     </ScrollView>
     )
 }

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Text, View, ScrollView, TouchableOpacity, Image, Pressable, ActivityIndicator } from 'react-native'
-
 import { db, storage, RECIPES_REF } from '../firebase/Config'
 import { ref, getDownloadURL } from "firebase/storage";
 import { collection, getDocs } from "firebase/firestore";
-import AddRecipe from './Recipe/AddRecipe';
+import AddRecipe from './Recipe/AddRecipe'; 
 import { RecipeItem } from './Recipe/RecipeItem'
 import LikeRecipe from './Recipe/LikeRecipe';
 
@@ -111,7 +110,7 @@ export function Recipes () {
                     ))
                     ) : (
                         
-                    <Text>Reseptejä ladataan</Text>
+                    <Text>Reseptejä ladataan</Text> 
                     )}
                 </ScrollView>
             </ScrollView>
