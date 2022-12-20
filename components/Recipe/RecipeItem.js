@@ -37,7 +37,6 @@ export const RecipeItem = ({recipeItem: { recipename: recipeName}}) => {
         {/* nimi */}
         <View>
           <Text style={defaultStyle.recipeTitle}>{recipeName}</Text>
-          <LikeRecipe />
         </View>
       </View>
     </ScrollView>

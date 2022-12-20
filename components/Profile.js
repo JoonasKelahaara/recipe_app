@@ -144,9 +144,9 @@ export default function Profile({ name, name2 }) {
                 </TouchableOpacity>
             </View>
             <Text style={defaultStyle.userName}>{username}</Text>
-            <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => navigation.navigate(name2, {category: "username", search: "==", value: username, screen: "omat"}) }>
+            {/* <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => navigation.navigate(name2, {category: "username", search: "==", value: username, screen: "omat"}) }>
                 <Text style={defaultStyle.buttonText}>Omat reseptit</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity style={defaultStyle.button} activeOpacity={0.6} onPress={() => setModalVisible2(true)}>
                 <Text style={defaultStyle.buttonText}>Vaihda salasana</Text>
             </TouchableOpacity>
@@ -188,7 +188,7 @@ export default function Profile({ name, name2 }) {
                 <View style={{backgroundColor:'white'}}>
                     <Header />
                     <Text style={defaultStyle.otherTitle} >Salasanan vaihto</Text>
-                    <Text style={[defaultStyle.miscText, {marginBottom: 25}]}>Haluatko varmasti vaihtaa salasanasi?</Text>
+                    <Text style={[defaultStyle.miscText, {marginBottom: 25}]}>Haluatko varmasti lähettää salasanan uusimispyynnön?</Text>
                     <Checkbox style={{alignSelf:'center'}} value={confirm} onValueChange={setConfirm} />
                     <View style={[defaultStyle.recipeContainerI, { flexDirection: "row", marginBottom: 12}]}>
                         <TouchableOpacity style={[{flex: 1, justifyContent:"center", alignContent:"center", alignItems: "center"}]} onPress={handleModal2}>

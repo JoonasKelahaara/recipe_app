@@ -96,7 +96,6 @@ export function QueryRecipe () {
                     />
                     ): (<Text style={{textAlign:'center'}}>Ei kuvaa saatavilla</Text>)}
                     <View style={{flexDirection: 'row', alignItems: 'center', paddingLeft: 8}}>
-                        <LikeRecipe />
                         <Text style={[defaultStyle.recipeTitle, {textAlign: "center"}]}>{selectedItem.recipename}</Text>
                     </View>
                     <View style={defaultStyle.recipeDetails}>
@@ -120,11 +119,6 @@ export function QueryRecipe () {
         } else {
             return(
             <ScrollView style={defaultStyle.navMargin}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <View style={defaultStyle.infoLine} />
-                    <Text style={defaultStyle.infoHeader}>Reseptit</Text>
-                    <View style={defaultStyle.infoLine} />
-                </View>
                 <ScrollView>
                     {recipeKeys.length > 0 ? (
                     recipeKeys.map(key => (

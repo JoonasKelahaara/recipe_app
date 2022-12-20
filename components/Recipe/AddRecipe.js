@@ -239,11 +239,11 @@ export function AddRecipe () {
             
             {/* avaa Modal ikkunan missä on reseptin lisääminen*/}
                 <TouchableOpacity
-                style={defaultStyle.floatButton}
+                style={[defaultStyle.button, {marginTop: 15}]} 
                 activeOpacity={0.6}
                 onPress={() => setModalVisible(true)}
                 >
-                    <AntDesign name="plus" size={34} color="white" />
+                    <Text style={defaultStyle.buttonText}>Lisää resepti</Text>
 
                 </TouchableOpacity>
         </View>

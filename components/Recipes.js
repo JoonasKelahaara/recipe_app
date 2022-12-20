@@ -4,7 +4,7 @@ import { Text, View, ScrollView, TouchableOpacity, Image, Pressable, ActivityInd
 import { db, storage, RECIPES_REF } from '../firebase/Config'
 import { ref, getDownloadURL } from "firebase/storage";
 import { collection, getDocs } from "firebase/firestore";
-
+import AddRecipe from './Recipe/AddRecipe';
 import { RecipeItem } from './Recipe/RecipeItem'
 import LikeRecipe from './Recipe/LikeRecipe';
 
@@ -68,7 +68,6 @@ export function Recipes () {
                     />
                     ): (<Text style={{textAlign:'center'}}>Ei kuvaa saatavilla</Text>)}
                     <View style={{flexDirection: 'row', alignItems: 'center', paddingLeft: 8}}>
-                        <LikeRecipe />
                         <Text style={[defaultStyle.recipeTitle, {textAlign: "center"}]}>{selectedItem.recipename}</Text>
                     </View>
                     <View style={defaultStyle.recipeDetails}>
@@ -99,6 +98,7 @@ export function Recipes () {
                     <Text style={defaultStyle.infoHeader}>Reseptit</Text>
                     <View style={defaultStyle.infoLine} />
                 </View>
+                <AddRecipe />
                 <ScrollView>
                 <ActivityIndicator animating={loading} size='large' color='grey' />
                     {recipeKeys.length > 0 ? (

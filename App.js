@@ -4,7 +4,7 @@ import {defaultStyle} from './styles/styles.js'
 import React, {useState, useEffect} from "react"
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, FontAwesome5 } from '@expo/vector-icons'
 import Home from './components/Home'
 import Recipes from './components/Recipes'
 import Header from './components/Header'
@@ -136,6 +136,8 @@ export default function App() {
 
   const Tab = createBottomTabNavigator();
 
+  console.log(auth.currentUser?.displayName)
+
   return (
     <View style={defaultStyle.container}>
       <Header />
@@ -166,7 +168,7 @@ export default function App() {
                 iconName = focused ? 'setting' : 'setting',
                 iconColor = focused ? '#808080' : 'white'
               } else if (route.name === "Favourites") {
-                iconName = focused ? 'heart' : 'hearto',
+                iconName = focused ? 'profile' : 'profile',
                 iconColor = focused ? '#808080' : 'white'
               }
 
@@ -216,7 +218,9 @@ export default function App() {
                 )
               }
             }} />
-            <Tab.Screen name="Favourites" component={FavouritesScreen} />
+            <Tab.Screen name="Favourites" component={FavouritesScreen}
+                        initialParams={{category: "username", search: "==", value: auth.currentUser?.displayName, screen: "omat" }} 
+            />
             <Tab.Screen name ="Profile" component={ProfileScreen} />
             <Tab.Screen name="Settings" component={SettingsScreen} options={{
               tabBarButton: () => null,
