@@ -37,7 +37,7 @@ export function Recipes () {
             setAllRecipes(recipes)
             setLoading(false)
         })
-    }, [useIsFocused])
+    }, [isFocused])
 
     const haku = () => {
         setAllRecipes([])
