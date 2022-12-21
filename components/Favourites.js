@@ -5,6 +5,7 @@ import { collection, getDocs, where, query } from "firebase/firestore";
 import { db, RECIPES_REF, auth } from '../firebase/Config'
 import AddRecipe from './Recipe/AddRecipe.js';
 import { RecipeItemUpdate } from './Recipe/RecipeItemUpdate'
+import { useIsFocused } from '@react-navigation/native';
 import RecipeItem from './Recipe/RecipeItem.js';
 
 export default function Favourites() {
@@ -13,6 +14,7 @@ export default function Favourites() {
     const [allRecipes, setAllRecipes] = useState([])
 
     const q = query(collection(db, RECIPES_REF), where("username", "==", username ))
+    const isFocused = useIsFocused();
 
     let recipeKeys = Object.keys(allRecipes)
 
@@ -27,7 +29,7 @@ export default function Favourites() {
             setLoading(false)
             setAllRecipes(recipes)
         })
-    }, [])
+    }, [isFocused])
 
     console.log(allRecipes)
 
