@@ -7,6 +7,7 @@ import AddRecipe from './Recipe/AddRecipe';
 import { AntDesign } from '@expo/vector-icons'; 
 import { RecipeItem } from './Recipe/RecipeItem'
 import LikeRecipe from './Recipe/LikeRecipe';
+import { useIsFocused } from '@react-navigation/native';
 
 import { defaultStyle } from '../styles/styles'
 
@@ -17,6 +18,8 @@ export function Recipes () {
     const [selectedItem, setSelectedItem] = useState(null)
     const [loading, setLoading] = useState(false)
     const [hakuValue, setHakuValue] = useState(null)
+
+    const isFocused = useIsFocused();
 
     function close () {
         setSelectedItem(null)
@@ -34,7 +37,7 @@ export function Recipes () {
             setAllRecipes(recipes)
             setLoading(false)
         })
-    }, [])
+    }, [useIsFocused])
 
     const haku = () => {
         setAllRecipes([])
